@@ -1,0 +1,17 @@
+.circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: yellow;
+}
+
+.red__circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: red;
+}
+
+body {
+  background-color: #202020;
+}
