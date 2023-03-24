@@ -17,6 +17,10 @@ p {
   margin: 0;
 }
 
+/* ul {
+  margin: 0;
+  padding: 0;
+} */
 a:visited {
   color: inherit;
 }
@@ -296,4 +300,58 @@ a:visited {
   letter-spacing: 0.06em;
   color: #292929;
   text-decoration: none;
+}
+
+.help {
+  padding: 80px 0 100px 0;
+}
+.help__title {
+  margin: 0 auto;
+  text-align: center;
+  font-size: 35px;
+  line-height: 45px;
+  letter-spacing: 0.06em;
+  color: #545454;
+  max-width: 320px;
+  padding: 0 0 60px 0;
+}
+.help__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-column-gap: 120px;
+     -moz-column-gap: 120px;
+          column-gap: 120px;
+  row-gap: 55px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.help__list-item {
+  text-align: center;
+}
+.help__image {
+  height: 60px;
+  margin: 0 0 30px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.help__subtitle {
+  font-size: 20px;
+  line-height: 23px;
+  text-align: center;
+  letter-spacing: 0.06em;
+  color: #545454;
 }
