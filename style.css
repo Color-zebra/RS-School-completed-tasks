@@ -355,3 +355,64 @@ a:visited {
   letter-spacing: 0.06em;
   color: #545454;
 }
+
+.donation {
+  padding: 80px 0 100px 0;
+}
+.donation__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 30px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.donation__image {
+  margin-top: 5px;
+}
+.donation__text {
+  max-width: 380px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 20px;
+}
+.donation__title {
+  font-size: 35px;
+  line-height: 45px;
+  letter-spacing: 0.06em;
+  color: #545454;
+  max-width: 300px;
+}
+.donation__bank {
+  font-size: 15px;
+  line-height: 17px;
+  letter-spacing: 0.06em;
+  color: #545454;
+}
+.donation__link-btn {
+  border-radius: 9px;
+  padding: 10px 15px 10px 60px;
+  font-size: 20px;
+  line-height: 23px;
+  letter-spacing: 0.06em;
+  color: #545454;
+  text-decoration: none;
+  background: url("../assets/icons/credit-card.svg") no-repeat 15px 50%, #F1CDB3;
+  max-width: 350px;
+}
+.donation__add-info {
+  font-family: "Arial";
+  font-style: italic;
+  font-size: 12px;
+  line-height: 18px;
+  color: #B2B2B2;
+}
