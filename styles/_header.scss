@@ -9,6 +9,12 @@
   }
 
   &__logo {
+    transition: all .3s ease;
+    text-decoration: none;
+  }
+
+  &__logo:hover {
+    transform: scale(1.2);
   }
 
   &__menu {
@@ -22,6 +28,11 @@
     font-size: 15px;
     line-height: 24px;
     color: #CDCDCD;
+    transition: all .3s ease;
+  }
+
+  &__item:hover {
+    color: #FAFAFA;
   }
 
   &__item_active {
@@ -43,8 +54,7 @@
     text-decoration: none;
   }
 }
-.container {
-}
+
 .logo-color {
 
   &__title {

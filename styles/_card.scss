@@ -8,6 +8,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: all .3s ease;
 
   &__image {
     padding: 0 0 25px 0;
@@ -33,6 +34,16 @@
     letter-spacing: 0.06em;
     color: #292929;
     text-decoration: none;
-    cursor: pointer;
+    transition: all .3s ease;
   }
+}
+
+.card:hover {
+  cursor: pointer;
+  background-color: #FFFFFF;
+}
+
+.card:hover > .card__btn {
+  background: #FDDCC4;
+  border: 2px solid #FDDCC4;
 }

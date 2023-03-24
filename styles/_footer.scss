@@ -26,9 +26,6 @@
   }
 
   &__item {
-    font-family: 'Georgia';
-    font-style: normal;
-    font-weight: 400;
     font-size: 20px;
     line-height: 23px;
     letter-spacing: 0.06em;
@@ -37,6 +34,7 @@
     display: flex;
     align-items: center;
     height: 46px;
+    transition: all .3s ease;
 
     &_email {
       padding: 0 0 0 60px;
@@ -56,5 +54,9 @@
 
   &__item a {
     text-decoration: none;
+  }
+
+  &__item:hover {
+    color: #FFFFFF;
   }
 }

@@ -40,6 +40,11 @@
     letter-spacing: 0.06em;
     color: #292929;
     text-decoration: none;
+    transition: all .3s ease;
+  }
+
+  &__btn-link:hover {
+    background: #FDDCC4;
   }
 
   &__image {

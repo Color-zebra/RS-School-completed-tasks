@@ -13,6 +13,10 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 400;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 p {
   margin: 0;
 }
@@ -21,7 +25,7 @@ p {
   margin: 0;
   padding: 0;
 } */
-a:visited {
+a, a:visited {
   color: inherit;
 }
 
@@ -44,6 +48,15 @@ a:visited {
       -ms-flex-pack: justify;
           justify-content: space-between;
 }
+.header__logo {
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+.header__logo:hover {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+}
 .header__menu {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -56,6 +69,11 @@ a:visited {
   font-size: 15px;
   line-height: 24px;
   color: #CDCDCD;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.header__item:hover {
+  color: #FAFAFA;
 }
 .header__item_active {
   position: relative;
@@ -136,6 +154,11 @@ a:visited {
   letter-spacing: 0.06em;
   color: #292929;
   text-decoration: none;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.banner__btn-link:hover {
+  background: #FDDCC4;
 }
 .banner__image {
   font-size: 0;
@@ -198,6 +221,8 @@ a:visited {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 .card__image {
   padding: 0 0 25px 0;
@@ -221,7 +246,18 @@ a:visited {
   letter-spacing: 0.06em;
   color: #292929;
   text-decoration: none;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
   cursor: pointer;
+  background-color: #FFFFFF;
+}
+
+.card:hover > .card__btn {
+  background: #FDDCC4;
+  border: 2px solid #FDDCC4;
 }
 
 .slider {
@@ -244,6 +280,8 @@ a:visited {
   cursor: pointer;
   background-position: center;
   background-repeat: no-repeat;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 .slider__arrow_left {
   background-image: url("../assets/icons/arrow-left.svg");
@@ -260,6 +298,11 @@ a:visited {
       justify-content: space-around;
   width: 100%;
 }
+.slider__arrow:hover {
+  background-color: #FDDCC4;
+  border: 2px solid #FDDCC4;
+}
+
 .our-pets {
   padding: 81px 0 100px 0;
   background: #F6F6F6;
@@ -300,6 +343,11 @@ a:visited {
   letter-spacing: 0.06em;
   color: #292929;
   text-decoration: none;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.our-pets__btn-link:hover {
+  background: #FDDCC4;
 }
 
 .help {
@@ -408,6 +456,11 @@ a:visited {
   text-decoration: none;
   background: url("../assets/icons/credit-card.svg") no-repeat 15px 50%, #F1CDB3;
   max-width: 350px;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.donation__link-btn:hover {
+  background: url("../assets/icons/credit-card.svg") no-repeat 15px 50%, #FDDCC4;
 }
 .donation__add-info {
   font-family: "Arial";
@@ -443,9 +496,6 @@ a:visited {
   overflow: hidden;
 }
 .footer__item {
-  font-family: "Georgia";
-  font-style: normal;
-  font-weight: 400;
   font-size: 20px;
   line-height: 23px;
   letter-spacing: 0.06em;
@@ -459,6 +509,8 @@ a:visited {
       -ms-flex-align: center;
           align-items: center;
   height: 46px;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 .footer__item_email {
   padding: 0 0 0 60px;
@@ -474,4 +526,7 @@ a:visited {
 }
 .footer__item a {
   text-decoration: none;
+}
+.footer__item:hover {
+  color: #FFFFFF;
 }

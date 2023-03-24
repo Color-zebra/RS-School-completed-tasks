@@ -44,6 +44,11 @@
     text-decoration: none;
     background: url("../assets/icons/credit-card.svg") no-repeat 15px 50%, #F1CDB3;
     max-width: 350px;
+    transition: all .3s ease;
+  }
+
+  &__link-btn:hover {
+    background: url("../assets/icons/credit-card.svg") no-repeat 15px 50%, #FDDCC4;
   }
 
   &__add-info {

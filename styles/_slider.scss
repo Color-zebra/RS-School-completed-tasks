@@ -13,6 +13,7 @@
     cursor: pointer;
     background-position: center;
     background-repeat: no-repeat;
+    transition: all .3s ease;
 
     &_left {
       background-image: url('../assets/icons/arrow-left.svg');
@@ -30,6 +31,8 @@
     width: 100%;
   }
 
-  &__card {
+  &__arrow:hover {
+    background-color: #FDDCC4;
+    border: 2px solid #FDDCC4;
   }
 }
