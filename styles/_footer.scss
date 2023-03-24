@@ -1,0 +1,60 @@
+.footer {
+  padding: 40px 0 0 0;
+  background: url("../assets/noise_transparent@2x.png"), radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%), #211F20;
+  overflow: hidden;
+
+  &__container {
+    display: grid;
+    grid-template-columns: 279px 301px 300px;
+    grid-template-rows: 107px 46px 32px 28px;
+    gap: 32px 160px;
+  }
+
+  &__title {
+    font-size: 35px;
+    line-height: 45px;
+    letter-spacing: 0.06em;
+    color: #FFFFFF;
+    align-self: flex-end;
+  }
+
+  &__image {
+    grid-column: 3;
+    grid-row: 1 / span 3;
+    height: 310px;
+    overflow: hidden;
+  }
+
+  &__item {
+    font-family: 'Georgia';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    letter-spacing: 0.06em;
+    color: #F1CDB3;
+    align-self: center;
+    display: flex;
+    align-items: center;
+    height: 46px;
+
+    &_email {
+      padding: 0 0 0 60px;
+      background: url("../assets/icons/icon-email.svg") no-repeat left 50%;
+    }
+
+    &_address {
+      padding: 0 0 0 42px;
+      background: url("../assets/icons/pin.svg") no-repeat left 50%;
+    }
+
+    &_phone {
+      padding: 0 0 0 60px;
+      background: url("../assets/icons/phone.svg") no-repeat left 50%;
+    }
+  }
+
+  &__item a {
+    text-decoration: none;
+  }
+}
