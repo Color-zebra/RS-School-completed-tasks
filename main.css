@@ -342,10 +342,10 @@ a, a:visited {
   background-color: transparent;
 }
 .slider__arrow_left {
-  background-image: url("../assets/icons/arrow-left.svg");
+  background-image: url("./assets/icons/arrow-left.svg");
 }
 .slider__arrow_right {
-  background-image: url("../assets/icons/arrow-right.svg");
+  background-image: url("./assets/icons/arrow-right.svg");
 }
 .slider__content {
   display: -webkit-box;
@@ -512,13 +512,13 @@ a, a:visited {
   letter-spacing: 0.06em;
   color: #545454;
   text-decoration: none;
-  background: url("../assets/icons/credit-card.svg") no-repeat 15px 50%, #F1CDB3;
+  background: url("./assets/icons/credit-card.svg") no-repeat 15px 50%, #F1CDB3;
   max-width: 350px;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
 .donation__link-btn:hover {
-  background: url("../assets/icons/credit-card.svg") no-repeat 15px 50%, #FDDCC4;
+  background: url("./assets/icons/credit-card.svg") no-repeat 15px 50%, #FDDCC4;
 }
 .donation__add-info {
   font-family: "Arial";
