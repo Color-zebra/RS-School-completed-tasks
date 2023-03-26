@@ -1,0 +1,23 @@
+.our-friends {
+  padding: 200px 0 100px 0;
+  background: #F6F6F6;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 45px;
+  }
+
+  &__title {
+    max-width: 400px;
+    font-size: 35px;
+    line-height: 45px;
+    text-align: center;
+    letter-spacing: 0.06em;
+    color: #545454;
+  }
+
+  &__pagination {
+  }
+}

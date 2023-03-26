@@ -1,0 +1,39 @@
+
+.slider {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  &__arrow {
+    width: 52px;
+    height: 52px;
+    border: 2px solid #F1CDB3;
+    border-radius: 100px;
+    cursor: pointer;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: all .3s ease;
+    background-color: transparent;
+
+    &_left {
+      background-image: url('../assets/icons/arrow-left.svg');
+    }
+
+    &_right {
+      background-image: url('../assets/icons/arrow-right.svg');
+    }
+  }
+
+  &__content {
+    display: flex;
+    max-width: 1080px;
+    justify-content: space-around;
+    width: 100%;
+  }
+
+  &__arrow:hover {
+    background-color: #FDDCC4;
+    border: 2px solid #FDDCC4;
+  }
+}

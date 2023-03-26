@@ -1,0 +1,140 @@
+.header {
+  padding: 30px 0 0 0;
+  position: absolute;
+  width: 100%;
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__logo {
+    transition: all .3s ease;
+    text-decoration: none;
+  }
+
+  &__logo:hover {
+    transform: scale(1.2);
+  }
+
+  &__menu {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+    font-family: 'Arial';
+  }
+
+  &__item {
+    font-size: 15px;
+    line-height: 24px;
+    color: #CDCDCD;
+    transition: all .3s ease;
+    position: relative;
+  }
+
+  &__item:hover {
+    color: #FAFAFA;
+  }
+
+  &__item_active {
+    //position: relative;
+    color: #FAFAFA;
+  }
+
+  &__item:active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 3px;
+    background: #F1CDB3;
+  }
+
+  &__item_active:hover > a {
+    user-select: none;
+    cursor: default;
+  }
+
+  &__item_active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 3px;
+    background: #F1CDB3;
+  }
+
+  &__link {
+    text-decoration: none;
+  }
+}
+
+.logo-color {
+
+  &__title {
+    font-size: 32px;
+    line-height: 35px;
+    letter-spacing: 0.06em;
+    color: #F1CDB3;
+    margin: 0 0 9px 0;
+  }
+
+  &__subtitle {
+    font-family: 'Arial';
+    font-style: normal;
+    text-align: center;
+    font-size: 13px;
+    line-height: 15px;
+    letter-spacing: 0.1em;
+    color: #FFFFFF;
+  }
+}
+
+/* FOR PETS PAGE */
+
+.header {
+
+  &__item_dark {
+    color: #545454;
+  }
+
+  &__item_dark:hover {
+    color: #292929;
+  }
+
+  &__item_active-dark {
+    color: #545454;
+  }
+
+  &__item_active-dark::after {
+    background: #F1CDB3;
+  }
+}
+
+.header_white {
+  background: #FFFFFF;
+  padding: 30px 0 30px 0;
+}
+
+.logo-black {
+
+  &__title {
+    font-size: 32px;
+    line-height: 35px;
+    letter-spacing: 0.06em;
+    color: #545454;
+    margin: 0 0 9px 0;
+  }
+
+  &__subtitle {
+    font-family: 'Arial';
+    font-style: normal;
+    text-align: center;
+    font-size: 13px;
+    line-height: 15px;
+    letter-spacing: 0.1em;
+    color: #292929;
+  }
+}
