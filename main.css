@@ -296,6 +296,11 @@ a, a:visited {
   border: 2px solid #FDDCC4;
 }
 
+.card:active > .card__btn {
+  background: #F1CDB3;
+  border: 2px solid #F1CDB3;
+}
+
 .slider {
   display: -webkit-box;
   display: -ms-flexbox;

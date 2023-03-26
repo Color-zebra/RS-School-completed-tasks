@@ -170,17 +170,6 @@ a, a:visited {
   letter-spacing: 0.06em;
   color: #545454;
 }
-/* .card {
-
-  &__image {
-  }
-
-  &__name {
-  }
-
-  &__btn {
-  }
-} */
 .pagination {
   padding: 15px 0 0 0;
   display: -webkit-box;
@@ -299,6 +288,11 @@ a, a:visited {
 .card:hover > .card__btn {
   background: #FDDCC4;
   border: 2px solid #FDDCC4;
+}
+
+.card:active > .card__btn {
+  background: #F1CDB3;
+  border: 2px solid #F1CDB3;
 }
 
 .footer {
