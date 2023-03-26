@@ -39,6 +39,10 @@
     position: relative;
     color: #FAFAFA;
   }
+  &__item_active:hover > a {
+    user-select: none;
+    cursor: default;
+  }
 
   &__item_active::after {
     content: "";

@@ -79,6 +79,13 @@ a, a:visited {
   position: relative;
   color: #FAFAFA;
 }
+.header__item_active:hover > a {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  cursor: default;
+}
 .header__item_active::after {
   content: "";
   position: absolute;
