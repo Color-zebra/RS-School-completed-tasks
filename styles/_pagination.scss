@@ -1,0 +1,63 @@
+.pagination {
+  padding: 15px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 61px;
+
+  &__content {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px 40px;
+  }
+
+  &__card {
+  }
+
+  &__controls {
+    display: flex;
+    gap: 20px;
+  }
+
+  &__controls > * {
+    width: 52px;
+    height: 52px;
+    border-radius: 100px;
+  }
+
+  &__button {
+    border: 2px solid #F1CDB3;
+    background-color: transparent;
+    font-size: 20px;
+    line-height: 115%;
+    text-align: center;
+    letter-spacing: 0.06em;
+    color: #292929;
+    cursor: pointer;
+    transition: all .3s ease;
+  }
+
+  &__button:disabled {
+    border: 2px solid #CDCDCD;
+    color: #CDCDCD;
+    cursor: unset;
+  }
+
+  &__button:not(:disabled):hover {
+    border: 2px solid #FDDCC4;
+    background: #FDDCC4;
+  }
+
+  &__button:not(:disabled):active {
+    border: 2px solid #F1CDB3;
+    background: #F1CDB3;
+  }
+
+
+  &__page-number {
+    background: #F1CDB3;
+    text-align: center;
+    line-height: 52px;
+    user-select: none;
+  }
+}

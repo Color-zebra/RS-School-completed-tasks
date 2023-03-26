@@ -109,6 +109,42 @@ a, a:visited {
   color: #FFFFFF;
 }
 
+/* FOR PETS PAGE */
+.header__item_dark {
+  color: #545454;
+}
+.header__item_dark:hover {
+  color: #292929;
+}
+.header__item_active-dark {
+  color: #545454;
+}
+.header__item_active-dark::after {
+  background: #F1CDB3;
+}
+
+.header_white {
+  background: #FFFFFF;
+  padding: 30px 0 30px 0;
+}
+
+.logo-black__title {
+  font-size: 32px;
+  line-height: 35px;
+  letter-spacing: 0.06em;
+  color: #545454;
+  margin: 0 0 9px 0;
+}
+.logo-black__subtitle {
+  font-family: "Arial";
+  font-style: normal;
+  text-align: center;
+  font-size: 13px;
+  line-height: 15px;
+  letter-spacing: 0.1em;
+  color: #292929;
+}
+
 .banner {
   padding: 180px 0 0 0;
   background: url(../assets/noise_transparent@2x.png), radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%), #211F20;
@@ -282,6 +318,7 @@ a, a:visited {
   background-repeat: no-repeat;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
+  background-color: transparent;
 }
 .slider__arrow_left {
   background-image: url("../assets/icons/arrow-left.svg");

@@ -14,6 +14,7 @@
     background-position: center;
     background-repeat: no-repeat;
     transition: all .3s ease;
+    background-color: transparent;
 
     &_left {
       background-image: url('../assets/icons/arrow-left.svg');

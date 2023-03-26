@@ -75,3 +75,50 @@
     color: #FFFFFF;
   }
 }
+
+/* FOR PETS PAGE */
+
+.header {
+
+  &__item_dark {
+    color: #545454;
+  }
+
+  &__item_dark:hover {
+    color: #292929;
+  }
+
+  &__item_active-dark {
+    color: #545454;
+  }
+
+  &__item_active-dark::after {
+    background: #F1CDB3;
+  }
+}
+
+.header_white {
+  background: #FFFFFF;
+  padding: 30px 0 30px 0;
+}
+
+.logo-black {
+
+  &__title {
+    font-size: 32px;
+    line-height: 35px;
+    letter-spacing: 0.06em;
+    color: #545454;
+    margin: 0 0 9px 0;
+  }
+
+  &__subtitle {
+    font-family: 'Arial';
+    font-style: normal;
+    text-align: center;
+    font-size: 13px;
+    line-height: 15px;
+    letter-spacing: 0.1em;
+    color: #292929;
+  }
+}
