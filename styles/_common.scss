@@ -1,3 +1,31 @@
+@font-face {
+  font-family: Georgia;
+  src: url("./assets/fonts/fonts/georgia/georgia-regular.ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Georgia;
+  src: url("./assets/fonts/fonts/georgia/georgia-bold.ttf");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Arial;
+  src: url("./assets/fonts/fonts/arial/arial-regular.ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Arial;
+  src: url("./assets/fonts/fonts/arial/arial-italic.ttf");
+  font-weight: 400;
+  font-style: italic;
+}
+
 *, *::after, *::before {
   box-sizing: border-box;
 }
@@ -18,11 +46,6 @@ html {
 p {
   margin: 0;
 }
-
-/* ul {
-  margin: 0;
-  padding: 0;
-} */
 
 a, a:visited {
   color: inherit;
