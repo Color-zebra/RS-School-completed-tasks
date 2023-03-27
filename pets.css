@@ -333,7 +333,7 @@ a, a:visited {
 
 .footer {
   padding: 40px 0 0 0;
-  background: url("../assets/noise_transparent@2x.png"), radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%), #211F20;
+  background: url("./assets/noise_transparent@2x.png"), radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%), #211F20;
   overflow: hidden;
 }
 .footer__container {
@@ -375,15 +375,15 @@ a, a:visited {
 }
 .footer__item_email {
   padding: 0 0 0 60px;
-  background: url("../assets/icons/icon-email.svg") no-repeat left 50%;
+  background: url("./assets/icons/icon-email.svg") no-repeat left 50%;
 }
 .footer__item_address {
   padding: 0 0 0 42px;
-  background: url("../assets/icons/pin.svg") no-repeat left 50%;
+  background: url("./assets/icons/pin.svg") no-repeat left 50%;
 }
 .footer__item_phone {
   padding: 0 0 0 60px;
-  background: url("../assets/icons/phone.svg") no-repeat left 50%;
+  background: url("./assets/icons/phone.svg") no-repeat left 50%;
 }
 .footer__item a {
   text-decoration: none;

@@ -1,6 +1,6 @@
 .footer {
   padding: 40px 0 0 0;
-  background: url("../assets/noise_transparent@2x.png"), radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%), #211F20;
+  background: url("./assets/noise_transparent@2x.png"), radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%), #211F20;
   overflow: hidden;
 
   &__container {
@@ -38,17 +38,17 @@
 
     &_email {
       padding: 0 0 0 60px;
-      background: url("../assets/icons/icon-email.svg") no-repeat left 50%;
+      background: url("./assets/icons/icon-email.svg") no-repeat left 50%;
     }
 
     &_address {
       padding: 0 0 0 42px;
-      background: url("../assets/icons/pin.svg") no-repeat left 50%;
+      background: url("./assets/icons/pin.svg") no-repeat left 50%;
     }
 
     &_phone {
       padding: 0 0 0 60px;
-      background: url("../assets/icons/phone.svg") no-repeat left 50%;
+      background: url("./assets/icons/phone.svg") no-repeat left 50%;
     }
   }
 
