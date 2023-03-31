@@ -2,10 +2,15 @@
   padding: 30px 0 0 0;
   position: absolute;
   width: 100%;
+  
+
+  &__burger {
+  }
 
   &__container {
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 
   &__logo {
@@ -19,6 +24,7 @@
 
   &__menu {
     display: flex;
+    margin: -1px 0 0 0;
     gap: 36px;
     list-style: none;
     font-family: 'Arial';
@@ -41,16 +47,6 @@
     color: #FAFAFA;
   }
 
-  &__item:active::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 3px;
-    background: #F1CDB3;
-  }
-
   &__item_active:hover > a {
     user-select: none;
     cursor: default;
@@ -60,7 +56,7 @@
     content: "";
     position: absolute;
     left: 0;
-    bottom: 0;
+    bottom: -2px;
     width: 100%;
     height: 3px;
     background: #F1CDB3;
@@ -137,4 +133,123 @@
     letter-spacing: 0.1em;
     color: #292929;
   }
+}
+
+.burger {
+  position: relative;
+  display: none;
+  z-index: 2;
+  width: 30px;
+  height: 22px;
+  margin: 0 11px 0 0;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all .3s ease;
+  cursor: pointer;
+
+  &__line {
+    border: 1px solid #F1CDB3;
+  }
+
+  &_shown {
+    transform: rotate(90deg);
+  }
+}
+
+@media (max-width: 769px) {
+  
+  .header {
+
+    &__container {
+    }
+
+    &__logo {
+    }
+
+    &__logo:hover {
+    }
+
+    &__menu {
+    }
+
+    &__item {
+    }
+
+    &__item:hover {
+    }
+
+    &__item_active {
+    }
+
+    &__item:active::after {
+    }
+
+    &__item_active:hover > a {
+    }
+
+    &__item_active::after {
+    }
+  }
+}
+
+@media (max-width: 767.7px) {
+  
+  .header {
+
+    &__container {
+    }
+
+    &__logo {
+      margin: 0 0 0 10px;
+    }
+
+    &__logo:hover {
+    }
+
+    &__menu {
+      position: absolute;
+      top: 0;
+      right: -100vw;
+      width: 320px;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      background: #292929;
+      transition: all .3s ease;
+    }
+
+    &__menu_shown {
+      right: 0;
+    }
+
+    &__item {
+      font-size: 32px;
+      line-height: 51px;
+    }
+
+    &__item:hover {
+    }
+
+    &__item_active {
+    }
+
+    &__item:active::after {
+    }
+
+    &__item_active:hover > a {
+    }
+
+    &__item_active::after {
+      bottom: -1px;
+    }
+}
+
+.burger {
+  display: flex;
+}
+
 }

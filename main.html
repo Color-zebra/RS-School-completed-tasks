@@ -10,13 +10,18 @@
   <title>Shelter</title>
 </head>
 <body>
-  <header class="header">
+  <div class="wrapper"><header class="header">
     <div class="header__container container">
       <a href="#!" class="header__logo logo-color">
         <div class="logo-color__title">Cozy House</div>
         <h1 class="logo-color__subtitle">Shelter for pets in Boston</h1>
       </a>
-      <ul class="header__menu">
+      <div id="burger" class="header__burger burger">
+        <span class="burger__line"></span>
+        <span class="burger__line"></span>
+        <span class="burger__line"></span>
+      </div>
+      <ul id="menu" class="header__menu">
         <li class="header__item header__item_active"><a href="#" class="header__link">About the shelter</a></li>
         <li class="header__item"><a href="./pets.html" class="header__link">Our pets</a></li>
         <li class="header__item"><a href="#help" class="header__link">Help the shelter</a></li>
@@ -37,7 +42,7 @@
         </div>
       </div>
     </section>
-    <section class="about">
+    <section class="about" style="display: none;">
       <div class="about__container container">
         <div class="about__image">
           <img src="./assets/images/about-pets.png" alt="cat and dog siting picture">
@@ -49,7 +54,7 @@
         </div>
       </div>
     </section>
-    <section id="our-pets" class="our-pets">
+    <section id="our-pets" class="our-pets" style="display: none;">
       <div class="our-pets__container container">
         <h2 class="our-pets__title">Our friends who <br> are looking for a house</h2>
         <div class="our-pets__slider slider">
@@ -82,7 +87,7 @@
         <a href="./pets.html" class="our-pets__btn-link">Get to know the rest</a>
       </div>
     </section>
-    <section id="help" class="help">
+    <section id="help" class="help" style="display: none;">
       <div class="help__container container">
         <h2 class="help__title">How you can help our shelter</h2>
         <ul class="help__list">
@@ -143,7 +148,7 @@
         </ul>
       </div>
     </section>
-    <section class="donation">
+    <section class="donation" style="display: none;">
       <div class="donation__container container">
         <div class="donation__image">
           <img src="./assets/images/donation-dog.png" alt="laying dog image">
@@ -157,7 +162,7 @@
       </div>
     </section>
   </main>
-  <footer id="contacts" class="footer">
+  <footer id="contacts" class="footer" style="display: none;">
     <div class="footer__container container">
       <div class="footer__title">For questions and suggestions</div>
       <div class="footer__title">We are waiting for your visit</div>
@@ -170,6 +175,7 @@
       <div class="footer__item footer__item_address"> <a target="_blank" href="https://www.google.com/maps/place/Novyi+Karapuz,+Novosibirsk+Oblast,+632533/@55.1347449,79.0816673,15.25z/data=!4m6!3m5!1s0x431d5c62cc1f0945:0x82f29ac85c4f4706!8m2!3d55.1337326!4d79.0884569!16s%2Fg%2F11c3w91z0g">18 South Park, London </a> </div>
     </div>
   </footer>
+  </div>
   <script src="./index.js"></script>
 </body>
 </html>

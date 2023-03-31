@@ -34,6 +34,12 @@ body {
   font-weight: 400;
 }
 
+.wrapper {
+  width: 100vw;
+  position: relative;
+  overflow-x: hidden;
+}
+
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
   font-weight: 400;
@@ -55,4 +61,18 @@ a, a:visited {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 40px;
+}
+
+@media (max-width: 769px) {
+
+  .container {
+    padding: 0 30px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .container {
+    padding: 0 10px;
+  }
 }
