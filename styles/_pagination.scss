@@ -4,11 +4,14 @@
   flex-direction: column;
   align-items: center;
   gap: 61px;
+  width: 100%;
 
   &__content {
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 30px 40px;
+    grid-template-columns: repeat(4, 270px);
+    row-gap: 30px;
+    justify-content: space-between;
   }
 
   &__card {
@@ -59,5 +62,121 @@
     text-align: center;
     line-height: 52px;
     user-select: none;
+  }
+}
+
+@media (max-width: 1200px ) {
+  .pagination {
+
+    &__content {
+      grid-template-columns: repeat(3, 270px);
+    }
+
+    &__card {
+    }
+
+    &__controls {
+    }
+
+    &__controls > * {
+    }
+
+    &__button {
+    }
+
+    &__button:disabled {
+    }
+
+    &__button:not(:disabled):hover {
+    }
+
+    &__button:not(:disabled):active {
+    }
+
+    &__page-number {
+    }
+  }
+}
+
+@media (max-width: 900px ) {
+  .pagination {
+    gap: 40px;
+
+    &__content {
+      padding: 0 23px;
+      grid-template-columns: repeat(2, 270px);
+      justify-content: space-evenly;
+    }
+
+    &__card:nth-child(n + 7) {
+      display: none;
+    }
+
+    &__card {
+    }
+
+    &__controls {
+    }
+
+    &__controls > * {
+    }
+
+    &__button {
+    }
+
+    &__button:disabled {
+    }
+
+    &__button:not(:disabled):hover {
+    }
+
+    &__button:not(:disabled):active {
+    }
+
+
+    &__page-number {
+    }
+  }
+}
+
+@media (max-width: 700px ) {
+  .pagination {
+    gap: 42px;
+
+    &__content {
+      padding: 0 23px;
+      grid-template-columns: repeat(1, 270px);
+      justify-content: space-evenly;
+    }
+
+    &__card:nth-child(n + 4) {
+      display: none;
+    }
+
+    &__card {
+    }
+
+    &__controls {
+      gap: 10px;
+    }
+
+    &__controls > * {
+    }
+
+    &__button {
+    }
+
+    &__button:disabled {
+    }
+
+    &__button:not(:disabled):hover {
+    }
+
+    &__button:not(:disabled):active {
+    }
+
+
+    &__page-number {
+    }
   }
 }

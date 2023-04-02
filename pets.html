@@ -10,106 +10,120 @@
   <link rel="stylesheet" href="pets.css">
 </head>
 <body>
-  <header class="header header_white">
-    <div class="header__container container">
-      <a href="./main.html" class="header__logo logo-color">
-        <div class="logo-black__title">Cozy House</div>
-        <h1 class="logo-black__subtitle">Shelter for pets in Boston</h1>
-      </a>
-      <ul class="header__menu">
-        <li class="header__item header__item_dark"><a href="./main.html" class="header__link">About the shelter</a></li>
-        <li class="header__item header__item_dark header__item_active header__item_active-dark"><a href="#" class="header__link">Our pets</a></li>
-        <li class="header__item header__item_dark"><a href="./main.html#help" class="header__link">Help the shelter</a></li>
-        <li class="header__item header__item_dark"><a href="#contacts" class="header__link">Contacts</a></li>
-      </ul>
+  <div class="wrapper">
+    <div id="overlay" class="overlay">
     </div>
-  </header>
-  <main>
-    <section class="our-friends">
-      <div class="our-friends__container container">
-        <h2 class="our-friends__title">Our friends who <br> are looking for a house</h2>
-        <div class="our-friends__pagination pagination">
-          <div class="pagination__content">
-            <div class="pagination__card card">
-              <div class="card__image">
-                <img src="./assets/images/pets/pets-katrine.png" alt="cat Catrine image">
+    <header class="header header_white">
+      <div class="header__container container">
+        <a href="./main.html" class="header__logo logo-color">
+          <div class="logo-black__title">Cozy House</div>
+          <h1 class="logo-black__subtitle">Shelter for pets in Boston</h1>
+        </a>
+        <div id="burger" class="header__burger burger">
+          <span class="burger__line burger__line_dark"></span>
+          <span class="burger__line burger__line_dark"></span>
+          <span class="burger__line burger__line_dark"></span>
+        </div>
+        <ul id="menu" class="header__menu">
+          <li class="header__item header__item_dark"><a href="./main.html" class="header__link">About the shelter</a></li>
+          <li class="header__item header__item_dark header__item_active header__item_active-dark"><a href="#" class="header__link">Our pets</a></li>
+          <li class="header__item header__item_dark"><a href="./main.html#help" class="header__link">Help the shelter</a></li>
+          <li class="header__item header__item_dark"><a href="#contacts" class="header__link">Contacts</a></li>
+        </ul>
+      </div>
+    </header>
+    <main>
+      <section class="our-friends">
+        <div class="our-friends__container container">
+          <h2 class="our-friends__title">Our friends who <br> are looking for a house</h2>
+          <div class="our-friends__pagination pagination">
+            <div class="pagination__content">
+              <div class="pagination__card card">
+                <div class="card__image">
+                  <img src="./assets/images/pets/pets-katrine.png" alt="cat Catrine image">
+                </div>
+                <h3 class="card__name">Katrine</h3>
+                <div class="card__btn">Learn more</div>
               </div>
-              <h3 class="card__name">Katrine</h3>
-              <div class="card__btn">Learn more</div>
-            </div>
-            <div class="pagination__card card">
-              <div class="card__image">
-                <img src="./assets/images/pets/pets-jennifer.png" alt="puppy Jennifer image">
+              <div class="pagination__card card">
+                <div class="card__image">
+                  <img src="./assets/images/pets/pets-jennifer.png" alt="puppy Jennifer image">
+                </div>
+                <h3 class="card__name">Jennifer</h3>
+                <div class="card__btn">Learn more</div>
               </div>
-              <h3 class="card__name">Jennifer</h3>
-              <div class="card__btn">Learn more</div>
-            </div>
-            <div class="pagination__card card">
-              <div class="card__image">
-                <img src="./assets/images/pets/pets-woody.png" alt="dog Woody image">
+              <div class="pagination__card card">
+                <div class="card__image">
+                  <img src="./assets/images/pets/pets-woody.png" alt="dog Woody image">
+                </div>
+                <h3 class="card__name">Woody</h3>
+                <div class="card__btn">Learn more</div>
               </div>
-              <h3 class="card__name">Woody</h3>
-              <div class="card__btn">Learn more</div>
-            </div>
-            <div class="pagination__card card">
-              <div class="card__image">
-                <img src="./assets/images/pets/pets-sophia.png" alt="puppy Sophia image">
+              <div class="pagination__card card">
+                <div class="card__image">
+                  <img src="./assets/images/pets/pets-sophia.png" alt="puppy Sophia image">
+                </div>
+                <h3 class="card__name">Sophia</h3>
+                <div class="card__btn">Learn more</div>
               </div>
-              <h3 class="card__name">Sophia</h3>
-              <div class="card__btn">Learn more</div>
-            </div>
-            <div class="pagination__card card">
-              <div class="card__image">
-                <img src="./assets/images/pets/pets-timmy.png" alt="cat Timmy image">
+              <div class="pagination__card card">
+                <div class="card__image">
+                  <img src="./assets/images/pets/pets-timmy.png" alt="cat Timmy image">
+                </div>
+                <h3 class="card__name">Timmy</h3>
+                <div class="card__btn">Learn more</div>
               </div>
-              <h3 class="card__name">Timmy</h3>
-              <div class="card__btn">Learn more</div>
-            </div>
-            <div class="pagination__card card">
-              <div class="card__image">
-                <img src="./assets/images/pets/pets-charly.png" alt="dog Charly image">
+              <div class="pagination__card card">
+                <div class="card__image">
+                  <img src="./assets/images/pets/pets-charly.png" alt="dog Charly image">
+                </div>
+                <h3 class="card__name">Charly</h3>
+                <div class="card__btn">Learn more</div>
               </div>
-              <h3 class="card__name">Charly</h3>
-              <div class="card__btn">Learn more</div>
-            </div>
-            <div class="pagination__card card">
-              <div class="card__image">
-                <img src="./assets/images/pets/pets-scarlet.png" alt="puppy Scarlett image">
+              <div class="pagination__card card">
+                <div class="card__image">
+                  <img src="./assets/images/pets/pets-scarlet.png" alt="puppy Scarlett image">
+                </div>
+                <h3 class="card__name">Scarlett</h3>
+                <div class="card__btn">Learn more</div>
               </div>
-              <h3 class="card__name">Scarlett</h3>
-              <div class="card__btn">Learn more</div>
-            </div>
-            <div class="pagination__card card">
-              <div class="card__image">
-                <img src="./assets/images/pets/pets-freddie.png" alt="cat Freddie image">
+              <div class="pagination__card card">
+                <div class="card__image">
+                  <img src="./assets/images/pets/pets-freddie.png" alt="cat Freddie image">
+                </div>
+                <h3 class="card__name">Freddie</h3>
+                <div class="card__btn">Learn more</div>
               </div>
-              <h3 class="card__name">Freddie</h3>
-              <div class="card__btn">Learn more</div>
             </div>
-          </div>
-          <div class="pagination__controls">
-            <button class="pagination__button" disabled>&lt;&lt;</button>
-            <button class="pagination__button" disabled>&lt;</button>
-            <div class="pagination__page-number">1</div>
-            <button class="pagination__button">&gt;</button>
-            <button class="pagination__button">&gt;&gt;</button>
+            <div class="pagination__controls">
+              <button class="pagination__button" disabled>&lt;&lt;</button>
+              <button class="pagination__button" disabled>&lt;</button>
+              <div class="pagination__page-number">1</div>
+              <button class="pagination__button">&gt;</button>
+              <button class="pagination__button">&gt;&gt;</button>
+            </div>
           </div>
         </div>
+      </section>
+    </main>
+    <footer id="contacts" class="footer">
+      <div class="footer__container container">
+        <div class="footer__contacts">
+          <div class="footer__title">For questions and suggestions</div>
+          <div class="footer__item footer__item_email"> <a href="mailto:email@shelter.com">email@shelter.com</a> </div>
+          <div class="footer__item footer__item_phone"> <a href="tel:136745677554">+13 674 567 75 54</a> </div>
+        </div>
+        <div class="footer__addresses">
+          <div class="footer__title">We are waiting for your visit</div>
+          <div class="footer__item footer__item_address"> <a target="_blank" href="https://www.google.com/maps/place/Ziuzya,+Novosibirsk+Oblast,+632322/@55.091533,77.8440783,15z/data=!3m1!4b1!4m6!3m5!1s0x43028f131775a65b:0x2197020aba3686f4!8m2!3d55.0915948!4d77.8521578!16s%2Fg%2F11b6x732vt">1 Central Street, Boston (entrance from the store)</a> </div>
+          <div class="footer__item footer__item_address"> <a target="_blank" href="https://www.google.com/maps/place/Novyi+Karapuz,+Novosibirsk+Oblast,+632533/@55.1347449,79.0816673,15.25z/data=!4m6!3m5!1s0x431d5c62cc1f0945:0x82f29ac85c4f4706!8m2!3d55.1337326!4d79.0884569!16s%2Fg%2F11c3w91z0g">18 South Park, London </a> </div>
+        </div>
+        <div class="footer__image">
+          <img src="./assets/images/footer-puppy.png" alt="puppy lick your screen image">
+        </div>
       </div>
-    </section>
-  </main>
-  <footer id="contacts" class="footer">
-    <div class="footer__container container">
-      <div class="footer__title">For questions and suggestions</div>
-      <div class="footer__title">We are waiting for your visit</div>
-      <div class="footer__image">
-        <img src="./assets/images/footer-puppy.png" alt="puppy lick your screen image">
-      </div>
-      <div class="footer__item footer__item_email"> <a href="mailto:email@shelter.com">email@shelter.com</a> </div>
-      <div class="footer__item footer__item_address"> <a target="_blank" href="https://www.google.com/maps/place/Ziuzya,+Novosibirsk+Oblast,+632322/@55.091533,77.8440783,15z/data=!3m1!4b1!4m6!3m5!1s0x43028f131775a65b:0x2197020aba3686f4!8m2!3d55.0915948!4d77.8521578!16s%2Fg%2F11b6x732vt">1 Central Street, Boston (entrance from the store)</a> </div>
-      <div class="footer__item footer__item_phone"> <a href="tel:136745677554">+13 674 567 75 54</a> </div>
-      <div class="footer__item footer__item_address"> <a target="_blank" href="https://www.google.com/maps/place/Novyi+Karapuz,+Novosibirsk+Oblast,+632533/@55.1347449,79.0816673,15.25z/data=!4m6!3m5!1s0x431d5c62cc1f0945:0x82f29ac85c4f4706!8m2!3d55.1337326!4d79.0884569!16s%2Fg%2F11c3w91z0g">18 South Park, London </a> </div>
-    </div>
-  </footer>
+    </footer>
+    <script src="./main.js"></script>
+  </div>
 </body>
 </html>
