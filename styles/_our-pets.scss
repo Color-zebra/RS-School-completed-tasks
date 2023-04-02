@@ -41,3 +41,69 @@
     background: #FDDCC4;
   }
 }
+/* 
+
+@media (max-width: 1000px) {
+  
+  .our-pets {
+    padding: 81px 0 100px 0;
+    background: #F6F6F6;
+  
+    &__container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    &__title {
+      font-size: 35px;
+      line-height: 45px;
+      letter-spacing: 0.06em;
+      text-align: center;
+      color: #545454;
+      max-width: 410px;
+      padding: 0 0 59px 0;
+    }
+  
+    &__slider {
+      padding: 0 0 60px 0;
+    }
+  
+    &__btn-link {
+      display: inline-block;
+      width: 261px;
+      height: 52px;
+      line-height: 52px;
+      text-align: center;
+      background: #F1CDB3;
+      border-radius: 100px;
+      font-size: 17px;
+      letter-spacing: 0.06em;
+      color: #292929;
+      text-decoration: none;
+      transition: all .3s ease;
+    }
+  
+    &__btn-link:hover {
+      background: #FDDCC4;
+    }
+  }
+} */
+
+
+
+@media (max-width: 767.7px) {
+  
+  .our-pets {
+    padding: 42px 0;
+    &__title {
+      font-size: 25px;
+      line-height: 32px;
+      padding: 0 0 42px 0;
+    }
+
+    &__slider {
+      padding: 0 0 43px 0;
+    }
+  }
+}
