@@ -42,6 +42,16 @@
     color: #FAFAFA;
   }
 
+  &__item:active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 3px;
+    background: #F1CDB3;
+  }
+
   &__item_active {
     //position: relative;
     color: #FAFAFA;
@@ -150,6 +160,9 @@
   &__line {
     border: 1px solid #F1CDB3;
   }
+  &__line_dark {
+    border: 1px solid #000000;
+  }
 
   &_shown {
     transform: rotate(90deg);
@@ -248,8 +261,33 @@
     }
 }
 
+/* FOR PETS PAGE */
+
+.header {
+
+  &__item_dark {
+    color: #CDCDCD;
+  }
+
+  &__item_dark:hover {
+    color: #FAFAFA;
+  }
+
+  &__item_active-dark {
+    color: #FAFAFA;
+  }
+
+  &__item_active-dark::after {
+    background: #F1CDB3;
+  }
+}
+
 .burger {
   display: flex;
+
+  &_shown > .burger__line_dark {
+    border: 1px solid #F1CDB3;
+  }
 }
 
 }

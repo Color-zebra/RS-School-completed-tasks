@@ -21,3 +21,39 @@
   &__pagination {
   }
 }
+
+@media (max-width: 900px) {
+  .our-friends {
+    padding: 200px 0 76px 0;
+  
+    &__container {
+      gap: 17px;
+    }
+  
+    &__title {
+    }
+  
+    &__pagination {
+    }
+  }
+  
+}
+
+@media (max-width: 767.7px) {
+  .our-friends {
+    padding: 162px 0 43px 0;
+  
+    &__container {
+      gap: 28px;
+    }
+  
+    &__title {
+      font-size: 25px;
+      line-height: 32px;
+    }
+  
+    &__pagination {
+    }
+  }
+  
+}
