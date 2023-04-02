@@ -38,6 +38,23 @@ body {
   overflow-x: hidden;
 }
 
+.overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  display: none;
+}
+.overlay_shown {
+  display: block;
+}
+
+.scroll-block {
+  position: fixed;
+  height: 100vh;
+}
+
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
   font-weight: 400;
@@ -204,7 +221,7 @@ a, a:visited {
 .burger {
   position: relative;
   display: none;
-  z-index: 2;
+  z-index: 4;
   width: 30px;
   height: 22px;
   margin: 0 11px 0 0;
@@ -236,6 +253,7 @@ a, a:visited {
   }
   .header__menu {
     position: absolute;
+    z-index: 3;
     top: 0;
     right: -100vw;
     width: 320px;
