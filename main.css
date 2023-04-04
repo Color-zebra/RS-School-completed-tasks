@@ -1057,9 +1057,10 @@ a, a:visited {
     margin: 0 0 -1px 0;
   }
   .donation__link-btn {
+    white-space: nowrap;
     font-size: 15px;
     line-height: 17px;
-    padding: 13px 15px 13px 60px;
+    padding: 13px 14px 13px 59px;
     max-width: 281px;
   }
   .donation__add-info {
