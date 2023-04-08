@@ -10,8 +10,14 @@
   <link rel="stylesheet" href="pets.css">
 </head>
 <body>
-  <div class="wrapper">
+  <div id="wrapper" class="wrapper">
     <div id="overlay" class="overlay">
+    </div>
+    <div id="popup" class="popup">
+      <div class="popup__overlay">
+        <div id="popup-content" class="popup__content">
+        </div>
+      </div>
     </div>
     <header class="header header_white">
       <div class="header__container container">
@@ -36,7 +42,7 @@
       <section class="our-friends">
         <div class="our-friends__container container">
           <h2 class="our-friends__title">Our friends who <br> are looking for a house</h2>
-          <div class="our-friends__pagination pagination">
+          <div id="pagination" class="our-friends__pagination pagination">
             <div class="pagination__content">
               <div class="pagination__card card">
                 <div class="card__image">
@@ -82,7 +88,7 @@
               </div>
               <div class="pagination__card card">
                 <div class="card__image">
-                  <img src="./assets/images/pets/pets-scarlet.png" alt="puppy Scarlett image">
+                  <img src="./assets/images/pets/pets-scarlett.png" alt="puppy Scarlett image">
                 </div>
                 <h3 class="card__name">Scarlett</h3>
                 <div class="card__btn">Learn more</div>
@@ -124,8 +130,10 @@
       </div>
     </footer>
     <script src="./scripts/main.js"></script>
-    <script type="module" src="./scripts/constants.js"></script>
-    <script type="module" src="./scripts/burger.js"></script>
+    <script type="module" src="./scripts/pets/constants.js"></script>
+    <script type="module" src="./scripts/pets/burger.js"></script>
+    <script type="module" src="./scripts/pets/popup.js"></script>
+    <script type="module" src="./scripts/pets/scrollBlock.js"></script>
   </div>
 </body>
 </html>
