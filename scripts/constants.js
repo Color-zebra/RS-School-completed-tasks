@@ -9,3 +9,7 @@ export const CAROUSEL_RIGHT = document.getElementById('carousel-right');
 export const CAROUSEL_LEFT_CONTENT = document.getElementById('carousel-left-content');
 export const CAROUSEL_MIDDLE_CONTENT = document.getElementById('carousel-middle-content');
 export const CAROUSEL_RIGHT_CONTENT = document.getElementById('carousel-right-content');
+
+export const POPUP = document.getElementById('popup');
+export const WRAPPER = document.getElementById('wrapper');
+export const POPUP_CONTENT = document.getElementById('popup-content');

@@ -9,7 +9,7 @@ const generateCard = (pet) => {
   return `
           <div class="slider__card card">
             <div class="card__image">
-              <img src="./assets/images/pets/pets-${pet.name.toLowerCase()}.png" alt="${pet.breed}">
+              <img src="./assets/images/pets/pets-${pet.name.toLowerCase()}.png" alt="${pet.name} the ${pet.name} image">
             </div>
             <h3 class="card__name">${pet.name}</h3>
             <div class="card__btn">Learn more</div>
@@ -20,14 +20,8 @@ const generateCard = (pet) => {
 const generateNewPets = () => {
   let newPets = data.filter(({name}) => !currentPetsNames.includes(name));
   newPets = newPets.sort(() => Math.random() - 0.5).slice(0, 3);
-  console.log(newPets);
-
   return newPets
 }
-
-const data = await getPets();
-let currentPetsNames = ['Katrine', 'Jennifer', 'Woody'];
-let newPets = generateNewPets();
 
 const disableArrows = () => {
   CAROUSEL_LEFT.setAttribute('disabled', 'disabled');
@@ -47,25 +41,34 @@ const generateNewCarouselContent = () => {
   return newPetsHtml;
 }
 
+const changePets = () => {
+  const currentCards = CAROUSEL_MIDDLE_CONTENT.getElementsByClassName('card__name');
+  currentPetsNames.length = 0;
+  [...currentCards].forEach(item => currentPetsNames.push(item.innerText));
+  newPets = generateNewPets();
+}
 
-const scrollLeft = () => {
+
+const scrollRight = () => {
   CAROUSEL.classList.add('slider-scroll-left');
   CAROUSEL_LEFT.removeEventListener('click', scrollLeft);
   disableArrows();
   CAROUSEL.addEventListener('animationend', () => {
     CAROUSEL_LEFT_CONTENT.innerHTML = CAROUSEL_MIDDLE_CONTENT.innerHTML;
     CAROUSEL_MIDDLE_CONTENT.innerHTML = CAROUSEL_RIGHT_CONTENT.innerHTML;
+    changePets();
     CAROUSEL_RIGHT_CONTENT.innerHTML = generateNewCarouselContent();
   }, {once: true})
 }
 
-const scrollRight = () => {
+const scrollLeft = () => {
   CAROUSEL.classList.add('slider-scroll-right');
   CAROUSEL_RIGHT.removeEventListener('click', scrollRight);
   disableArrows();
   CAROUSEL.addEventListener('animationend', () => {
     CAROUSEL_RIGHT_CONTENT.innerHTML = CAROUSEL_MIDDLE_CONTENT.innerHTML;
     CAROUSEL_MIDDLE_CONTENT.innerHTML = CAROUSEL_LEFT_CONTENT.innerHTML;
+    changePets();
     CAROUSEL_LEFT_CONTENT.innerHTML = generateNewCarouselContent();
   }, {once: true})
 }
@@ -75,18 +78,17 @@ const handleAnimationEnd = () => {
   CAROUSEL.classList.remove('slider-scroll-right');
   CAROUSEL_LEFT.addEventListener('click', scrollLeft);
   CAROUSEL_RIGHT.addEventListener('click', scrollRight);
-  currentPetsNames.length = 0;
-  newPets.forEach(({name}) => currentPetsNames.push(name));
-  newPets = generateNewPets();
   enableArrows();
 }
+
+export const data = await getPets();
+let currentPetsNames = ['Katrine', 'Jennifer', 'Woody'];
+let newPets = generateNewPets();
 
 CAROUSEL_LEFT_CONTENT.innerHTML = generateNewCarouselContent();
 CAROUSEL_RIGHT_CONTENT.innerHTML = generateNewCarouselContent();
 
 CAROUSEL_LEFT.addEventListener('click', scrollLeft);
 CAROUSEL_RIGHT.addEventListener('click', scrollRight);
-
-
 
 CAROUSEL.addEventListener("animationend", handleAnimationEnd);
