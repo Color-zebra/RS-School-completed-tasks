@@ -51,7 +51,6 @@ const changePets = () => {
 
 const scrollRight = () => {
   CAROUSEL.classList.add('slider-scroll-left');
-  CAROUSEL_LEFT.removeEventListener('click', scrollLeft);
   disableArrows();
   CAROUSEL.addEventListener('animationend', () => {
     CAROUSEL_LEFT_CONTENT.innerHTML = CAROUSEL_MIDDLE_CONTENT.innerHTML;
@@ -62,8 +61,8 @@ const scrollRight = () => {
 }
 
 const scrollLeft = () => {
+  console.log('click');
   CAROUSEL.classList.add('slider-scroll-right');
-  CAROUSEL_RIGHT.removeEventListener('click', scrollRight);
   disableArrows();
   CAROUSEL.addEventListener('animationend', () => {
     CAROUSEL_RIGHT_CONTENT.innerHTML = CAROUSEL_MIDDLE_CONTENT.innerHTML;
@@ -76,8 +75,6 @@ const scrollLeft = () => {
 const handleAnimationEnd = () => {
   CAROUSEL.classList.remove('slider-scroll-left');
   CAROUSEL.classList.remove('slider-scroll-right');
-  CAROUSEL_LEFT.addEventListener('click', scrollLeft);
-  CAROUSEL_RIGHT.addEventListener('click', scrollRight);
   enableArrows();
 }
 

@@ -16,7 +16,7 @@ const openModal = (e) => {
 }
 
 const closeModal = (e) => {
-  if ([...e.target.classList].includes('popup__overlay') || [...e.target.classList].includes('popup__close')) {
+  if (e.target.classList.contains('popup__overlay') || e.target.classList.contains('popup__close')) {
     POPUP.classList.remove('popup__show');
     unblockScroll(currOffsetY);
   }
