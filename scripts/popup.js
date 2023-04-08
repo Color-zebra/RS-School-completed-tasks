@@ -1,5 +1,5 @@
 import { data } from "./carousel.js";
-import { POPUP, CAROUSEL, BODY, WRAPPER, POPUP_CONTENT } from "./constants.js";
+import { POPUP, CAROUSEL, POPUP_CONTENT } from "./constants.js";
 import { blockScroll, unblockScroll } from "./scrollBlock.js";
 
 let currOffsetY = 0;
@@ -8,7 +8,6 @@ const openModal = (e) => {
   if (e.target.closest('.card')) {
     const currPetName = e.target.closest('.card').querySelector('.card__name').innerText;
     generateModal(currPetName);
-    //console.log(currPetName);
     currOffsetY = window.scrollY;
     POPUP.style.top = `${currOffsetY}px`;
     POPUP.classList.add('popup__show');

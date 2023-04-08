@@ -91,6 +91,7 @@
   &__info {
     list-style: none;
     padding: 0;
+    margin: 0;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -110,5 +111,126 @@
   &__info-text {
     font-size: 15px;
     line-height: 17px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .popup {
+  
+    &__content {
+      width: 630px;
+      height: 350px;
+    }
+  
+    &__image {
+      flex: 0 0 350px;
+      height: 350px;
+    }
+  
+    &__text {
+      padding: 0 9px 0 9px;
+      letter-spacing: 0.05em;
+    }
+  
+    &__name {
+      font-size: 35px;
+      line-height: 45px;
+      margin: 10px 0 10px 0;
+    }
+  
+    &__type-and-breed {
+      font-size: 20px;
+      line-height: 115%;
+      margin: 0 0 20px 0;
+    }
+  
+    &__desc {
+      font-size: 13px;
+      line-height: 14px;
+      margin: 0 0 15px 0;
+    }
+  
+    &__info {
+      gap: 6px;
+    }
+  
+    &__info-item {
+      padding: 0 0 0 14px;
+    }
+  
+    &__info-title {
+      font-size: 15px;
+      line-height: 17px;
+      font-weight: 700;
+    }
+  
+    &__info-text {
+      font-size: 15px;
+      line-height: 17px;
+    }
+  }
+}
+
+@media (max-width: 767.7px) {
+  .popup {
+  
+    &__content {
+      width: 240px;
+      height: auto;
+      padding: 10px;
+    }
+  
+    &__image {
+      display: none;
+    }
+  
+    &__text {
+      padding: 0;
+      letter-spacing: 0.05em;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  
+    &__name {
+      font-size: 35px;
+      line-height: 45px;
+      margin: 0 0 10px 0;
+      text-align: center;
+    }
+  
+    &__type-and-breed {
+      font-size: 20px;
+      line-height: 115%;
+      margin: 0 0 20px 0;
+      text-align: center;
+    }
+  
+    &__desc {
+      font-size: 13px;
+      line-height: 14px;
+      margin: 0 0 24px 0;
+      text-align: justify;
+      letter-spacing: 0.04em;
+    }
+  
+    &__info {
+      gap: 6px;
+    }
+  
+    &__info-item {
+      padding: 0 0 0 14px;
+    }
+  
+    &__info-title {
+      font-size: 15px;
+      line-height: 17px;
+      font-weight: 700;
+    }
+  
+    &__info-text {
+      font-size: 15px;
+      line-height: 17px;
+    }
   }
 }
