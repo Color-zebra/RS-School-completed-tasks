@@ -10,7 +10,6 @@
     height: 52px;
     border: 2px solid #F1CDB3;
     border-radius: 100px;
-    cursor: pointer;
     background-position: center;
     background-repeat: no-repeat;
     transition: all .3s ease;
@@ -25,14 +24,28 @@
     }
   }
 
+  &__arrow:disabled {
+    border: 2px solid #CDCDCD;
+  }
+
+  &__arrow_right:disabled {
+    background-image: url('./assets/icons/arrow-right-dis.svg');
+  }
+
+  &__arrow_left:disabled {
+    background-image: url('./assets/icons/arrow-left-dis.svg');
+  }
+
   &__content {
     display: flex;
     max-width: 1080px;
     justify-content: space-around;
-    width: 100%;
+    width: 100cqw;
+    margin: 0 auto;
   }
 
-  &__arrow:hover {
+  &__arrow:not(:disabled):hover {
+    cursor: pointer;
     background-color: #FDDCC4;
     border: 2px solid #FDDCC4;
   }
@@ -91,4 +104,48 @@
     }
   }
 
+}
+
+.slider__window {
+  position: relative;
+  width: 100%;
+  height: 435px;
+  overflow: hidden;
+
+}
+
+.slider__carousel {
+  position: absolute;
+  right: -100%;
+  width: 300%;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.slider-scroll-left {
+  animation: scroll-left 1s ease-in-out;
+}
+
+@keyframes scroll-left {
+  0% {
+    right: -100%;
+  }
+
+  100% {
+    right: 0;
+  }
+}
+
+.slider-scroll-right {
+  animation: scroll-right 1s ease-in-out;
+}
+
+@keyframes scroll-right {
+  0% {
+    right: -100%;
+  }
+
+  100% {
+    right: -200%;
+  }
 }
