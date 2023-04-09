@@ -162,26 +162,6 @@ window.onresize = () => {
   }
 }
 
-/* const toNextPage = () => {
-  currentPage += 1;
-  renderPage();
-}
-
-const toPrevPage = () => {
-  currentPage -= 1;
-  renderPage();
-}
-
-const toLastPage = () => {
-  currentPage = lastPage;
-  renderPage();
-}
-
-const toFirstPage = (e) => {
-  currentPage = 1;
-  renderPage();
-} */
-
 const allPets = generatePetsArray();
 let desktop = [];
 let tablet = [];
@@ -194,11 +174,6 @@ let lastPage = 6;
 generatePages();
 window.onresize();
 renderPage();
-
-/* FULL_BACK.addEventListener('click', toFirstPage);
-BACK.addEventListener('click', toPrevPage);
-FORWARD.addEventListener('click', toNextPage);
-FULL_FORWARD.addEventListener('click', toLastPage); */
 
 const handleControlsClick = (e) => {
   switch (e.target) {
@@ -218,7 +193,4 @@ const handleControlsClick = (e) => {
   renderPage();
 }
 
-CONTROLS.addEventListener('click', handleControlsClick)
-
-
-
+CONTROLS.addEventListener('click', handleControlsClick);
