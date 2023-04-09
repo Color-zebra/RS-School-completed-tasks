@@ -10,8 +10,14 @@
   <title>Shelter</title>
 </head>
 <body>
-  <div class="wrapper">
+  <div id="wrapper" class="wrapper">
     <div id="overlay" class="overlay">
+    </div>
+    <div id="popup" class="popup">
+      <div class="popup__overlay">
+        <div id="popup-content" class="popup__content">
+        </div>
+      </div>
     </div>
     <header class="header">
       <div class="header__container container">
@@ -61,31 +67,39 @@
         <div class="our-pets__container container">
           <h2 class="our-pets__title">Our friends who <br> are looking for a house</h2>
           <div class="our-pets__slider slider">
-            <button class="slider__arrow slider__arrow_left"></button>
-            <div class="slider__content">
-              <div class="slider__card card">
-                <div class="card__image">
-                  <img src="./assets/images/pets/pets-katrine.png" alt="cat Catrine image">
+            <button id="carousel-left" class="slider__arrow slider__arrow_left"></button>
+            <div class="slider__window">
+              <div id="carousel" class="slider__carousel">
+                <div id="carousel-left-content" class="slider__content">
                 </div>
-                <h3 class="card__name">Katrine</h3>
-                <div class="card__btn">Learn more</div>
-              </div>
-              <div class="slider__card card">
-                <div class="card__image">
-                  <img src="./assets/images/pets/pets-jennifer.png" alt="puppy Jennifer image">
+                <div id="carousel-middle-content" class="slider__content">
+                  <div class="slider__card card">
+                    <div class="card__image">
+                      <img src="./assets/images/pets/pets-katrine.png" alt="cat Catrine image">
+                    </div>
+                    <h3 class="card__name">Katrine</h3>
+                    <div class="card__btn">Learn more</div>
+                  </div>
+                  <div class="slider__card card">
+                    <div class="card__image">
+                      <img src="./assets/images/pets/pets-jennifer.png" alt="puppy Jennifer image">
+                    </div>
+                    <h3 class="card__name">Jennifer</h3>
+                    <div class="card__btn">Learn more</div>
+                  </div>
+                  <div class="slider__card card">
+                    <div class="card__image">
+                      <img src="./assets/images/pets/pets-woody.png" alt="dog Woody image">
+                    </div>
+                    <h3 class="card__name">Woody</h3>
+                    <div class="card__btn">Learn more</div>
+                  </div>
                 </div>
-                <h3 class="card__name">Jennifer</h3>
-                <div class="card__btn">Learn more</div>
-              </div>
-              <div class="slider__card card">
-                <div class="card__image">
-                  <img src="./assets/images/pets/pets-woody.png" alt="dog Woody image">
+                <div id="carousel-right-content" class="slider__content">
                 </div>
-                <h3 class="card__name">Woody</h3>
-                <div class="card__btn">Learn more</div>
               </div>
             </div>
-            <button class="slider__arrow slider__arrow_right"></button>
+            <button id="carousel-right" class="slider__arrow slider__arrow_right"></button>
           </div>
           <a href="./pets.html" class="our-pets__btn-link">Get to know the rest</a>
         </div>
@@ -185,6 +199,9 @@
   </div>
   <script src="./scripts/main.js"></script>
   <script type="module" src="./scripts/constants.js"></script>
+  <script type="module" src="./scripts/scrollBlock.js"></script>
+  <script type="module" src="./scripts/popup.js"></script>
   <script type="module" src="./scripts/burger.js"></script>
+  <script type="module" src="./scripts/carousel.js"></script>
 </body>
 </html>
