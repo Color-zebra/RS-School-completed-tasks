@@ -6,6 +6,12 @@ export const POPUP = document.getElementById('popup');
 export const WRAPPER = document.getElementById('wrapper');
 export const POPUP_CONTENT = document.getElementById('popup-content');
 export const PAGINATION = document.getElementById('pagination');
+export const FULL_BACK = document.getElementById('full-back');
+export const BACK = document.getElementById('back');
+export const PAGE_NUMBER = document.getElementById('page-number');
+export const FORWARD = document.getElementById('forward');
+export const FULL_FORWARD = document.getElementById('full-forward');
+
 
 const getPets = async () => {
   let res = await fetch('./pets.json');
