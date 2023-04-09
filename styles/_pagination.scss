@@ -12,6 +12,8 @@
     grid-template-columns: repeat(4, 270px);
     row-gap: 30px;
     justify-content: space-between;
+    height: 899px;
+    opacity: 1;
   }
 
   &__card {
@@ -67,45 +69,13 @@
 
 @media (max-width: 1200px ) {
   .pagination {
-
-    &__content {
-      grid-template-columns: repeat(3, 270px);
-    }
-
-    &__card {
-    }
-
-    &__controls {
-    }
-
-    &__controls > * {
-    }
-
-    &__button {
-    }
-
-    &__button:disabled {
-    }
-
-    &__button:not(:disabled):hover {
-    }
-
-    &__button:not(:disabled):active {
-    }
-
-    &__page-number {
-    }
-  }
-}
-
-@media (max-width: 900px ) {
-  .pagination {
     gap: 40px;
 
     &__content {
       padding: 0 23px;
       grid-template-columns: repeat(2, 270px);
       justify-content: space-evenly;
+      height: 1364px;
     }
 
     &__card:nth-child(n + 7) {
@@ -178,5 +148,23 @@
 
     &__page-number {
     }
+  }
+}
+
+.blur {
+  animation: blur .5s ease;
+}
+
+@keyframes blur {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 1;
   }
 }

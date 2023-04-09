@@ -11,6 +11,7 @@ export const BACK = document.getElementById('back');
 export const PAGE_NUMBER = document.getElementById('page-number');
 export const FORWARD = document.getElementById('forward');
 export const FULL_FORWARD = document.getElementById('full-forward');
+export const CONTROLS = document.getElementById('controls');
 
 
 const getPets = async () => {

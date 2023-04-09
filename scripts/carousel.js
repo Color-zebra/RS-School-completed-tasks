@@ -9,7 +9,7 @@ const generateCard = (pet) => {
   return `
           <div class="slider__card card">
             <div class="card__image">
-              <img src="./assets/images/pets/pets-${pet.name.toLowerCase()}.png" alt="${pet.name} the ${pet.name} image">
+              <img src="./assets/images/pets/pets-${pet.name.toLowerCase()}.png" alt="${pet.name} the ${pet.breed} image">
             </div>
             <h3 class="card__name">${pet.name}</h3>
             <div class="card__btn">Learn more</div>

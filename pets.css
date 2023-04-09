@@ -376,6 +376,8 @@ a, a:visited {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  height: 899px;
+  opacity: 1;
 }
 .pagination__controls {
   display: -webkit-box;
@@ -424,11 +426,6 @@ a, a:visited {
 }
 
 @media (max-width: 1200px) {
-  .pagination__content {
-    grid-template-columns: repeat(3, 270px);
-  }
-}
-@media (max-width: 900px) {
   .pagination {
     gap: 40px;
   }
@@ -438,6 +435,7 @@ a, a:visited {
     -webkit-box-pack: space-evenly;
         -ms-flex-pack: space-evenly;
             justify-content: space-evenly;
+    height: 1364px;
   }
   .pagination__card:nth-child(n+7) {
     display: none;
@@ -459,6 +457,34 @@ a, a:visited {
   }
   .pagination__controls {
     gap: 10px;
+  }
+}
+.blur {
+  -webkit-animation: blur 0.5s ease;
+          animation: blur 0.5s ease;
+}
+
+@-webkit-keyframes blur {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes blur {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
   }
 }
 .card {
