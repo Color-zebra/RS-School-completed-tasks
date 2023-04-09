@@ -41,13 +41,13 @@
     height: 52px;
     border: 2px solid #F1CDB3;
     border-radius: 100px;
-    background: url('../assets/icons/close-popup-icon.png') no-repeat center;
+    background: url('./assets/icons/close-popup-icon.png') no-repeat center;
     transition: all .3s ease;
     cursor: pointer;
   }
 
   &__close:hover {
-    background: url('../assets/icons/close-popup-icon.png') no-repeat center, #FDDCC4;;
+    background: url('./assets/icons/close-popup-icon.png') no-repeat center, #FDDCC4;;
   }
 
   &__image {
@@ -65,8 +65,8 @@
   &__text {
     color: #000000;
     font-weight: 400;
-    letter-spacing: 0.06em;
-    padding: 0 19px 0 28px;
+    letter-spacing: 0.055em;
+    padding: 0 20px 0 29px;
     overflow-y: auto;
   }
 
@@ -74,12 +74,14 @@
     font-size: 35px;
     line-height: 45px;
     margin: 50px 0 10px 0;
+    letter-spacing: 0.06em;
   }
 
   &__type-and-breed {
     font-size: 20px;
     line-height: 115%;
     margin: 0 0 40px 0;
+    letter-spacing: 0.06em;
   }
 
   &__desc {
@@ -98,7 +100,7 @@
   }
 
   &__info-item {
-    background: url('../assets/icons/dot.png') no-repeat left center;
+    background: url('./assets/icons/dot.png') no-repeat left center;
     padding: 0 0 0 14px;
   }
 
@@ -173,11 +175,18 @@
 
 @media (max-width: 767.7px) {
   .popup {
+
+    &__close {
+      right: -30px;
+      top: -52px;
+    }
   
     &__content {
       width: 240px;
       height: auto;
       padding: 10px;
+      position: relative;
+      top: -4px;
     }
   
     &__image {
@@ -216,21 +225,21 @@
   
     &__info {
       gap: 6px;
+      margin: 0 0 1px 0;
     }
   
     &__info-item {
       padding: 0 0 0 14px;
+      line-height: 17px;
     }
   
     &__info-title {
       font-size: 15px;
-      line-height: 17px;
       font-weight: 700;
     }
   
     &__info-text {
       font-size: 15px;
-      line-height: 17px;
     }
   }
 }
