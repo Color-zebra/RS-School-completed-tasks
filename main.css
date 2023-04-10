@@ -56,6 +56,15 @@ body {
   height: 100vh;
 }
 
+@media (pointer: fine) {
+  .scroll-block > .wrapper {
+    padding-right: 17px;
+  }
+  .scroll-block .burger {
+    position: relative;
+    left: -17px;
+  }
+}
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
   font-weight: 400;
@@ -273,8 +282,8 @@ a, a:visited {
             align-items: center;
     gap: 40px;
     background: #292929;
-    -webkit-transition: right 0.3s ease;
-    transition: right 0.3s ease;
+    -webkit-transition: right 0.5s ease;
+    transition: right 0.5s ease;
     overflow-x: auto;
   }
   .header__menu_shown {
