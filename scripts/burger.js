@@ -10,6 +10,7 @@ const toggleMenu = () => {
   if (MENU.classList.contains('header__menu_shown')) {
     currOffsetY = window.scrollY;
     blockScroll(currOffsetY);
+    MENU.style.top = `${currOffsetY}px`;
   } else {
     unblockScroll(currOffsetY)
   }
