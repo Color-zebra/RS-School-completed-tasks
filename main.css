@@ -273,8 +273,9 @@ a, a:visited {
             align-items: center;
     gap: 40px;
     background: #292929;
-    -webkit-transition: all 0.3s ease;
-    transition: all 0.3s ease;
+    -webkit-transition: right 0.3s ease;
+    transition: right 0.3s ease;
+    overflow-x: auto;
   }
   .header__menu_shown {
     right: 0;
