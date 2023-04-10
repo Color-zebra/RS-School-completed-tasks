@@ -56,6 +56,15 @@ body {
   height: 100vh;
 }
 
+@media (pointer: fine) {
+  .scroll-block > .wrapper {
+    padding-right: 17px;
+  }
+  .scroll-block .burger {
+    position: relative;
+    left: -17px;
+  }
+}
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
   font-weight: 400;
@@ -469,9 +478,6 @@ a, a:visited {
   0% {
     opacity: 0;
   }
-  50% {
-    opacity: 0.5;
-  }
   100% {
     opacity: 1;
   }
@@ -480,9 +486,6 @@ a, a:visited {
 @keyframes blur {
   0% {
     opacity: 0;
-  }
-  50% {
-    opacity: 0.5;
   }
   100% {
     opacity: 1;

@@ -22,6 +22,19 @@ const handleMenuClick = (e) => {
   }
 }
 
+const removeBurger = () => {
+  OVERLAY.classList.remove('overlay_shown');
+  BURGER.classList.remove('burger_shown');
+  MENU.classList.remove('header__menu_shown');
+  unblockScroll(currOffsetY);
+}
+
+window.onresize = () => {
+  if (window.innerWidth > 767 && BURGER.classList.contains('burger_shown') ){
+    removeBurger();
+  }
+}
+
 BURGER.addEventListener('click', toggleMenu);
 OVERLAY.addEventListener('click', toggleMenu);
 MENU.addEventListener('click',  handleMenuClick);
