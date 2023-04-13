@@ -9,6 +9,12 @@ const checkSameElements = (prevArray, nextArray) => {
   const tail = prevArray.slice(-4);
   const head = nextArray.slice(0, 4);
   const sum = tail.concat(head);
+  const prev = prevArray.slice(prevArray.length - 8);
+  let isSame = true;
+  for (let i = 0; i < prev.length; i++) {
+    if (prev[i] !== nextArray[i]) isSame = false;
+  }
+  if (isSame) return false;
   return sum.length === [...new Set(sum)].length;
 }
 
@@ -163,6 +169,8 @@ window.onresize = () => {
 }
 
 const allPets = generatePetsArray();
+const allPetsObjects = allPets.map(item => data[item]);
+console.log('Массив с объектами питомцев', allPetsObjects);
 let desktop = [];
 let tablet = [];
 let mobile = [];
