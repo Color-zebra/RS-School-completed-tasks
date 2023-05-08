@@ -1,3 +1,5 @@
-import sayHi from './modules/Game.js';
+import Game from './modules/Game.js';
 
-sayHi();
+const game = new Game();
+
+game.init();
