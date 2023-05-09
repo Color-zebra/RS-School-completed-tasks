@@ -9,6 +9,11 @@ class Game {
     };
     this.bombsCount = 0;
     this.field = new Field();
+    this.controls = null;
+    this.fieldWrapper = null;
+    this.HTMLElements = {
+      themeSwitcher: document.getElementById('theme-switcher'),
+    };
   }
 
   init() {
@@ -16,6 +21,16 @@ class Game {
     this.field.plantBombs(50);
     this.field.describeField();
     this.field.renderField();
+    this.hydrateGame();
+  }
+
+  hydrateGame() {
+    this.HTMLElements.themeSwitcher.addEventListener('click', () => {
+      console.log('switch');
+      const currTheme = document.body.dataset.theme;
+      console.log(currTheme);
+      document.body.dataset.theme = currTheme === 'flame' ? 'ice' : 'flame';
+    });
   }
 }
 

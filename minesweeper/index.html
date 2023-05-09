@@ -6,9 +6,212 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script defer type="module" src="script.js"></script>
   <link rel="icon" href="fav.png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="input.css">
+  <script>
+    function toggleStat() {
+      document.getElementById('table').classList.toggle('stat__table_shown');
+    }
+  </script>
   <title>Minesweeper</title>
 </head>
-<body>
-  
+<body data-theme="flame">
+  <div class="wrapper">
+    <div class="controls">
+      <div class="controls__size size">
+        <div class="size__text">Field size</div>
+        <div class="size__inputs">
+          <label class="size__label" for="10">
+            <input type="radio" class="size__input" name="size" checked id="10">
+            <span>10</span>
+          </label>
+          <label class="size__label" for="15">
+            <input type="radio" class="size__input" name="size" id="15">
+            <span>15</span>
+          </label>
+          <label class="size__label" for="25">
+            <input type="radio" class="size__input" name="size" id="25">
+            <span>25</span>
+          </label>
+        </div>
+      </div>
+      <div class="controls__mines-count">
+        <label for="mines-count">Total mines: <span class="controls__mines-value">10</span></label>
+        <input class="styled-slider" type="range" min="10" max="99" value="10" step="1" name="mines-count">
+      </div>
+      <div class="controls__start-game">
+        <button class="controls__start-game-button button">Start game</button>
+      </div>
+      <button id="theme-switcher" class="controls__theme-switch-button button">
+        Theme
+      </button>
+    </div>
+    <div class="statistics">
+      <div class="statistics__steps">Steps: <span>2000</span></div>
+      <div class="statistics__stat stat">
+        <div class="stat__title button" onclick="toggleStat()">Latest results</div>
+        <table id="table" class="stat__table">
+          <tr class="stat__row">
+            <th>Res</th>
+            <th>Steps</th>
+            <th>Time</th>
+          </tr>
+          <tr class="stat__row">
+            <td>Win</td>
+            <td>25</td>
+            <td>1:25</td>
+          </tr>
+          <tr class="stat__row">
+            <td>Win</td>
+            <td>25</td>
+            <td>1:25</td>
+          </tr>
+          <tr class="stat__row">
+            <td>Win</td>
+            <td>25</td>
+            <td>1:25</td>
+          </tr>
+          <tr class="stat__row">
+            <td>Win</td>
+            <td>25</td>
+            <td>1:25</td>
+          </tr>
+          <tr class="stat__row">
+            <td>Win</td>
+            <td>25</td>
+            <td>1:25</td>
+          </tr>
+          <tr class="stat__row">
+            <td>Win</td>
+            <td>25</td>
+            <td>1:25</td>
+          </tr>
+          <tr class="stat__row">
+            <td>Win</td>
+            <td>25</td>
+            <td>1:25</td>
+          </tr>
+          <tr class="stat__row">
+            <td>Win</td>
+            <td>25</td>
+            <td>1:25</td>
+          </tr>
+          <tr class="stat__row">
+            <td>Win</td>
+            <td>25</td>
+            <td>1:25</td>
+          </tr>
+          <tr class="stat__row">
+            <td>Win</td>
+            <td>25</td>
+            <td>1:25</td>
+          </tr>
+        </table>
+      </div>
+      <div class="statistics__time">Steps: <span>1:55:25</span></div>
+    </div>
+    <div class="game-field">
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_wrong"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_wrong"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_wrong"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_wrong"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+      <div class="game-field__cell game-field__cell_right"></div>
+    </div>
+  </div>
 </body>
 </html>
