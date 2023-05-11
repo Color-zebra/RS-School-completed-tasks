@@ -3,8 +3,24 @@ class View {
     this.classes = {
       hidden: 'game-field__cell_hidden',
       broken: 'game-field__cell_broken',
+      marked: 'game-field__cell_marked',
       empty: 'game-field__cell',
     };
+  }
+
+  showEmptyCell(elem) {
+    elem.classList.remove(this.classes.hidden);
+    elem.classList.remove(this.classes.marked);
+  }
+
+  showWrongCell(elem) {
+    elem.classList.remove(this.classes.hidden);
+    elem.classList.remove(this.classes.marked);
+    elem.classList.add(this.classes.broken);
+  }
+
+  showMarkedCell(elem) {
+    elem.classList.add(this.classes.marked);
   }
 
   renderGameField(size, container) {

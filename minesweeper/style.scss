@@ -6,6 +6,8 @@
 :root {
   --big-radius: 0.5rem;
   --small-radius: 0.3rem;
+  --mist: url('./assets/textures-small/mist8-small.png');
+  --mark: url('./assets/textures-small/mark.png');
 }
 body[data-theme='flame'] {
   --field-bg: url('./assets/textures-big/Lava.png');
@@ -226,10 +228,15 @@ body {
     }
 
     &_hidden {
-      background-image: url('./assets/textures-small/mist8-small.png'), var(--right-cell);
+      background-image: var(--mist), var(--right-cell);
       margin: 0;
       border-radius: 0;
       filter: blur(0.1rem);
+    }
+
+    &_marked {
+      background-image: var(--mark), var(--mist), var(--right-cell);
+      filter: none;
     }
 
     &_hidden:hover {

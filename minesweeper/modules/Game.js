@@ -18,8 +18,20 @@ class Game {
       themeSwitcherElem: document.getElementById('theme-switcher'),
       gameFieldElem: document.getElementById('game-field'),
     };
-    /* this.handlers = {
-    } */
+    this.handlers = {
+      onCellClick: (e) => {
+        const elem = e.target.closest('.game-field__cell');
+        const { x, y } = elem.dataset;
+        if (!elem) return;
+        if (e.button === 0) {
+          this.view.showEmptyCell(this.cells[y][x]);
+        }
+        if (e.button === 2) {
+          this.view.showMarkedCell(this.cells[y][x]);
+        }
+      },
+
+    }
   }
 
   init() {
@@ -37,10 +49,7 @@ class Game {
       const currTheme = document.body.dataset.theme;
       document.body.dataset.theme = currTheme === 'flame' ? 'ice' : 'flame';
     });
-    this.HTMLElements.gameFieldElem.addEventListener('mousedown', (e) => {
-      console.log(e.button);
-      this.view.showEmptyCell(e.target);
-    });
+    this.HTMLElements.gameFieldElem.addEventListener('mousedown', this.handlers.onCellClick);
     this.HTMLElements.gameFieldElem.addEventListener('contextmenu', (e) => {
       e.preventDefault();
       return false;
