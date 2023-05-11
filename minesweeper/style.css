@@ -35,6 +35,38 @@ body[data-theme=ice] {
   --add-color-2: #03A2DB;
 }
 
+.col1 {
+  color: blue;
+}
+
+.col2 {
+  color: green;
+}
+
+.col3 {
+  color: red;
+}
+
+.col4 {
+  color: purple;
+}
+
+.col5 {
+  color: brown;
+}
+
+.col6 {
+  color: aquamarine;
+}
+
+.col7 {
+  color: black;
+}
+
+.col8 {
+  color: white;
+}
+
 body[data-size="10"] {
   --fsize: 5vmin;
   --size: 10;
@@ -54,6 +86,10 @@ body {
   background-color: var(--main-bg);
   color: var(--font-color);
   font-family: "Rubik", sans-serif;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 .wrapper {
@@ -242,10 +278,7 @@ body {
       -ms-flex-align: center;
           align-items: center;
   font-size: var(--fsize);
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  text-shadow: 0 0 5px darkgray, 0 0 5px darkgray;
   cursor: pointer;
   -webkit-transition: -webkit-transform 0.3s ease;
   transition: -webkit-transform 0.3s ease;
@@ -271,6 +304,7 @@ body {
 .game-field__cell_hidden:hover {
   -webkit-transform: scale(0.92);
           transform: scale(0.92);
+  outline: var(--font-color-alt) 0.2rem solid;
 }
 .game-field__value {
   line-height: 0;
@@ -375,5 +409,8 @@ body {
   .button {
     padding: 0.1rem 0.3rem;
     font-size: 1rem;
+  }
+  .game-field {
+    padding: 0.2rem;
   }
 }

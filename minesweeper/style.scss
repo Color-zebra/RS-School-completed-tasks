@@ -3,12 +3,14 @@
 *, *::after, *::before {
   box-sizing: border-box;
 }
+
 :root {
   --big-radius: 0.5rem;
   --small-radius: 0.3rem;
   --mist: url('./assets/textures-small/mist8-small.png');
   --mark: url('./assets/textures-small/mark.png');
 }
+
 body[data-theme='flame'] {
   --field-bg: url('./assets/textures-big/Lava.png');
   --right-cell: url('./assets/textures-small/Stone.jpg');
@@ -33,6 +35,38 @@ body[data-theme='ice'] {
   --add-color-2: #03A2DB;
 }
 
+.col1 {
+  color: blue;
+}
+
+.col2 {
+  color: green;
+}
+
+.col3 {
+  color: red;
+}
+
+.col4 {
+  color: purple;
+}
+
+.col5 {
+  color: brown;
+}
+
+.col6 {
+  color: aquamarine;
+}
+
+.col7 {
+  color: black;
+}
+
+.col8 {
+  color: white;
+}
+
 body[data-size='10'] {
   --fsize: 5vmin;
   --size: 10;
@@ -52,6 +86,7 @@ body {
   background-color: var(--main-bg);
   color: var(--font-color);
   font-family: 'Rubik', sans-serif;
+  user-select: none;
 }
 
 .wrapper {
@@ -157,6 +192,7 @@ body {
   &__time {
   }
 }
+
 .stat {
   position: relative;
   display: flex;
@@ -219,7 +255,7 @@ body {
     justify-content: center;
     align-items: center;
     font-size: var(--fsize);
-    user-select: none;
+    text-shadow: 0 0 5px darkgray, 0 0 5px darkgray;
     cursor: pointer;
     transition: transform .3s ease;
 
@@ -241,6 +277,7 @@ body {
 
     &_hidden:hover {
       transform: scale(0.92);
+      outline: var(--font-color-alt) 0.2rem solid;
     }
   }
 
@@ -292,6 +329,9 @@ body {
   .button {
     padding: 0.1rem 0.3rem;
     font-size: 1rem;
+  }
+  .game-field {
+    padding: 0.2rem;
   }
 
 }

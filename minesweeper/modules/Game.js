@@ -24,7 +24,9 @@ class Game {
         const { x, y } = elem.dataset;
         if (!elem) return;
         if (e.button === 0) {
-          this.view.showEmptyCell(this.cells[y][x]);
+          const rnd = Math.ceil(Math.random() * 8); //! remove math random
+          console.log(rnd);
+          this.view.showEmptyCell(this.cells[y][x], rnd);
         }
         if (e.button === 2) {
           this.view.showMarkedCell(this.cells[y][x]);

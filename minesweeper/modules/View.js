@@ -8,7 +8,11 @@ class View {
     };
   }
 
-  showEmptyCell(elem) {
+  showEmptyCell(elem, value) {
+    if (value) {
+      elem.append(value);
+      elem.classList.add(`col${value}`);
+    }
     elem.classList.remove(this.classes.hidden);
     elem.classList.remove(this.classes.marked);
   }
@@ -21,6 +25,10 @@ class View {
 
   showMarkedCell(elem) {
     elem.classList.add(this.classes.marked);
+  }
+
+  showHiddenCell(elem) {
+    elem.classList.remove(this.classes.marked);
   }
 
   renderGameField(size, container) {
