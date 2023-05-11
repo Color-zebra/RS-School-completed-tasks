@@ -33,14 +33,17 @@ body[data-theme='ice'] {
 
 body[data-size='10'] {
   --fsize: 5vmin;
+  --size: 10;
 }
 
 body[data-size='15'] {
   --fsize: 3.3vmin;
+  --size: 15;
 }
 
 body[data-size='25'] {
   --fsize: 2vmin;
+  --size: 25;
 }
 
 body {
@@ -202,8 +205,8 @@ body {
   width: 70vmin;
   height: 70vmin;
   border-radius: var(--big-radius);
-  grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: repeat(10, 1fr);
+  grid-template-columns: repeat(var(--size), 1fr);
+  grid-template-rows: repeat(var(--size), 1fr);
 
   &__cell {
     background-size: cover;
@@ -218,9 +221,6 @@ body {
     cursor: pointer;
     transition: transform .3s ease;
 
-    &_right {
-    }
-
     &_broken {
       animation: fall 1s ease forwards;
     }
@@ -232,17 +232,15 @@ body {
       filter: blur(0.1rem);
     }
 
-    &_broken:hover {
-      border: none;
+    &_hidden:hover {
+      transform: scale(0.92);
     }
-  }
-
-  &__cell:hover {
-    transform: scale(0.92);
   }
 
   &__value {
     line-height: 0;
+    margin: 0;
+    padding: 0;
   }
 }
 

@@ -35,14 +35,17 @@ body[data-theme=ice] {
 
 body[data-size="10"] {
   --fsize: 5vmin;
+  --size: 10;
 }
 
 body[data-size="15"] {
   --fsize: 3.3vmin;
+  --size: 15;
 }
 
 body[data-size="25"] {
   --fsize: 2vmin;
+  --size: 25;
 }
 
 body {
@@ -219,8 +222,8 @@ body {
   width: 70vmin;
   height: 70vmin;
   border-radius: var(--big-radius);
-  grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: repeat(10, 1fr);
+  grid-template-columns: repeat(var(--size), 1fr);
+  grid-template-rows: repeat(var(--size), 1fr);
 }
 .game-field__cell {
   background-size: cover;
@@ -258,15 +261,14 @@ body {
   -webkit-filter: blur(0.1rem);
           filter: blur(0.1rem);
 }
-.game-field__cell_broken:hover {
-  border: none;
-}
-.game-field__cell:hover {
+.game-field__cell_hidden:hover {
   -webkit-transform: scale(0.92);
           transform: scale(0.92);
 }
 .game-field__value {
   line-height: 0;
+  margin: 0;
+  padding: 0;
 }
 
 @-webkit-keyframes fall {
