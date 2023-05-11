@@ -33,6 +33,18 @@ body[data-theme=ice] {
   --add-color-2: #03A2DB;
 }
 
+body[data-size="10"] {
+  --fsize: 5vmin;
+}
+
+body[data-size="15"] {
+  --fsize: 3.3vmin;
+}
+
+body[data-size="25"] {
+  --fsize: 2vmin;
+}
+
 body {
   background-color: var(--main-bg);
   color: var(--font-color);
@@ -213,14 +225,48 @@ body {
 .game-field__cell {
   background-size: cover;
   border-radius: var(--small-radius);
-  margin: 0.1rem;
   background-image: var(--right-cell);
+  margin: 0.1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: var(--fsize);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  cursor: pointer;
+  -webkit-transition: -webkit-transform 0.3s ease;
+  transition: -webkit-transform 0.3s ease;
+  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, -webkit-transform 0.3s ease;
 }
 .game-field__cell_broken {
   -webkit-animation: fall 1s ease forwards;
           animation: fall 1s ease forwards;
-  -webkit-transform: rotateY(50deg) rotateX(50deg);
-          transform: rotateY(50deg) rotateX(50deg);
+}
+.game-field__cell_hidden {
+  background-image: url("./assets/textures-small/mist8-small.png"), var(--right-cell);
+  margin: 0;
+  border-radius: 0;
+  -webkit-filter: blur(0.1rem);
+          filter: blur(0.1rem);
+}
+.game-field__cell_broken:hover {
+  border: none;
+}
+.game-field__cell:hover {
+  -webkit-transform: scale(0.92);
+          transform: scale(0.92);
+}
+.game-field__value {
+  line-height: 0;
 }
 
 @-webkit-keyframes fall {

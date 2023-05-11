@@ -30,6 +30,19 @@ body[data-theme='ice'] {
   --add-color-1: #035CA5;
   --add-color-2: #03A2DB;
 }
+
+body[data-size='10'] {
+  --fsize: 5vmin;
+}
+
+body[data-size='15'] {
+  --fsize: 3.3vmin;
+}
+
+body[data-size='25'] {
+  --fsize: 2vmin;
+}
+
 body {
   background-color: var(--main-bg);
   color: var(--font-color);
@@ -191,17 +204,45 @@ body {
   border-radius: var(--big-radius);
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
+
   &__cell {
     background-size: cover;
     border-radius: var(--small-radius);
-    margin: 0.1rem;
     background-image: var(--right-cell);
+    margin: 0.1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--fsize);
+    user-select: none;
+    cursor: pointer;
+    transition: transform .3s ease;
+
     &_right {
     }
+
     &_broken {
       animation: fall 1s ease forwards;
-      transform: rotateY(50deg) rotateX(50deg);
     }
+
+    &_hidden {
+      background-image: url('./assets/textures-small/mist8-small.png'), var(--right-cell);
+      margin: 0;
+      border-radius: 0;
+      filter: blur(0.1rem);
+    }
+
+    &_broken:hover {
+      border: none;
+    }
+  }
+
+  &__cell:hover {
+    transform: scale(0.92);
+  }
+
+  &__value {
+    line-height: 0;
   }
 }
 
