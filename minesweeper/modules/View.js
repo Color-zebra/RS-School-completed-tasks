@@ -1,3 +1,5 @@
+import Cell from './Cell.js';
+
 class View {
   constructor() {
     this.classes = {
@@ -8,7 +10,19 @@ class View {
     };
   }
 
+  revealCell(elem, value) {
+    if (value === '*') {
+      this.showWrongCell(elem);
+    } else {
+      this.showEmptyCell(elem, value);
+    }
+    if (value === '') {
+
+    }
+  }
+
   showEmptyCell(elem, value) {
+    if (!elem.classList.contains('game-field__cell_hidden')) return;
     if (value) {
       elem.append(value);
       elem.classList.add(`col${value}`);
@@ -38,22 +52,13 @@ class View {
     for (let i = 0; i < size; i += 1) {
       elements.push([]);
       for (let j = 0; j < size; j += 1) {
-        const cell = this.generateCell(j, i);
+        const cell = new Cell(j, i);
         elements[i].push(cell);
-        curr.append(cell);
+        curr.append(cell.elem);
       }
     }
 
     return elements;
-  }
-
-  generateCell(x, y) {
-    const cell = document.createElement('div');
-    cell.classList.add(this.classes.empty);
-    cell.classList.add(this.classes.hidden);
-    cell.dataset.x = x;
-    cell.dataset.y = y;
-    return cell;
   }
 }
 
