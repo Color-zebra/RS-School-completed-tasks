@@ -3,36 +3,48 @@ class Field {
     this.field = [];
   }
 
-  generateField(emptyCell, size = 10, bombsCount = 10) {
+  generateField(coords, size = 10, bombsCount = 10) {
     this.createField(size);
-    if ((bombsCount + 9) <= (size * size)) {
-      this.createEmptyZone(emptyCell);
+    /* if ((bombsCount + 9) <= (size * size)) {
+      this.createEmptyZone(coords);
     } else {
-      this.createEmptyCell(emptyCell);
-    }
-    this.plantBombs(bombsCount);
+      this.createEmptyCell(coords);
+    } */
+    this.createEmptyZone(coords);
+    console.log(this.field);
+    this.plantBombs(bombsCount, size);
     this.describeField();
+    this.testField();
   }
 
-  createEmptyZone(emptyCell) {
-    const { emptyX, emptyY } = emptyCell;
-    this.field[emptyY][emptyX] = 'empty';
-    if (this.field[emptyY - 1] !== undefined) {
-      if (this.field[emptyY - 1][emptyX + 1] !== undefined) this.field[emptyY - 1][emptyX + 1] = 'empty';
-      if (this.field[emptyY - 1][emptyX] !== undefined) this.field[emptyY - 1][emptyX] = 'empty';
-      if (this.field[emptyY - 1][emptyX - 1] !== undefined) this.field[emptyY - 1][emptyX - 1] = 'empty';
+  createEmptyZone(coords) {
+    const [x, y] = coords;
+    this.field[y][x] = 'start';
+    if (this.field[y - 1] !== undefined) {
+      if (this.field[y - 1][x + 1] !== undefined) this.field[y - 1][x + 1] = 'empty';
+      if (this.field[y - 1][x] !== undefined) this.field[y - 1][x] = 'empty';
+      if (this.field[y - 1][x - 1] !== undefined) this.field[y - 1][x - 1] = 'empty';
     }
-    if (this.field[emptyY + 1] !== undefined) {
-      if (this.field[emptyY + 1][emptyX + 1] !== undefined) this.field[emptyY + 1][emptyX + 1] = 'empty';
-      if (this.field[emptyY + 1][emptyX] !== undefined) this.field[emptyY + 1][emptyX] = 'empty';
-      if (this.field[emptyY + 1][emptyX - 1] !== undefined) this.field[emptyY + 1][emptyX - 1] = 'empty';
+    if (this.field[y + 1] !== undefined) {
+      if (this.field[y + 1][x + 1] !== undefined) this.field[y + 1][x + 1] = 'empty';
+      if (this.field[y + 1][x] !== undefined) this.field[y + 1][x] = 'empty';
+      if (this.field[y + 1][x - 1] !== undefined) this.field[y + 1][x - 1] = 'empty';
     }
-    if (this.field[emptyY][emptyX + 1] !== undefined) this.field[emptyY][emptyX + 1] = 'empty';
-    if (this.field[emptyY][emptyX - 1] !== undefined) this.field[emptyY][emptyX - 1] = 'empty';
+    if (this.field[y][x + 1] !== undefined) this.field[y][x + 1] = 'empty';
+    if (this.field[y][x - 1] !== undefined) this.field[y][x - 1] = 'empty';
   }
 
-  createEmptyCell(emptyCell) {
-    const { emptyX, emptyY } = emptyCell;
+  testField() {
+    const flatted = this.field.flat();
+    let counter = 0;
+    flatted.forEach((cell) => {
+      if (cell === '*') counter += 1;
+    });
+    console.log(`${counter} total bombs planted`);
+  }
+
+  createEmptyCell(coords) {
+    const [emptyX, emptyY] = coords;
     this.field[emptyY][emptyX] = 'empty';
   }
 
@@ -45,14 +57,19 @@ class Field {
     }
   }
 
-  plantBombs(bombsCount = 10) {
+  plantBombs(bombsCount, size) {
     let bombs = bombsCount;
+    let overflowedBombs = bombs > (size * size - 9) ? bombs - (size * size - 9) : 0;
     while (bombs > 0) {
       const x = Math.floor(Math.random() * this.field.length);
       const y = Math.floor(Math.random() * this.field.length);
       if (this.field[x][y] === false) {
         this.field[x][y] = '*';
         bombs -= 1;
+      } else if (overflowedBombs > 0 && this.field[x][y] === 'empty') {
+        this.field[x][y] = '*';
+        bombs -= 1;
+        overflowedBombs -= 1;
       }
     }
   }
@@ -76,7 +93,7 @@ class Field {
     };
     for (let i = 0; i < this.field.length; i += 1) {
       for (let j = 0; j < this.field.length; j += 1) {
-        if (this.field[i][j] === false || this.field[i][j] === 'empty') this.field[i][j] = checkSiblings(i, j);
+        if (this.field[i][j] === false || this.field[i][j] === 'empty' || this.field[i][j] === 'start') this.field[i][j] = checkSiblings(i, j);
       }
     }
   }
