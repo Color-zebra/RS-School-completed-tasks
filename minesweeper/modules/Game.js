@@ -32,11 +32,15 @@ class Game {
             this.field.generateField([x, y], this.size, this.bombsCount);
             this.isStarted = true;
           }
-          this.nextStep();
+          this.updateStep();
           this.revealCell([x, y]);
         }
         if (e.button === 2) {
-          this.view.showMarkedCell(this.cells[y][x].elem);
+          if (elem.classList.contains('game-field__cell_marked')) {
+            this.view.showHiddenCell(this.cells[y][x].elem);
+          } else {
+            this.view.showMarkedCell(this.cells[y][x].elem);
+          }
         }
       },
     };
@@ -58,14 +62,28 @@ class Game {
     currCell.isOpen = true;
     this.view.revealCell(currCell.elem, value);
 
-    console.log(value);
+    if (value === '*') {
+      this.finishGame(false);
+      return;
+    }
+
+    const totalOpenCells = this.cells.flat().filter((cell) => cell.isOpen).length;
+    if (totalOpenCells === this.size ** 2 - this.bombsCount) {
+      this.finishGame(true);
+    }
 
     if (!value) this.revealSiblingsCell(coords);
   }
 
-  nextStep() {
+  updateStep() {
     this.steps += 1;
     this.view.elements.steps.innerText = this.steps;
+  }
+
+  finishGame(isWinner) {
+    console.log('Game over');
+    console.log(`You are ${isWinner ? 'Winner' : 'Loser'}`);
+    this.view.gameOver(isWinner);
   }
 
   revealSiblingsCell(coords) {

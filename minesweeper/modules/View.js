@@ -7,11 +7,12 @@ class View {
       broken: 'game-field__cell_broken',
       marked: 'game-field__cell_marked',
       empty: 'game-field__cell',
+      shownResult: 'result_shown',
       win: 'win',
       lose: 'lose',
     };
     this.texts = {
-      win: 'Congratulations! You won!',
+      win: 'Congratulations!\n You won!',
       lose: 'You lose',
     };
     this.choosenOptions = {
@@ -29,6 +30,9 @@ class View {
       resultsBtn: null,
       timer: null,
       gameField: null,
+      resultText: null,
+      resultAnimation: null,
+      resultWindow: null,
     };
     this.cells = null;
     this.timerId = null;
@@ -82,6 +86,12 @@ class View {
     this.cells = elements;
   }
 
+  gameOver(isWinner) {
+    this.elements.resultText.innerText = isWinner ? this.texts.win : this.texts.lose;
+    this.elements.resultAnimation.classList.add(isWinner ? this.classes.win : this.classes.lose);
+    this.elements.resultWindow.classList.add(this.classes.shownResult);
+  }
+
   createGameField() {
     const fieldElem = document.createElement('div');
     fieldElem.classList.add('game-field');
@@ -94,8 +104,8 @@ class View {
     results.classList.add('result');
     results.setAttribute('id', 'result');
     results.innerHTML = `
-      <p class="result__text">You lose</p>
-      <div class="result__animation"></div>
+      <p id="result-text" class="result__text">You lose</p>
+      <div id="result-animation" class="result__animation"></div>
       <div class="result__start-game-button button">Start new game</div>
     `;
 
@@ -176,6 +186,9 @@ class View {
     this.elements.steps = document.getElementById('steps');
     this.elements.resultsBtn = document.getElementById('toggle-stat-btn');
     this.elements.timer = document.getElementById('time');
+    this.elements.resultText = document.getElementById('result-text');
+    this.elements.resultAnimation = document.getElementById('result-animation');
+    this.elements.resultWindow = document.getElementById('result');
   }
 
   hydrateInterface() {

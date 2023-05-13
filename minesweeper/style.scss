@@ -38,6 +38,14 @@ body[data-theme='ice'] {
   --lose: url('./assets/animations/ice-fall.gif')
 }
 
+.win {
+  background-image: var(--win);
+}
+
+.lose {
+  background-image: var(--lose);
+}
+
 .col1 {
   color: blue;
 }
@@ -330,7 +338,6 @@ body {
       width: 40vmin;
       height: 30vmin;
       background-size: cover;
-      background-image: var(--lose);
       transition: right .5s ease;
 		}
 
