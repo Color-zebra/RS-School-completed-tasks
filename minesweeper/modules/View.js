@@ -7,12 +7,31 @@ class View {
       broken: 'game-field__cell_broken',
       marked: 'game-field__cell_marked',
       empty: 'game-field__cell',
+      win: 'win',
+      lose: 'lose',
+    };
+    this.texts = {
+      win: 'Congratulations! You won!',
+      lose: 'You lose',
+    };
+    this.choosenOptions = {
+      size: null,
+      bombsCount: null,
     };
     this.elements = {
       wrapper: null,
+      sizeButtons: null,
+      choosenMinesValue: null,
+      minesInput: null,
+      startBtn: null,
+      themeSwitcher: null,
+      steps: null,
+      resultsBtn: null,
+      timer: null,
       gameField: null,
     };
     this.cells = null;
+    this.timerId = null;
   }
 
   revealCell(elem, value) {
@@ -111,11 +130,11 @@ class View {
         </div>
       </div>
       <div class="controls__mines-count">
-        <label for="mines-count">Total mines: <span class="controls__mines-value">10</span></label>
-        <input class="styled-slider" type="range" min="10" max="99" value="10" step="1" name="mines-count">
+        <label for="mines-count">Total mines: <span class="controls__mines-value" id="choosen-mines-value">10</span></label>
+        <input class="styled-slider" type="range" min="10" max="99" value="10" step="1" id="mines-input" name="mines-count">
       </div>
       <div class="controls__start-game">
-        <button id="startGame" class="controls__start-game-button button">Start game</button>
+        <button id="start-game-btn" class="controls__start-game-button button">Start game</button>
       </div>
       <button id="theme-switcher" class="controls__theme-switch-button button">
         Theme
@@ -128,13 +147,13 @@ class View {
     const statistic = document.createElement('div');
     statistic.classList.add('statistics');
     statistic.innerHTML = `
-      <div class="statistics__steps">Steps: <span>2000</span></div>
+      <div class="statistics__steps">Steps: <span id="steps">0</span></div>
       <div class="statistics__stat stat">
-        <div class="stat__title button" onclick="toggleStat()">Latest results</div>
+        <div class="stat__title button" id="toggle-stat-btn">Latest results</div>
         <table id="table" class="stat__table">
         </table>
       </div>
-      <div class="statistics__time">Steps: <span>1:55:25</span></div>
+      <div class="statistics__time">Time: <span id="time">00:00:00</span></div>
     `;
     this.elements.wrapper.append(statistic);
   }
@@ -146,6 +165,45 @@ class View {
     this.createGameField();
     this.createResultsWindow();
     document.body.append(this.elements.wrapper);
+  }
+
+  getHtmlElements() {
+    this.elements.sizeButtons = document.querySelectorAll('.size__input');
+    this.elements.choosenMinesValue = document.getElementById('choosen-mines-value');
+    this.elements.minesInput = document.getElementById('mines-input');
+    this.elements.startBtn = document.getElementById('start-game-btn');
+    this.elements.themeSwitcher = document.getElementById('theme-switcher');
+    this.elements.steps = document.getElementById('steps');
+    this.elements.resultsBtn = document.getElementById('toggle-stat-btn');
+    this.elements.timer = document.getElementById('time');
+  }
+
+  hydrateInterface() {
+    this.getHtmlElements();
+
+    this.elements.themeSwitcher.addEventListener('click', () => {
+      const currTheme = document.body.dataset.theme;
+      document.body.dataset.theme = currTheme === 'flame' ? 'ice' : 'flame';
+    });
+
+    const checkRadio = () => {
+      let choosenValue = null;
+      [...this.elements.sizeButtons].forEach((btn) => {
+        if (btn.checked) choosenValue = +btn.getAttribute('id');
+      });
+      this.choosenOptions.size = choosenValue;
+    };
+    [...this.elements.sizeButtons].forEach((btn) => {
+      btn.addEventListener('change', checkRadio);
+    });
+
+    this.elements.minesInput.addEventListener('input', (e) => {
+      const { value } = e.target;
+      if (this.choosenOptions.bombsCount === value) return;
+
+      this.choosenOptions.bombsCount = e.target.value;
+      this.elements.choosenMinesValue.innerText = e.target.value;
+    });
   }
 }
 

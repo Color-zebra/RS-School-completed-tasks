@@ -19,6 +19,8 @@ class Game {
       themeSwitcherElem: document.getElementById('theme-switcher'),
       gameFieldElem: document.getElementById('game-field'),
     };
+
+    this.steps = 0;
     this.handlers = {
       onCellClick: (e) => {
         const elem = e.target.closest('.game-field__cell');
@@ -30,6 +32,7 @@ class Game {
             this.field.generateField([x, y], this.size, this.bombsCount);
             this.isStarted = true;
           }
+          this.nextStep();
           this.revealCell([x, y]);
         }
         if (e.button === 2) {
@@ -44,8 +47,6 @@ class Game {
     this.view.renderGameField(this.size);
     this.cells = this.view.cells; //! а надо ли?
     this.hydrateGame();
-    // document.body.dataset.size = this.size;
-    // this.cells = this.view.renderGameField(this.size, this.HTMLElements.gameFieldElem);
   }
 
   revealCell(coords) {
@@ -57,7 +58,14 @@ class Game {
     currCell.isOpen = true;
     this.view.revealCell(currCell.elem, value);
 
+    console.log(value);
+
     if (!value) this.revealSiblingsCell(coords);
+  }
+
+  nextStep() {
+    this.steps += 1;
+    this.view.elements.steps.innerText = this.steps;
   }
 
   revealSiblingsCell(coords) {
@@ -89,10 +97,11 @@ class Game {
   }
 
   hydrateGame() {
-    /* this.HTMLElements.themeSwitcherElem.addEventListener('click', () => {
-      const currTheme = document.body.dataset.theme;
-      document.body.dataset.theme = currTheme === 'flame' ? 'ice' : 'flame';
-    }); */
+    this.view.hydrateInterface();
+    this.hydrateGameField();
+  }
+
+  hydrateGameField() {
     this.view.elements.gameField.addEventListener('mousedown', this.handlers.onCellClick);
     this.view.elements.gameField.addEventListener('contextmenu', (e) => {
       e.preventDefault();
