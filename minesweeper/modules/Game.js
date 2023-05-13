@@ -21,6 +21,7 @@ class Game {
     };
 
     this.steps = 0;
+    this.time = 0;
     this.handlers = {
       onCellClick: (e) => {
         const elem = e.target.closest('.game-field__cell');
@@ -31,6 +32,8 @@ class Game {
           if (!this.isStarted) {
             this.field.generateField([x, y], this.size, this.bombsCount);
             this.isStarted = true;
+            const intervalFunc = this.updateTimer.bind(this);
+            this.view.timerId = setInterval(intervalFunc, 1000);
           }
           this.updateStep();
           this.revealCell([x, y]);
@@ -80,10 +83,25 @@ class Game {
     this.view.elements.steps.innerText = this.steps;
   }
 
+  updateTimer() {
+    console.log('tick');
+    const transformSeconds = (seconds) => {
+      let currSec = seconds;
+      const hours = `${Math.floor(currSec / 3600)}`;
+      currSec %= 3600;
+      const minutes = `${Math.floor(currSec / 60)}`;
+      currSec = `${currSec % 60}`;
+
+      return `${(`0${hours}`).slice(-2)}:${(`0${minutes}`).slice(-2)}:${(`0${currSec}`).slice(-2)}`;
+    };
+
+    this.time += 1;
+    this.view.elements.timer.innerText = transformSeconds(this.time);
+  }
+
   finishGame(isWinner) {
-    console.log('Game over');
-    console.log(`You are ${isWinner ? 'Winner' : 'Loser'}`);
-    this.view.gameOver(isWinner);
+    clearInterval(this.view.timerId);
+    this.view.gameOver(isWinner, this.time, this.steps);
   }
 
   revealSiblingsCell(coords) {

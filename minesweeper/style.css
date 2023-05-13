@@ -18,6 +18,7 @@ body[data-theme=flame] {
   --font-color: #DD4C19;
   --font-color-alt: #3C3445;
   --main-bg: #292929;
+  --main-bg-transp: #292929ee;
   --add-color-1: #F0B249;
   --add-color-2: #D12A08;
   --alt-color-1: #035CA5;
@@ -31,6 +32,7 @@ body[data-theme=ice] {
   --font-color: #292929;
   --font-color-alt: #035CA5;
   --main-bg: #9edcf3;
+  --main-bg-transp: #9edcf3ee;
   --alt-color-1: #F0B249;
   --alt-color-2: #D12A08;
   --add-color-1: #035CA5;
@@ -213,7 +215,7 @@ body {
 
 .statistics {
   width: 100%;
-  padding: 2vmin 1vmin;
+  padding: 2vmin 6vmin;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -332,6 +334,8 @@ body {
   z-index: 2;
   top: 50%;
   left: -100vw;
+  width: 100vw;
+  height: 100vh;
   padding: 1rem;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -343,9 +347,12 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   gap: 2vmin;
   font-size: var(--fsize);
-  background-color: var(--main-bg);
+  background-color: var(--main-bg-transp);
   border-radius: var(--big-radius);
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);

@@ -87,7 +87,11 @@ class View {
   }
 
   gameOver(isWinner) {
+    const time = this.elements.timer.innerText;
+    const steps = this.elements.steps.innerText;
+
     this.elements.resultText.innerText = isWinner ? this.texts.win : this.texts.lose;
+    this.elements.resultText.innerText += `\nTime: ${time} \nSteps: ${steps}`;
     this.elements.resultAnimation.classList.add(isWinner ? this.classes.win : this.classes.lose);
     this.elements.resultWindow.classList.add(this.classes.shownResult);
   }
