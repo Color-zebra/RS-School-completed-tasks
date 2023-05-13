@@ -1,7 +1,9 @@
 import Cell from './Cell.js';
+import Sound from './Sound.js';
 
 class View {
   constructor() {
+    this.sound = new Sound();
     this.classes = {
       hidden: 'game-field__cell_hidden',
       broken: 'game-field__cell_broken',
@@ -63,15 +65,18 @@ class View {
   }
 
   showMarkedCell(elem) {
+    this.sound.playFlag();
     elem.classList.add(this.classes.marked);
   }
 
   showHiddenCell(elem) {
+    this.sound.playFlag();
     elem.classList.remove(this.classes.marked);
   }
 
   renderGameField(size) {
     this.elements.gameField.innerHTML = '';
+    document.body.dataset.size = size;
 
     const elements = [];
     for (let i = 0; i < size; i += 1) {
@@ -89,6 +94,11 @@ class View {
   gameOver(isWinner) {
     const time = this.elements.timer.innerText;
     const steps = this.elements.steps.innerText;
+    if (isWinner) {
+      this.sound.playWin();
+    } else {
+      this.sound.playLose();
+    }
 
     this.elements.resultText.innerText = isWinner ? this.texts.win : this.texts.lose;
     this.elements.resultText.innerText += `\nTime: ${time} \nSteps: ${steps}`;

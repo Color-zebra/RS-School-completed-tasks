@@ -398,6 +398,10 @@ body {
   }
   .game-field {
     padding: 0.2rem;
+
+    &__cell {
+      margin: 0.05rem;
+    }
   }
 
   .size__label {

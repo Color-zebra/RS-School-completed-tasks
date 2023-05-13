@@ -35,10 +35,11 @@ class Game {
             const intervalFunc = this.updateTimer.bind(this);
             this.view.timerId = setInterval(intervalFunc, 1000);
           }
-          this.updateStep();
+          this.updateStep(); //! Считать ли клики по открытым клеткам?
           this.revealCell([x, y]);
         }
         if (e.button === 2) {
+          if (!elem.classList.contains('game-field__cell_hidden')) return;
           if (elem.classList.contains('game-field__cell_marked')) {
             this.view.showHiddenCell(this.cells[y][x].elem);
           } else {
@@ -81,10 +82,10 @@ class Game {
   updateStep() {
     this.steps += 1;
     this.view.elements.steps.innerText = this.steps;
+    this.view.sound.playStep();
   }
 
   updateTimer() {
-    console.log('tick');
     const transformSeconds = (seconds) => {
       let currSec = seconds;
       const hours = `${Math.floor(currSec / 3600)}`;
