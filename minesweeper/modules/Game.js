@@ -3,22 +3,22 @@ import View from './View.js';
 
 class Game {
   constructor() {
+    this.field = new Field();
+    this.view = new View();
+
     this.sizes = {
       easy: 10,
       medium: 15,
       hard: 25,
     };
     this.size = 10;
-    this.bombsCount = 92;
-    this.field = new Field();
-    this.view = new View();
-    this.controls = null;
+    this.bombsCount = 10;
     this.cells = null;
+    this.isStarted = false;
     this.HTMLElements = {
       themeSwitcherElem: document.getElementById('theme-switcher'),
       gameFieldElem: document.getElementById('game-field'),
     };
-    this.isStarted = false;
     this.handlers = {
       onCellClick: (e) => {
         const elem = e.target.closest('.game-field__cell');
@@ -40,22 +40,23 @@ class Game {
   }
 
   init() {
-    // this.field.generateField({ emptyX: 5, emptyY: 4 }, 10, 10);
+    this.view.createLayout();
+    this.view.renderGameField(this.size);
+    this.cells = this.view.cells; //! а надо ли?
     this.hydrateGame();
-    document.body.dataset.size = this.size;
-    this.cells = this.view.renderGameField(this.size, this.HTMLElements.gameFieldElem);
-    console.log(this.field);
-    console.log(this.cells);
+    // document.body.dataset.size = this.size;
+    // this.cells = this.view.renderGameField(this.size, this.HTMLElements.gameFieldElem);
   }
 
   revealCell(coords) {
     const [x, y] = coords;
     const currCell = this.cells[y][x];
     if (currCell.isOpen) return;
-    const value = this.field.field[y][x];
 
+    const value = this.field.field[y][x];
     currCell.isOpen = true;
     this.view.revealCell(currCell.elem, value);
+
     if (!value) this.revealSiblingsCell(coords);
   }
 
@@ -88,12 +89,12 @@ class Game {
   }
 
   hydrateGame() {
-    this.HTMLElements.themeSwitcherElem.addEventListener('click', () => {
+    /* this.HTMLElements.themeSwitcherElem.addEventListener('click', () => {
       const currTheme = document.body.dataset.theme;
       document.body.dataset.theme = currTheme === 'flame' ? 'ice' : 'flame';
-    });
-    this.HTMLElements.gameFieldElem.addEventListener('mousedown', this.handlers.onCellClick);
-    this.HTMLElements.gameFieldElem.addEventListener('contextmenu', (e) => {
+    }); */
+    this.view.elements.gameField.addEventListener('mousedown', this.handlers.onCellClick);
+    this.view.elements.gameField.addEventListener('contextmenu', (e) => {
       e.preventDefault();
       return false;
     });

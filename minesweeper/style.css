@@ -9,6 +9,7 @@
   --small-radius: 0.3rem;
   --mist: url("./assets/textures-small/mist8-small.png");
   --mark: url("./assets/textures-small/mark.png");
+  --win: url("./assets/animations/win.gif") ;
 }
 
 body[data-theme=flame] {
@@ -21,6 +22,7 @@ body[data-theme=flame] {
   --add-color-2: #D12A08;
   --alt-color-1: #035CA5;
   --alt-color-2: #03A2DB;
+  --lose: url("./assets/animations/flame-fall.gif") ;
 }
 
 body[data-theme=ice] {
@@ -33,6 +35,7 @@ body[data-theme=ice] {
   --alt-color-2: #D12A08;
   --add-color-1: #035CA5;
   --add-color-2: #03A2DB;
+  --lose: url("./assets/animations/ice-fall.gif") ;
 }
 
 .col1 {
@@ -90,6 +93,10 @@ body {
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
+  width: 100vw;
+  overflow-x: hidden;
+  padding: 0;
+  margin: 0;
 }
 
 .wrapper {
@@ -198,7 +205,7 @@ body {
 
 .statistics {
   width: 100%;
-  padding: 2vmin;
+  padding: 2vmin 1vmin;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -312,6 +319,60 @@ body {
   padding: 0;
 }
 
+.result {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: -100vw;
+  padding: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 2vmin;
+  font-size: var(--fsize);
+  background-color: var(--main-bg);
+  border-radius: var(--big-radius);
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-transition: left 0.5s ease;
+  transition: left 0.5s ease;
+}
+.result_shown {
+  left: 50%;
+}
+.result_shown > .result__animation {
+  right: 0;
+}
+.result__text {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+.result__animation {
+  position: relative;
+  right: -500vw;
+  width: 40vmin;
+  height: 30vmin;
+  background-size: cover;
+  background-image: var(--lose);
+  -webkit-transition: right 0.5s ease;
+  transition: right 0.5s ease;
+}
+.result__start-game-button {
+  color: var(--font-color-alt);
+  background: -webkit-gradient(linear, left top, right top, from(var(--add-color-1)), to(var(--add-color-2)));
+  background: linear-gradient(90deg, var(--add-color-1), var(--add-color-2));
+  text-align: center;
+  max-width: 12rem;
+}
+
 @-webkit-keyframes fall {
   0% {
     -webkit-transform: scale(1) rotateY(0deg) rotateX(0deg);
@@ -412,5 +473,8 @@ body {
   }
   .game-field {
     padding: 0.2rem;
+  }
+  .size__label {
+    margin: 0.2rem 0;
   }
 }

@@ -9,6 +9,7 @@
   --small-radius: 0.3rem;
   --mist: url('./assets/textures-small/mist8-small.png');
   --mark: url('./assets/textures-small/mark.png');
+  --win: url('./assets/animations/win.gif')
 }
 
 body[data-theme='flame'] {
@@ -21,6 +22,7 @@ body[data-theme='flame'] {
   --add-color-2: #D12A08;
   --alt-color-1: #035CA5;
   --alt-color-2: #03A2DB;
+  --lose: url('./assets/animations/flame-fall.gif')
 }
 
 body[data-theme='ice'] {
@@ -33,6 +35,7 @@ body[data-theme='ice'] {
   --alt-color-2: #D12A08;
   --add-color-1: #035CA5;
   --add-color-2: #03A2DB;
+  --lose: url('./assets/animations/ice-fall.gif')
 }
 
 .col1 {
@@ -87,6 +90,10 @@ body {
   color: var(--font-color);
   font-family: 'Rubik', sans-serif;
   user-select: none;
+  width: 100vw;
+  overflow-x: hidden;
+  padding: 0;
+  margin: 0;
 }
 
 .wrapper {
@@ -178,7 +185,7 @@ body {
 
 .statistics {
   width: 100%;
-  padding: 2vmin;
+  padding: 2vmin 1vmin;
   display: flex;
   justify-content: space-between;
   border-bottom: 0.2rem solid var(--add-color-1);
@@ -287,6 +294,53 @@ body {
     padding: 0;
   }
 }
+.result {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: -100vw;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2vmin;
+  font-size: var(--fsize);
+  background-color: var(--main-bg);
+  border-radius: var(--big-radius);
+  transform: translate(-50%, -50%);
+  transition: left .5s ease;
+
+    &_shown {
+      left: 50%;
+    }
+
+    &_shown > &__animation {
+      right: 0;
+    }
+
+		&__text {
+      text-align: center;
+      margin: 0;
+      padding: 0;
+		}
+
+		&__animation {
+      position: relative;
+      right: -500vw;
+      width: 40vmin;
+      height: 30vmin;
+      background-size: cover;
+      background-image: var(--lose);
+      transition: right .5s ease;
+		}
+
+		&__start-game-button {
+      color: var(--font-color-alt);
+      background: linear-gradient(90deg, var(--add-color-1), var(--add-color-2));
+      text-align: center;
+      max-width: 12rem;
+		}
+}
 
 @keyframes fall {
   0% {
@@ -332,6 +386,10 @@ body {
   }
   .game-field {
     padding: 0.2rem;
+  }
+
+  .size__label {
+    margin: 0.2rem 0;
   }
 
 }

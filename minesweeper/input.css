@@ -17,12 +17,12 @@ input[type=range]::-webkit-slider-thumb {
   width: 0.4rem;
   height: 1rem;
   -webkit-appearance: none;
-  margin-top: -4px;
+  margin-top: -5px;
 }
 
 input[type=range]::-moz-range-track {
   border-radius: var(--small-radius);
-  height: 5px;
+  height: 7px;
   
   background: linear-gradient(90deg, var(--add-color-1), var(--add-color-2));
 }
@@ -32,4 +32,6 @@ input[type=range]::-moz-range-thumb {
   cursor: pointer;
   width: 0.4rem;
   height: 1rem;
+  -moz-appearance: none;
+  margin-top: -5px;
 }
