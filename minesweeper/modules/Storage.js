@@ -2,26 +2,28 @@ class Storage {
   constructor() {
     this.options = null;
     this.statistic = null;
-    this.game = {
-      field: null,
-      openedCells: null,
-      markedCells: null,
-    };
+    this.game = null;
   }
 
-  save(opts, stat) {
+  save(opts, stat, game) {
     if (opts) this.saveOptions(opts);
     if (stat) this.saveStatistics(stat);
+    if (game) {
+      this.saveGameState(game);
+    } else {
+      this.saveGameState(null);
+    };
   }
 
   load() {
     this.options = this.loadOptions();
     this.statistic = this.loadStatistics();
+    this.game = this.loadGameState();
 
     return {
       options: this.options,
       statistic: this.statistic,
-      game: null,
+      game: this.game,
     };
   }
 
@@ -49,10 +51,16 @@ class Storage {
     return null;
   }
 
-  saveGameState() {
+  saveGameState(game) {
+    localStorage.setItem('game', JSON.stringify(game));
   }
 
   loadGameState() {
+    const loaded = localStorage.getItem('game');
+    if (loaded) {
+      return JSON.parse(loaded);
+    }
+    return null;
   }
 }
 

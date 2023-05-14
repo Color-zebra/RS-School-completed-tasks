@@ -92,6 +92,7 @@ class View {
     }
 
     this.cells = elements;
+    console.log(elements);
   }
 
   gameOver(isWinner) {

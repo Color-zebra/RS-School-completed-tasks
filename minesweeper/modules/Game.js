@@ -37,6 +37,7 @@ class Game {
         if (e.button === 2) {
           if (!elem.classList.contains('game-field__cell_hidden')) return;
           if (elem.classList.contains('game-field__cell_marked')) {
+            console.log(this.cells[y][x].elem);
             this.view.showHiddenCell(this.cells[y][x].elem);
           } else {
             this.view.showMarkedCell(this.cells[y][x].elem);
@@ -64,6 +65,9 @@ class Game {
         this.view.createStatisticRow(res);
       });
     }
+    if (loaded.game) {
+      this.initLoadedGame(loaded.game);
+    }
   }
 
   load() {
@@ -85,12 +89,33 @@ class Game {
       isMute: this.isMute,
     };
     let currStat = null;
+    let currGame = null;
 
     if (this.statistic.length > 0) {
       currStat = this.statistic;
     }
 
-    this.storage.save(currOptions, currStat);
+    if (this.isStarted === true) {
+      const opened = this.cells.flat()
+        .filter((cell) => cell.isOpen)
+        .map((cell) => [cell.x, cell.y]);
+
+      const marked = this.cells.flat()
+        .filter((cell) => cell.elem.classList.contains('game-field__cell_marked'))
+        .map((cell) => [cell.x, cell.y]);
+
+      currGame = {
+        size: this.size,
+        bombsCount: this.bombsCount,
+        field: this.field.field,
+        time: this.time,
+        steps: this.steps,
+        openedCells: opened,
+        markedCells: marked,
+      };
+    }
+
+    this.storage.save(currOptions, currStat, currGame);
   }
 
   initNewGame() {
@@ -110,6 +135,20 @@ class Game {
     if (this.steps) {
       this.resetSteps();
     }
+  }
+
+  initLoadedGame(game) {
+    this.size = game.size;
+    this.bombsCount = game.bombsCount;
+    this.isStarted = true;
+    this.view.renderGameField(this.size);
+    this.cells = this.view.cells;
+    this.field.field = game.field;
+    this.time = game.time;
+    this.steps = game.steps;
+    game.openedCells.forEach((coords) => {
+      this.revealCell(coords);
+    });
   }
 
   updateOptions() {
@@ -174,6 +213,7 @@ class Game {
   }
 
   finishGame(isWinner) {
+    this.isStarted = false;
     clearInterval(this.view.timerId);
     this.view.gameOver(isWinner, this.time, this.steps);
     this.updateStatistic(isWinner);
