@@ -6,22 +6,14 @@ class Game {
     this.field = new Field();
     this.view = new View();
 
-    this.sizes = {
-      easy: 10,
-      medium: 15,
-      hard: 25,
-    };
     this.size = 10;
     this.bombsCount = 10;
     this.cells = null;
     this.isStarted = false;
-    this.HTMLElements = {
-      themeSwitcherElem: document.getElementById('theme-switcher'),
-      gameFieldElem: document.getElementById('game-field'),
-    };
 
     this.steps = 0;
     this.time = 0;
+
     this.handlers = {
       onCellClick: (e) => {
         const elem = e.target.closest('.game-field__cell');
@@ -47,6 +39,9 @@ class Game {
           }
         }
       },
+      onNewGameClick: () => {
+        this.initNewGame();
+      },
     };
   }
 
@@ -55,6 +50,28 @@ class Game {
     this.view.renderGameField(this.size);
     this.cells = this.view.cells; //! а надо ли?
     this.hydrateGame();
+    this.view.showCurrentOptions(this.size, this.bombsCount);
+  }
+
+  initNewGame() {
+    const opt = this.view.getChooseOptions();
+    this.size = opt.size;
+    this.bombsCount = opt.bombsCount;
+    this.view.renderGameField(this.size);
+    this.cells = this.view.cells;
+    this.field = new Field();
+    this.isStarted = false;
+    this.hydrateGameField();
+    this.view.showCurrentOptions(this.size, this.bombsCount);
+    this.view.closeGameResults();
+
+    if (this.view.timerId) {
+      this.resetTimer();
+    }
+
+    if (this.steps) {
+      this.resetSteps();
+    }
   }
 
   revealCell(coords) {
@@ -85,6 +102,11 @@ class Game {
     this.view.sound.playStep();
   }
 
+  resetSteps() {
+    this.steps = 0;
+    this.view.elements.steps.innerText = this.steps;
+  }
+
   updateTimer() {
     const transformSeconds = (seconds) => {
       let currSec = seconds;
@@ -98,6 +120,13 @@ class Game {
 
     this.time += 1;
     this.view.elements.timer.innerText = transformSeconds(this.time);
+  }
+
+  resetTimer() {
+    clearInterval(this.view.timerId);
+    this.view.cells.timerId = null;
+    this.time = 0;
+    this.view.elements.timer.innerText = '00:00:00';
   }
 
   finishGame(isWinner) {
@@ -144,6 +173,8 @@ class Game {
       e.preventDefault();
       return false;
     });
+    this.view.elements.startBtn.addEventListener('click', this.handlers.onNewGameClick);
+    this.view.elements.resultBtn.addEventListener('click', this.handlers.onNewGameClick);
   }
 }
 

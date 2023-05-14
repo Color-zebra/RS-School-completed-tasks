@@ -2,6 +2,7 @@ class Sound {
   constructor() {
     this.currAudio = new Audio();
     this.isMuted = false;
+    this.isPlayPromised = false;
   }
 
   playStep() {

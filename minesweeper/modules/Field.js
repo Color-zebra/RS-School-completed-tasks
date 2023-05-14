@@ -97,10 +97,6 @@ class Field {
       }
     }
   }
-
-  renderField() {
-    console.log(this.field);
-  }
 }
 
 export default Field;

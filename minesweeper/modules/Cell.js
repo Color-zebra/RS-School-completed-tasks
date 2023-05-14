@@ -8,6 +8,8 @@ class Cell {
     };
     this.elem = this.generateCell(x, y);
     this.isOpen = false;
+    this.x = x;
+    this.y = y;
   }
 
   generateCell(x, y) {

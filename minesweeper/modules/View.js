@@ -2,7 +2,7 @@ import Cell from './Cell.js';
 import Sound from './Sound.js';
 
 class View {
-  constructor() {
+  constructor(size, bombsCount) {
     this.sound = new Sound();
     this.classes = {
       hidden: 'game-field__cell_hidden',
@@ -10,6 +10,7 @@ class View {
       marked: 'game-field__cell_marked',
       empty: 'game-field__cell',
       shownResult: 'result_shown',
+      shownStat: 'stat__table_shown',
       win: 'win',
       lose: 'lose',
     };
@@ -18,8 +19,8 @@ class View {
       lose: 'You lose',
     };
     this.choosenOptions = {
-      size: null,
-      bombsCount: null,
+      size,
+      bombsCount,
     };
     this.elements = {
       wrapper: null,
@@ -30,11 +31,13 @@ class View {
       themeSwitcher: null,
       steps: null,
       resultsBtn: null,
+      resultsTable: null,
       timer: null,
       gameField: null,
       resultText: null,
       resultAnimation: null,
       resultWindow: null,
+      resultBtn: null,
     };
     this.cells = null;
     this.timerId = null;
@@ -49,7 +52,7 @@ class View {
   }
 
   showEmptyCell(elem, value) {
-    if (!elem.classList.contains('game-field__cell_hidden')) return;
+    if (!elem.classList.contains(this.classes.hidden)) return;
     if (value) {
       elem.append(value);
       elem.classList.add(`col${value}`);
@@ -106,6 +109,12 @@ class View {
     this.elements.resultWindow.classList.add(this.classes.shownResult);
   }
 
+  closeGameResults() {
+    this.elements.resultAnimation.classList.remove(this.classes.win);
+    this.elements.resultAnimation.classList.remove(this.classes.lose);
+    this.elements.resultWindow.classList.remove(this.classes.shownResult);
+  }
+
   createGameField() {
     const fieldElem = document.createElement('div');
     fieldElem.classList.add('game-field');
@@ -120,7 +129,7 @@ class View {
     results.innerHTML = `
       <p id="result-text" class="result__text">You lose</p>
       <div id="result-animation" class="result__animation"></div>
-      <div class="result__start-game-button button">Start new game</div>
+      <div class="result__start-game-button button" id="result-btn">Start new game</div>
     `;
 
     this.elements.wrapper.append(results);
@@ -175,6 +184,11 @@ class View {
       <div class="statistics__stat stat">
         <div class="stat__title button" id="toggle-stat-btn">Latest results</div>
         <table id="table" class="stat__table">
+          <tr class="stat__row">
+            <th>Res</th>
+            <th>Steps</th>
+            <th>Time</th>
+          </tr>
         </table>
       </div>
       <div class="statistics__time">Time: <span id="time">00:00:00</span></div>
@@ -199,10 +213,28 @@ class View {
     this.elements.themeSwitcher = document.getElementById('theme-switcher');
     this.elements.steps = document.getElementById('steps');
     this.elements.resultsBtn = document.getElementById('toggle-stat-btn');
+    this.elements.resultsTable = document.getElementById('table');
     this.elements.timer = document.getElementById('time');
     this.elements.resultText = document.getElementById('result-text');
     this.elements.resultAnimation = document.getElementById('result-animation');
     this.elements.resultWindow = document.getElementById('result');
+    this.elements.resultBtn = document.getElementById('result-btn');
+  }
+
+  showCurrentOptions(size, minesCount) {
+    [...this.elements.sizeButtons].forEach((item) => {
+      if (+item.getAttribute('id') === size) {
+        item.setAttribute('checked', 'checked');
+      }
+    });
+    this.choosenOptions.bombsCount = minesCount;
+    this.choosenOptions.size = size;
+    this.elements.minesInput.value = minesCount;
+    this.elements.choosenMinesValue.innerText = minesCount;
+  }
+
+  getChooseOptions() {
+    return this.choosenOptions;
   }
 
   hydrateInterface() {
@@ -228,8 +260,12 @@ class View {
       const { value } = e.target;
       if (this.choosenOptions.bombsCount === value) return;
 
-      this.choosenOptions.bombsCount = e.target.value;
+      this.choosenOptions.bombsCount = +e.target.value;
       this.elements.choosenMinesValue.innerText = e.target.value;
+    });
+
+    this.elements.resultsBtn.addEventListener('click', () => {
+      this.elements.resultsTable.classList.toggle(this.classes.shownStat);
     });
   }
 }
