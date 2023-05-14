@@ -196,6 +196,27 @@ class View {
     this.elements.wrapper.append(statistic);
   }
 
+  clearStatistic() {
+    this.elements.resultsTable.innerHTML = `
+      <tr class="stat__row">
+        <th>Res</th>
+        <th>Steps</th>
+        <th>Time</th>
+      </tr>
+    `;
+  }
+
+  createStatisticRow(res) {
+    const row = document.createElement('tr');
+    row.classList.add('stat__row');
+    row.innerHTML = `
+      <td>${res[0] ? 'Win' : 'Lose'}</td>
+      <td>${res[1]}</td>
+      <td>${res[2]}</td>
+    `;
+    this.elements.resultsTable.append(row);
+  }
+
   createLayout() {
     this.createWrapper();
     this.createControls();

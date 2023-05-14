@@ -1,15 +1,19 @@
 import Field from './Field.js';
 import View from './View.js';
+import Storage from './Storage.js';
 
 class Game {
   constructor() {
     this.field = new Field();
     this.view = new View();
+    this.storage = new Storage();
 
     this.size = 10;
     this.bombsCount = 10;
+    this.isMute = false;
     this.cells = null;
     this.isStarted = false;
+    this.statistic = [];
 
     this.steps = 0;
     this.time = 0;
@@ -46,17 +50,51 @@ class Game {
   }
 
   init() {
+    const loaded = this.load();
     this.view.createLayout();
     this.view.renderGameField(this.size);
     this.cells = this.view.cells; //! а надо ли?
     this.hydrateGame();
     this.view.showCurrentOptions(this.size, this.bombsCount);
+    if (loaded.options) {
+      this.view.showCurrentOptions(loaded.options.size, loaded.options.bombsCount)
+    }
+    if (this.statistic) {
+      this.statistic.forEach((res) => {
+        this.view.createStatisticRow(res);
+      });
+    }
+  }
+
+  load() {
+    const state = this.storage.load();
+
+    if (state.statistic) {
+      this.statistic = [...state.statistic];
+    }
+    console.log(state);
+    return state;
+  }
+
+  save() {
+    this.updateOptions();
+
+    const currOptions = {
+      size: this.size,
+      bombsCount: this.bombsCount,
+      isMute: this.isMute,
+    };
+    let currStat = null;
+
+    if (this.statistic.length > 0) {
+      currStat = this.statistic;
+    }
+
+    this.storage.save(currOptions, currStat);
   }
 
   initNewGame() {
-    const opt = this.view.getChooseOptions();
-    this.size = opt.size;
-    this.bombsCount = opt.bombsCount;
+    this.updateOptions();
     this.view.renderGameField(this.size);
     this.cells = this.view.cells;
     this.field = new Field();
@@ -72,6 +110,12 @@ class Game {
     if (this.steps) {
       this.resetSteps();
     }
+  }
+
+  updateOptions() {
+    const opt = this.view.getChooseOptions();
+    this.size = opt.size;
+    this.bombsCount = opt.bombsCount;
   }
 
   revealCell(coords) {
@@ -132,6 +176,16 @@ class Game {
   finishGame(isWinner) {
     clearInterval(this.view.timerId);
     this.view.gameOver(isWinner, this.time, this.steps);
+    this.updateStatistic(isWinner);
+  }
+
+  updateStatistic(isWinner) {
+    this.statistic.unshift([isWinner, this.steps, this.view.elements.timer.innerText]);
+    this.statistic.length = this.statistic.length > 10 ? 10 : this.statistic.length;
+    this.view.clearStatistic();
+    this.statistic.forEach((res) => {
+      this.view.createStatisticRow(res);
+    });
   }
 
   revealSiblingsCell(coords) {
@@ -165,6 +219,10 @@ class Game {
   hydrateGame() {
     this.view.hydrateInterface();
     this.hydrateGameField();
+
+    window.addEventListener('beforeunload', () => {
+      this.save();
+    });
   }
 
   hydrateGameField() {
