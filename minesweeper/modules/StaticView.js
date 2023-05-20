@@ -50,6 +50,8 @@ class StaticView {
   }
 
   renderStatic() {
+    document.body.dataset.theme = 'flame';
+    document.body.dataset.size = 10;
     this.createWrapper();
     this.createControls();
     this.createStatistic();

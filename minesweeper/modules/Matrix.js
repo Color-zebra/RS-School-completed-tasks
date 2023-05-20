@@ -33,11 +33,6 @@ class Matrix {
     if (this.field[y][x - 1] !== undefined) this.field[y][x - 1] = 'empty';
   }
 
-  createEmptyCell(coords) {
-    const [emptyX, emptyY] = coords;
-    this.field[emptyY][emptyX] = 'empty';
-  }
-
   createField(size) {
     for (let i = 0; i < size; i += 1) {
       this.field.push([]);
