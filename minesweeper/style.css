@@ -243,6 +243,14 @@ body {
           align-items: center;
   border-bottom: 0.2rem solid var(--add-color-1);
 }
+.statistics__time {
+  width: 75px;
+  text-align: left;
+}
+.statistics__steps {
+  width: 75px;
+  text-align: left;
+}
 .statistics__flags {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -250,6 +258,8 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  width: 50px;
+  text-align: left;
 }
 .statistics__flag-icon {
   background: url("./assets/textures-small/mark.png") center/contain no-repeat;

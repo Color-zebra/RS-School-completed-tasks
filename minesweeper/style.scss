@@ -213,9 +213,20 @@ body {
   align-items: center;
   border-bottom: 0.2rem solid var(--add-color-1);
 
+  &__time {
+    width: 75px;
+    text-align: left;
+  }
+  &__steps {
+    width: 75px;
+    text-align: left;
+  }
+
   &__flags {
     display: flex;
     align-items: center;
+    width: 50px;
+    text-align: left;
   }
 
   &__flag-icon {
