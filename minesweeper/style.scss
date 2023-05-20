@@ -95,7 +95,7 @@ body[data-size='15'] {
 }
 
 body[data-size='25'] {
-  --fsize: 2vmin;
+  --fsize: 1.5vmin;
   --size: 25;
 }
 
@@ -222,8 +222,6 @@ body {
     background: url('./assets/textures-small/mark.png') center/contain no-repeat;
     width: 2rem;
     height: 2rem;
-    /* width: 5vmin;
-    height: auto; */
   }
 
   &__bombs {
@@ -325,12 +323,6 @@ body {
       outline: var(--font-color-alt) 0.2rem solid;
     }
   }
-
-  &__value {
-    line-height: 0;
-    margin: 0;
-    padding: 0;
-  }
 }
 .result {
   position: absolute;
@@ -419,6 +411,40 @@ body {
 }
 
 @media (max-width: 767px) {
+
+  .button {
+    padding: 0.1rem 0.3rem;
+    font-size: 1rem;
+  }
+  .game-field {
+    padding: 0.2rem;
+
+    &__cell {
+      margin: 0.05rem;
+    }
+  }
+
+  .size__label {
+    margin: 0.2rem 0;
+  }
+
+  .controls__sound {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .statistics__bomb-icon {
+    width: 5vmin;
+    height: 5vmin;
+  }
+
+  .statistics__flag-icon {
+    width: 5vmin;
+    height: 5vmin;
+  }
+
+}
+@media (max-height: 767px) {
 
   .button {
     padding: 0.1rem 0.3rem;
