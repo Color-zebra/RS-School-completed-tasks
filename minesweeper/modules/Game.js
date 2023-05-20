@@ -114,6 +114,7 @@ class Game {
 
   loseGame() {
     this.stopGame();
+    this.sounds.playFall();
     this.revealAllCells();
     this.showResTimeout = setTimeout(() => this.view.showGameResults(false), 2000);
   }

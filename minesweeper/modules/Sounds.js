@@ -25,10 +25,17 @@ class Sounds {
     this.currAudio.play();
   }
 
-  playLose() {
+  playFall() {
     if (this.isMuted) return;
     this.currAudio = new Audio();
     this.currAudio.src = './assets/sounds/fall-sound.mp3';
+    this.currAudio.play();
+  }
+
+  playLose() {
+    if (this.isMuted) return;
+    this.currAudio = new Audio();
+    this.currAudio.src = './assets/sounds/lose-sound.mp3';
     this.currAudio.play();
   }
 }
