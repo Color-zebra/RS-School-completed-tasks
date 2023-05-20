@@ -21,6 +21,7 @@ class Game {
     this.gameTime = 0;
     this.gameTimer = null;
     this.prevResults = this.storage.loadPrevRes() || [];
+    this.marksLeft = null;
   }
 
   load() {
@@ -51,6 +52,8 @@ class Game {
     this.cells = null;
     this.gameSize = size;
     this.gameMinesCount = mines;
+    /* this.marksLeft = mines;
+    this.view.static.elements.flags.innerText = mines; */
     this.view.gameView.renderGameField(this.gameSize);
     this.refreshGameInfo(steps, time);
     this.startTimer();
@@ -61,11 +64,12 @@ class Game {
       for (let j = 0; j < size; j += 1) {
         cells[i][j].value = fieldState[i][j].cellValue;
         if (fieldState[i][j].isOpen) cells[i][j].setOpen();
-        if (fieldState[i][j].isMarked) cells[i][j].setMarked();
+        if (fieldState[i][j].isMarked) cells[i][j].setMark();
       }
     }
 
     this.cells = cells;
+    this.updateFlags();
     this.view.static.elements.gameField.addEventListener('mousedown', this.handleGameClick);
   }
 
@@ -84,6 +88,8 @@ class Game {
     this.cells = null;
     this.gameSize = size;
     this.gameMinesCount = minesCount;
+    this.marksLeft = minesCount;
+    this.view.static.elements.flags.innerText = minesCount;
     this.view.gameView.renderGameField(this.gameSize);
     this.refreshGameInfo(0, 0);
 
@@ -126,6 +132,19 @@ class Game {
       this.gameTime += 1;
       this.view.static.elements.timer.innerText = this.gameTime;
     }, 1000);
+  }
+
+  updateFlags() {
+    let markedCells = 0;
+    for (let i = 0; i < this.gameSize; i += 1) {
+      for (let j = 0; j < this.gameSize; j += 1) {
+        if (this.cells[i][j].isMarked) {
+          markedCells += 1;
+        }
+      }
+    }
+    this.marksLeft = this.gameMinesCount - markedCells;
+    this.view.static.elements.flags.innerText = this.marksLeft;
   }
 
   checkIsWin() {

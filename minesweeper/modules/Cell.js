@@ -47,14 +47,17 @@ class Cell {
 
   mark() {
     if (this.isOpen) return;
-    this.gameInstance.sounds.playFlag();
     if (this.isMarked) {
+      this.gameInstance.sounds.playFlag();
       this.isMarked = false;
       this.elem.classList.remove(this.classes.marked);
-      return;
+      this.gameInstance.updateFlags();
+    } else if (this.gameInstance.marksLeft > 0) {
+      this.gameInstance.sounds.playFlag();
+      this.isMarked = true;
+      this.elem.classList.add(this.classes.marked);
+      this.gameInstance.updateFlags();
     }
-    this.isMarked = true;
-    this.elem.classList.add(this.classes.marked);
   }
 
   setOpen() {
