@@ -15,6 +15,8 @@
 body[data-theme=flame] {
   --field-bg: url("./assets/textures-big/Lava.png");
   --right-cell: url("./assets/textures-small/Stone.jpg");
+  --sound: url("./assets/textures-small/flame-sound.png");
+  --nosound: url("./assets/textures-small/flame-nosound.png");
   --font-color: #DD4C19;
   --font-color-alt: #3C3445;
   --main-bg: #292929;
@@ -29,6 +31,8 @@ body[data-theme=flame] {
 body[data-theme=ice] {
   --field-bg: url("./assets/textures-big/water.jpg");
   --right-cell: url("./assets/textures-small/Ice.jpg");
+  --sound: url("./assets/textures-small/ice-sound.png");
+  --nosound: url("./assets/textures-small/ice-nosound.png");
   --font-color: #292929;
   --font-color-alt: #035CA5;
   --main-bg: #9edcf3;
@@ -179,13 +183,16 @@ body {
   background: linear-gradient(90deg, var(--alt-color-2), var(--alt-color-1));
 }
 .controls__sound {
-  background: url("./assets/textures-small/sound.png") no-repeat center/contain;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: var(--sound);
   width: 2rem;
   height: 2rem;
   cursor: pointer;
 }
 .controls__sound_off {
-  background: url("./assets/textures-small/nosound.png") no-repeat center/contain;
+  background-image: var(--nosound);
 }
 
 .size {
