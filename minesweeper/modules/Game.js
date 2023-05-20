@@ -26,6 +26,7 @@ class Game {
 
   load() {
     this.storage.loadOptions();
+    this.storage.loadChoosenValues();
     this.view.renderPrevResults(this.prevResults);
 
     const loadedGame = this.storage.loadGame();
@@ -33,7 +34,13 @@ class Game {
       this.startLoadedGame(loadedGame);
       return;
     }
-    this.prepareNewGame();
+    const params = this.view.static.getChoosenOptions();
+    if (params) {
+      const { size, minesCount } = params;
+      this.prepareNewGame(+size, +minesCount);
+    } else {
+      this.prepareNewGame();
+    }
   }
 
   init() {

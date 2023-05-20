@@ -95,7 +95,7 @@ body[data-size="15"] {
 }
 
 body[data-size="25"] {
-  --fsize: 2vmin;
+  --fsize: 1.5vmin;
   --size: 25;
 }
 
@@ -243,6 +243,14 @@ body {
           align-items: center;
   border-bottom: 0.2rem solid var(--add-color-1);
 }
+.statistics__time {
+  width: 75px;
+  text-align: left;
+}
+.statistics__steps {
+  width: 75px;
+  text-align: left;
+}
 .statistics__flags {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -250,13 +258,13 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  width: 50px;
+  text-align: left;
 }
 .statistics__flag-icon {
   background: url("./assets/textures-small/mark.png") center/contain no-repeat;
   width: 2rem;
   height: 2rem;
-  /* width: 5vmin;
-  height: auto; */
 }
 .statistics__bombs {
   display: -webkit-box;
@@ -371,11 +379,6 @@ body {
           transform: scale(0.92);
   outline: var(--font-color-alt) 0.2rem solid;
 }
-.game-field__value {
-  line-height: 0;
-  margin: 0;
-  padding: 0;
-}
 
 .result {
   position: absolute;
@@ -399,7 +402,7 @@ body {
       -ms-flex-pack: center;
           justify-content: center;
   gap: 2vmin;
-  font-size: var(--fsize);
+  font-size: 5vmin;
   background-color: var(--main-bg-transp);
   border-radius: var(--big-radius);
   -webkit-transform: translate(-50%, -50%);
@@ -529,6 +532,33 @@ body {
   }
 }
 @media (max-width: 767px) {
+  .button {
+    padding: 0.1rem 0.3rem;
+    font-size: 1rem;
+  }
+  .game-field {
+    padding: 0.2rem;
+  }
+  .game-field__cell {
+    margin: 0.05rem;
+  }
+  .size__label {
+    margin: 0.2rem 0;
+  }
+  .controls__sound {
+    width: 1rem;
+    height: 1rem;
+  }
+  .statistics__bomb-icon {
+    width: 5vmin;
+    height: 5vmin;
+  }
+  .statistics__flag-icon {
+    width: 5vmin;
+    height: 5vmin;
+  }
+}
+@media (max-height: 767px) {
   .button {
     padding: 0.1rem 0.3rem;
     font-size: 1rem;

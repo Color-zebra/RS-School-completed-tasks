@@ -46,7 +46,11 @@ class StaticView {
   }
 
   getChoosenOptions() {
-    return this.choosenOptions;
+    const opt = {
+      size: +this.choosenOptions.size,
+      minesCount: +this.choosenOptions.minesCount,
+    };
+    return opt;
   }
 
   renderStatic() {
@@ -200,6 +204,7 @@ class StaticView {
         if (btn.checked) choosenValue = +btn.getAttribute('id');
       });
       this.choosenOptions.size = choosenValue;
+      this.gameInstance.storage.saveChoosenValues();
     };
 
     [...this.elements.sizeButtons].forEach((btn) => {
@@ -212,6 +217,7 @@ class StaticView {
 
       this.choosenOptions.minesCount = +e.target.value;
       this.elements.choosenMinesValue.innerText = e.target.value;
+      this.gameInstance.storage.saveChoosenValues();
     });
 
     this.elements.startBtn.addEventListener('click', () => this.gameInstance.createNewGame.call(this.gameInstance));
