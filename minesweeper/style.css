@@ -178,6 +178,15 @@ body {
   background: -webkit-gradient(linear, left top, right top, from(var(--alt-color-2)), to(var(--alt-color-1)));
   background: linear-gradient(90deg, var(--alt-color-2), var(--alt-color-1));
 }
+.controls__sound {
+  background: url("./assets/textures-small/sound.png") no-repeat center/contain;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+}
+.controls__sound_off {
+  background: url("./assets/textures-small/nosound.png") no-repeat center/contain;
+}
 
 .size {
   display: -webkit-box;
@@ -215,14 +224,37 @@ body {
 
 .statistics {
   width: 100%;
-  padding: 2vmin 6vmin;
+  padding: 2vmin;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   border-bottom: 0.2rem solid var(--add-color-1);
+}
+.statistics__flags {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.statistics__flag-icon {
+  background: url("./assets/textures-small/mark.png") center/contain no-repeat;
+  width: 5vmin;
+  height: auto;
+}
+.statistics__bombs {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.statistics__bomb-icon {
+  background: url("./assets/textures-small/Bomb.png") center/contain no-repeat;
+  width: 5vmin;
+  height: auto;
 }
 .stat {
   position: relative;
@@ -493,5 +525,9 @@ body {
   }
   .size__label {
     margin: 0.2rem 0;
+  }
+  .controls__sound {
+    width: 1rem;
+    height: 1rem;
   }
 }

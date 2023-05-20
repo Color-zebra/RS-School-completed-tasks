@@ -1,66 +1,30 @@
 class Storage {
-  constructor() {
-    this.options = null;
-    this.statistic = null;
-    this.game = null;
-  }
-
-  save(opts, stat, game) {
-    if (opts) this.saveOptions(opts);
-    if (stat) this.saveStatistics(stat);
-    if (game) {
-      this.saveGameState(game);
-    } else {
-      this.saveGameState(null);
+  constructor(gameInstance) {
+    this.gameInstance = gameInstance;
+    this.saveOptions = () => {
+      const { theme } = document.body.dataset;
+      const sound = !this.gameInstance.sounds.isMuted;
+      const opt = { theme, sound };
+      localStorage.setItem('ms-options', JSON.stringify(opt));
     };
-  }
-
-  load() {
-    this.options = this.loadOptions();
-    this.statistic = this.loadStatistics();
-    this.game = this.loadGameState();
-
-    return {
-      options: this.options,
-      statistic: this.statistic,
-      game: this.game,
+    this.loadOptions = () => {
+      let opt = localStorage.getItem('ms-options');
+      if (!opt) return;
+      opt = JSON.parse(opt);
+      if (!opt.sound) {
+        this.gameInstance.sounds.isMuted = true;
+        this.gameInstance.view.static.elements.soundToggle.classList.add('controls__sound_off');
+      }
+      document.body.dataset.theme = opt.theme;
     };
-  }
-
-  saveOptions(opts) {
-    localStorage.setItem('options', JSON.stringify(opts));
-  }
-
-  loadOptions() {
-    const loaded = localStorage.getItem('options');
-    if (loaded) {
-      return JSON.parse(loaded);
-    }
-    return null;
-  }
-
-  saveStatistics(stat) {
-    localStorage.setItem('statistic', JSON.stringify(stat));
-  }
-
-  loadStatistics() {
-    const loaded = localStorage.getItem('statistic');
-    if (loaded) {
-      return JSON.parse(loaded);
-    }
-    return null;
-  }
-
-  saveGameState(game) {
-    localStorage.setItem('game', JSON.stringify(game));
-  }
-
-  loadGameState() {
-    const loaded = localStorage.getItem('game');
-    if (loaded) {
-      return JSON.parse(loaded);
-    }
-    return null;
+    this.savePrevRes = () => {
+      localStorage.setItem('ms-latest', JSON.stringify(this.gameInstance.prevResults));
+    };
+    this.loadPrevRes = () => {
+      const prev = localStorage.getItem('ms-latest');
+      if (prev) return JSON.parse(prev);
+      return null;
+    };
   }
 }
 

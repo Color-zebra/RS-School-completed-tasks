@@ -1,278 +1,211 @@
-import Field from './Field.js';
-import View from './View.js';
+import Matrix from './Matrix.js';
+import Sounds from './Sounds.js';
 import Storage from './Storage.js';
+import View from './View.js';
 
 class Game {
   constructor() {
-    this.field = new Field();
-    this.view = new View();
-    this.storage = new Storage();
-
-    this.size = 10;
-    this.bombsCount = 10;
-    this.isMute = false;
+    this.view = new View(this);
+    this.matrix = new Matrix();
+    this.sounds = new Sounds(this);
+    this.storage = new Storage(this);
     this.cells = null;
-    this.isStarted = false;
-    this.statistic = [];
-
-    this.steps = 0;
-    this.time = 0;
-
-    this.handlers = {
-      onCellClick: (e) => {
-        const elem = e.target.closest('.game-field__cell');
-        if (!elem) return;
-        const x = +elem.dataset.x;
-        const y = +elem.dataset.y;
-        if (e.button === 0) {
-          if (!this.isStarted) {
-            this.field.generateField([x, y], this.size, this.bombsCount);
-            this.isStarted = true;
-            const intervalFunc = this.updateTimer.bind(this);
-            this.view.timerId = setInterval(intervalFunc, 1000);
-          }
-          this.updateStep(); //! Считать ли клики по открытым клеткам?
-          this.revealCell([x, y]);
-        }
-        if (e.button === 2) {
-          if (!elem.classList.contains('game-field__cell_hidden')) return;
-          if (elem.classList.contains('game-field__cell_marked')) {
-            console.log(this.cells[y][x].elem);
-            this.view.showHiddenCell(this.cells[y][x].elem);
-          } else {
-            this.view.showMarkedCell(this.cells[y][x].elem);
-          }
-        }
-      },
-      onNewGameClick: () => {
-        this.initNewGame();
-      },
-    };
-  }
-
-  init() {
-    const loaded = this.load();
-    this.view.createLayout();
-    this.view.renderGameField(this.size);
-    this.cells = this.view.cells; //! а надо ли?
-    this.hydrateGame();
-    this.view.showCurrentOptions(this.size, this.bombsCount);
-    if (loaded.options) {
-      this.view.showCurrentOptions(loaded.options.size, loaded.options.bombsCount)
-    }
-    if (this.statistic) {
-      this.statistic.forEach((res) => {
-        this.view.createStatisticRow(res);
-      });
-    }
-    if (loaded.game) {
-      this.initLoadedGame(loaded.game);
-    }
+    this.isStarted = null;
+    this.isGameOver = null;
+    this.gameSize = null;
+    this.gameMinesCount = null;
+    this.waitForFirstClick = this.waitForFirstClick.bind(this);
+    this.handleGameClick = this.handleGameClick.bind(this);
+    this.showResTimeout = null;
+    this.gameSteps = 0;
+    this.gameTime = 0;
+    this.gameTimer = null;
+    this.prevResults = this.storage.loadPrevRes() || [];
   }
 
   load() {
-    const state = this.storage.load();
-
-    if (state.statistic) {
-      this.statistic = [...state.statistic];
-    }
-    console.log(state);
-    return state;
+    this.storage.loadOptions();
+    this.view.renderPrevResults(this.prevResults);
   }
 
-  save() {
-    this.updateOptions();
-
-    const currOptions = {
-      size: this.size,
-      bombsCount: this.bombsCount,
-      isMute: this.isMute,
-    };
-    let currStat = null;
-    let currGame = null;
-
-    if (this.statistic.length > 0) {
-      currStat = this.statistic;
-    }
-
-    if (this.isStarted === true) {
-      const opened = this.cells.flat()
-        .filter((cell) => cell.isOpen)
-        .map((cell) => [cell.x, cell.y]);
-
-      const marked = this.cells.flat()
-        .filter((cell) => cell.elem.classList.contains('game-field__cell_marked'))
-        .map((cell) => [cell.x, cell.y]);
-
-      currGame = {
-        size: this.size,
-        bombsCount: this.bombsCount,
-        field: this.field.field,
-        time: this.time,
-        steps: this.steps,
-        openedCells: opened,
-        markedCells: marked,
-      };
-    }
-
-    this.storage.save(currOptions, currStat, currGame);
+  init() {
+    this.load();
+    this.prepareNewGame();
   }
 
-  initNewGame() {
-    this.updateOptions();
-    this.view.renderGameField(this.size);
-    this.cells = this.view.cells;
-    this.field = new Field();
-    this.isStarted = false;
-    this.hydrateGameField();
-    this.view.showCurrentOptions(this.size, this.bombsCount);
+  createNewGame() {
     this.view.closeGameResults();
-
-    if (this.view.timerId) {
-      this.resetTimer();
-    }
-
-    if (this.steps) {
-      this.resetSteps();
-    }
+    const params = this.view.static.getChoosenOptions();
+    const { size, minesCount } = params;
+    this.prepareNewGame(size, minesCount);
+    clearTimeout(this.showResTimeout);
+    clearTimeout(this.gameTimer);
   }
 
-  initLoadedGame(game) {
-    this.size = game.size;
-    this.bombsCount = game.bombsCount;
-    this.isStarted = true;
-    this.view.renderGameField(this.size);
-    this.cells = this.view.cells;
-    this.field.field = game.field;
-    this.time = game.time;
-    this.steps = game.steps;
-    game.openedCells.forEach((coords) => {
-      this.revealCell(coords);
+  prepareNewGame(size = 10, minesCount = 10) {
+    this.isStarted = false;
+    this.isGameOver = false;
+    this.cells = null;
+    this.gameSize = size;
+    this.gameMinesCount = minesCount;
+    this.view.gameView.renderGameField(this.gameSize);
+    this.refreshGameInfo();
+
+    const field = this.view.static.elements.gameField;
+    field.removeEventListener('mousedown', this.handleGameClick);
+    field.addEventListener('click', this.waitForFirstClick);
+  }
+
+  startNewGame(firstClickCoords, size, mines) {
+    const cells = this.view.getNewCells(size).flat();
+    const cellsValue = this.matrix.getNewMatrix(firstClickCoords, size, mines).flat();
+    const res = cells.map((cell, index) => {
+      const newCell = cell;
+      newCell.value = cellsValue[index];
+      return newCell;
+    });
+
+    const matrixRes = [];
+    for (let i = 0; i < res.length; i += 1) {
+      if (i % this.gameSize === 0) {
+        matrixRes.push([]);
+      }
+      matrixRes[matrixRes.length - 1].push(res[i]);
+    }
+
+    this.cells = matrixRes;
+
+    this.view.static.elements.gameField.addEventListener('mousedown', this.handleGameClick);
+    const [x, y] = [...firstClickCoords];
+    this.cells[y][x].reveal();
+  }
+
+  addSteps() {
+    this.gameSteps += 1;
+    this.view.static.elements.steps.innerText = this.gameSteps;
+  }
+
+  startTimer() {
+    this.gameTimer = setInterval(() => {
+      this.gameTime += 1;
+      this.view.static.elements.timer.innerText = this.gameTime;
+    }, 1000);
+  }
+
+  checkIsWin() {
+    if (this.isGameOver) return;
+    const openedCells = this.cells.flat().filter((cell) => cell.isOpen).length;
+    const totalCells = this.gameSize * this.gameSize;
+    if (openedCells + this.gameMinesCount >= totalCells) this.winGame();
+  }
+
+  winGame() {
+    this.isGameOver = true;
+    this.stopGame();
+    this.view.showGameResults(true);
+    const steps = this.gameSteps;
+    const time = this.gameTime;
+    const size = this.gameSize;
+    const mines = this.gameMinesCount;
+    this.addGameResult({
+      steps, time, size, mines,
     });
   }
 
-  updateOptions() {
-    const opt = this.view.getChooseOptions();
-    this.size = opt.size;
-    this.bombsCount = opt.bombsCount;
+  loseGame() {
+    this.stopGame();
+    this.revealAllCells();
+    this.showResTimeout = setTimeout(() => this.view.showGameResults(false), 2000);
   }
 
-  revealCell(coords) {
-    const [x, y] = coords;
-    const currCell = this.cells[y][x];
-    if (currCell.isOpen) return;
-
-    const value = this.field.field[y][x];
-    currCell.isOpen = true;
-    this.view.revealCell(currCell.elem, value);
-
-    if (value === '*') {
-      this.finishGame(false);
-      return;
+  addGameResult(res) {
+    this.prevResults.unshift(res);
+    if (this.prevResults.length > 10) {
+      this.prevResults.length = 10;
     }
-
-    const totalOpenCells = this.cells.flat().filter((cell) => cell.isOpen).length;
-    if (totalOpenCells === this.size ** 2 - this.bombsCount) {
-      this.finishGame(true);
-    }
-
-    if (!value) this.revealSiblingsCell(coords);
+    this.view.renderPrevResults(this.prevResults);
+    this.storage.savePrevRes();
   }
 
-  updateStep() {
-    this.steps += 1;
-    this.view.elements.steps.innerText = this.steps;
-    this.view.sound.playStep();
+  stopGame() {
+    this.view.static.elements.gameField.removeEventListener('mousedown', this.handleGameClick);
+    clearInterval(this.gameTimer);
   }
 
-  resetSteps() {
-    this.steps = 0;
-    this.view.elements.steps.innerText = this.steps;
+  refreshGameInfo() {
+    this.gameSteps = 0;
+    this.gameTime = 0;
+    this.view.static.elements.steps.innerText = this.gameSteps;
+    this.view.static.elements.timer.innerText = this.gameTime;
   }
 
-  updateTimer() {
-    const transformSeconds = (seconds) => {
-      let currSec = seconds;
-      const hours = `${Math.floor(currSec / 3600)}`;
-      currSec %= 3600;
-      const minutes = `${Math.floor(currSec / 60)}`;
-      currSec = `${currSec % 60}`;
-
-      return `${(`0${hours}`).slice(-2)}:${(`0${minutes}`).slice(-2)}:${(`0${currSec}`).slice(-2)}`;
-    };
-
-    this.time += 1;
-    this.view.elements.timer.innerText = transformSeconds(this.time);
-  }
-
-  resetTimer() {
-    clearInterval(this.view.timerId);
-    this.view.cells.timerId = null;
-    this.time = 0;
-    this.view.elements.timer.innerText = '00:00:00';
-  }
-
-  finishGame(isWinner) {
-    this.isStarted = false;
-    clearInterval(this.view.timerId);
-    this.view.gameOver(isWinner, this.time, this.steps);
-    this.updateStatistic(isWinner);
-  }
-
-  updateStatistic(isWinner) {
-    this.statistic.unshift([isWinner, this.steps, this.view.elements.timer.innerText]);
-    this.statistic.length = this.statistic.length > 10 ? 10 : this.statistic.length;
-    this.view.clearStatistic();
-    this.statistic.forEach((res) => {
-      this.view.createStatisticRow(res);
+  revealAllCells() {
+    this.cells.flat().forEach((cell) => {
+      if (cell.isOpen) return;
+      if (cell.isMarked) cell.mark();
+      cell.open();
     });
   }
 
   revealSiblingsCell(coords) {
     const [x, y] = coords;
+    const { cells } = this;
 
-    const { field } = this.field;
     const prevRowIndex = y - 1;
     const nextRowIndex = y + 1;
     const prevColumnIndex = x - 1;
     const nextColumnIndex = x + 1;
 
-    const prevRow = field[prevRowIndex];
-    const nextRow = field[nextRowIndex];
+    const prevRow = cells[prevRowIndex];
+    const nextRow = cells[nextRowIndex];
 
     if (prevRow !== undefined) {
-      if (prevRow[x + 1] !== undefined) this.revealCell([nextColumnIndex, prevRowIndex]);
-      if (prevRow[x] !== undefined) this.revealCell([x, prevRowIndex]);
-      if (prevRow[x - 1] !== undefined) this.revealCell([prevColumnIndex, prevRowIndex]);
+      if (prevRow[x + 1] !== undefined) cells[prevRowIndex][nextColumnIndex].reveal();
+      if (prevRow[x] !== undefined) cells[prevRowIndex][x].reveal();
+      if (prevRow[x - 1] !== undefined) cells[prevRowIndex][prevColumnIndex].reveal();
     }
 
     if (nextRow !== undefined) {
-      if (nextRow[x + 1] !== undefined) this.revealCell([nextColumnIndex, nextRowIndex]);
-      if (nextRow[x] !== undefined) this.revealCell([x, nextRowIndex]);
-      if (nextRow[x - 1] !== undefined) this.revealCell([prevColumnIndex, nextRowIndex]);
+      if (nextRow[x + 1] !== undefined) cells[nextRowIndex][nextColumnIndex].reveal();
+      if (nextRow[x] !== undefined) cells[nextRowIndex][x].reveal();
+      if (nextRow[x - 1] !== undefined) cells[nextRowIndex][prevColumnIndex].reveal();
     }
 
-    if (field[y][x + 1] !== undefined) this.revealCell([nextColumnIndex, y]);
-    if (field[y][x - 1] !== undefined) this.revealCell([prevColumnIndex, y]);
+    if (cells[y][x + 1] !== undefined) cells[y][nextColumnIndex].reveal();
+    if (cells[y][x - 1] !== undefined) cells[y][prevColumnIndex].reveal();
   }
 
-  hydrateGame() {
-    this.view.hydrateInterface();
-    this.hydrateGameField();
+  /* HANDLERS */
 
-    window.addEventListener('beforeunload', () => {
-      this.save();
-    });
+  waitForFirstClick(e) {
+    const elem = e.target.closest('.game-field__cell');
+    if (!elem) return;
+    this.sounds.playStep();
+    this.isStarted = true;
+    const x = +elem.dataset.x;
+    const y = +elem.dataset.y;
+    this.startNewGame([x, y], this.gameSize, this.gameMinesCount);
+    this.addSteps();
+    this.startTimer();
+    this.view.static.elements.gameField.removeEventListener('click', this.waitForFirstClick);
   }
 
-  hydrateGameField() {
-    this.view.elements.gameField.addEventListener('mousedown', this.handlers.onCellClick);
-    this.view.elements.gameField.addEventListener('contextmenu', (e) => {
-      e.preventDefault();
-      return false;
-    });
-    this.view.elements.startBtn.addEventListener('click', this.handlers.onNewGameClick);
-    this.view.elements.resultBtn.addEventListener('click', this.handlers.onNewGameClick);
+  handleGameClick(e) {
+    const elem = e.target.closest('.game-field__cell');
+    if (!elem) return;
+    const x = +elem.dataset.x;
+    const y = +elem.dataset.y;
+    const cell = this.cells[y][x];
+    if (e.button === 0) {
+      if (!cell.isOpen && !cell.isMarked) {
+        this.addSteps();
+        this.sounds.playStep();
+      }
+      cell.reveal();
+    }
+    if (e.button === 2) {
+      cell.mark();
+    }
   }
 }
 

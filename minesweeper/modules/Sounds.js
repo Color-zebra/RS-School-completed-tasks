@@ -1,8 +1,7 @@
-class Sound {
+class Sounds {
   constructor() {
     this.currAudio = new Audio();
     this.isMuted = false;
-    this.isPlayPromised = false;
   }
 
   playStep() {
@@ -34,4 +33,4 @@ class Sound {
   }
 }
 
-export default Sound;
+export default Sounds;

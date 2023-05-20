@@ -1,17 +1,17 @@
-class Field {
+class Matrix {
   constructor() {
     this.field = [];
   }
 
-  generateField(coords, size = 10, bombsCount = 10) {
+  getNewMatrix(firstClickCoords, size, bombsCount) {
+    this.field = [];
+    this.generateField(firstClickCoords, size, bombsCount);
+    return this.field;
+  }
+
+  generateField(firstClickCoords, size = 10, bombsCount = 10) {
     this.createField(size);
-    /* if ((bombsCount + 9) <= (size * size)) {
-      this.createEmptyZone(coords);
-    } else {
-      this.createEmptyCell(coords);
-    } */
-    this.createEmptyZone(coords);
-    console.log(this.field);
+    this.createEmptyZone(firstClickCoords);
     this.plantBombs(bombsCount, size);
     this.describeField();
     this.testField();
@@ -99,4 +99,4 @@ class Field {
   }
 }
 
-export default Field;
+export default Matrix;
