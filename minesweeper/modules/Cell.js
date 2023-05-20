@@ -57,7 +57,8 @@ class Cell {
     this.elem.classList.add(this.classes.marked);
   }
 
-  open() {
+  setOpen() {
+    this.isOpen = true;
     this.elem.classList.remove(this.classes.hidden);
 
     if (this.value === '*') {
@@ -69,6 +70,11 @@ class Cell {
       this.elem.classList.add(`col${this.value}`);
       this.elem.innerHTML = this.value;
     }
+  }
+
+  setMark() {
+    this.isMarked = true;
+    this.elem.classList.add(this.classes.marked);
   }
 }
 

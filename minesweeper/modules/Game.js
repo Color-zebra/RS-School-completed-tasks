@@ -7,7 +7,7 @@ class Game {
   constructor() {
     this.view = new View(this);
     this.matrix = new Matrix();
-    this.sounds = new Sounds(this);
+    this.sounds = new Sounds();
     this.storage = new Storage(this);
     this.cells = null;
     this.isStarted = null;
@@ -26,11 +26,47 @@ class Game {
   load() {
     this.storage.loadOptions();
     this.view.renderPrevResults(this.prevResults);
+
+    const loadedGame = this.storage.loadGame();
+    if (loadedGame) {
+      this.startLoadedGame(loadedGame);
+      return;
+    }
+    this.prepareNewGame();
   }
 
   init() {
+    window.addEventListener('beforeunload', this.storage.saveGame);
+
     this.load();
-    this.prepareNewGame();
+  }
+
+  startLoadedGame(game) {
+    const {
+      size, mines, steps, time, fieldState,
+    } = game;
+
+    this.isStarted = true;
+    this.isGameOver = false;
+    this.cells = null;
+    this.gameSize = size;
+    this.gameMinesCount = mines;
+    this.view.gameView.renderGameField(this.gameSize);
+    this.refreshGameInfo(steps, time);
+    this.startTimer();
+
+    const cells = this.view.getNewCells(size);
+
+    for (let i = 0; i < size; i += 1) {
+      for (let j = 0; j < size; j += 1) {
+        cells[i][j].value = fieldState[i][j].cellValue;
+        if (fieldState[i][j].isOpen) cells[i][j].setOpen();
+        if (fieldState[i][j].isMarked) cells[i][j].setMarked();
+      }
+    }
+
+    this.cells = cells;
+    this.view.static.elements.gameField.addEventListener('mousedown', this.handleGameClick);
   }
 
   createNewGame() {
@@ -49,7 +85,7 @@ class Game {
     this.gameSize = size;
     this.gameMinesCount = minesCount;
     this.view.gameView.renderGameField(this.gameSize);
-    this.refreshGameInfo();
+    this.refreshGameInfo(0, 0);
 
     const field = this.view.static.elements.gameField;
     field.removeEventListener('mousedown', this.handleGameClick);
@@ -113,6 +149,7 @@ class Game {
   }
 
   loseGame() {
+    this.isGameOver = true;
     this.stopGame();
     this.sounds.playFall();
     this.revealAllCells();
@@ -133,9 +170,9 @@ class Game {
     clearInterval(this.gameTimer);
   }
 
-  refreshGameInfo() {
-    this.gameSteps = 0;
-    this.gameTime = 0;
+  refreshGameInfo(steps, time) {
+    this.gameSteps = steps;
+    this.gameTime = time;
     this.view.static.elements.steps.innerText = this.gameSteps;
     this.view.static.elements.timer.innerText = this.gameTime;
   }
@@ -144,7 +181,7 @@ class Game {
     this.cells.flat().forEach((cell) => {
       if (cell.isOpen) return;
       if (cell.isMarked) cell.mark();
-      cell.open();
+      cell.setOpen();
     });
   }
 
