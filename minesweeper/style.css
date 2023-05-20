@@ -402,7 +402,7 @@ body {
       -ms-flex-pack: center;
           justify-content: center;
   gap: 2vmin;
-  font-size: var(--fsize);
+  font-size: 5vmin;
   background-color: var(--main-bg-transp);
   border-radius: var(--big-radius);
   -webkit-transform: translate(-50%, -50%);

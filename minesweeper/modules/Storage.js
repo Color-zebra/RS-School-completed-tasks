@@ -39,6 +39,29 @@ class Storage {
     this.saveGame = this.saveGame.bind(this);
   }
 
+  saveChoosenValues() {
+    const choosenMines = +this.gameInstance.view.static.elements.minesInput.value;
+    let choosenSize = 0;
+    this.gameInstance.view.static.elements.sizeButtons.forEach((btn) => {
+      if (btn.checked) choosenSize = +btn.getAttribute('id');
+    });
+    localStorage.setItem('ms-choosen', JSON.stringify({ choosenMines, choosenSize }));
+  }
+
+  loadChoosenValues() {
+    let values = localStorage.getItem('ms-choosen');
+    if (!values) return;
+    values = JSON.parse(values);
+    const { choosenMines, choosenSize } = values;
+    this.gameInstance.view.static.elements.minesInput.value = choosenMines;
+    this.gameInstance.view.static.elements.choosenMinesValue.innerText = choosenMines;
+    this.gameInstance.view.static.choosenOptions.minesCount = choosenMines;
+    this.gameInstance.view.static.elements.sizeButtons.forEach((btn) => {
+      if (+btn.getAttribute('id') === choosenSize) btn.setAttribute('checked', 'checked');
+    });
+    this.gameInstance.view.static.choosenOptions.size = choosenSize;
+  }
+
   saveGame() {
     if (!this.gameInstance.isStarted || this.gameInstance.isGameOver) {
       localStorage.removeItem('ms-game');
