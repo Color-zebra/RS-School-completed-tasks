@@ -40,7 +40,6 @@ class Storage {
   }
 
   saveGame() {
-    console.log('save');
     if (!this.gameInstance.isStarted || this.gameInstance.isGameOver) {
       localStorage.removeItem('ms-game');
       return;

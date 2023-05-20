@@ -240,22 +240,31 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 .statistics__flag-icon {
   background: url("./assets/textures-small/mark.png") center/contain no-repeat;
-  width: 5vmin;
-  height: auto;
+  width: 2rem;
+  height: 2rem;
+  /* width: 5vmin;
+  height: auto; */
 }
 .statistics__bombs {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 .statistics__bomb-icon {
   background: url("./assets/textures-small/Bomb.png") center/contain no-repeat;
-  width: 5vmin;
-  height: auto;
+  width: 2rem;
+  height: 2rem;
 }
+
 .stat {
   position: relative;
   display: -webkit-box;
@@ -529,5 +538,13 @@ body {
   .controls__sound {
     width: 1rem;
     height: 1rem;
+  }
+  .statistics__bomb-icon {
+    width: 5vmin;
+    height: 5vmin;
+  }
+  .statistics__flag-icon {
+    width: 5vmin;
+    height: 5vmin;
   }
 }

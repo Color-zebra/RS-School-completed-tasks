@@ -14,7 +14,6 @@ class Matrix {
     this.createEmptyZone(firstClickCoords);
     this.plantBombs(bombsCount, size);
     this.describeField();
-    this.testField();
   }
 
   createEmptyZone(coords) {
@@ -32,15 +31,6 @@ class Matrix {
     }
     if (this.field[y][x + 1] !== undefined) this.field[y][x + 1] = 'empty';
     if (this.field[y][x - 1] !== undefined) this.field[y][x - 1] = 'empty';
-  }
-
-  testField() {
-    const flatted = this.field.flat();
-    let counter = 0;
-    flatted.forEach((cell) => {
-      if (cell === '*') counter += 1;
-    });
-    console.log(`${counter} total bombs planted`);
   }
 
   createEmptyCell(coords) {

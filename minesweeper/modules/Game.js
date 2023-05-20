@@ -52,8 +52,6 @@ class Game {
     this.cells = null;
     this.gameSize = size;
     this.gameMinesCount = mines;
-    /* this.marksLeft = mines;
-    this.view.static.elements.flags.innerText = mines; */
     this.view.gameView.renderGameField(this.gameSize);
     this.refreshGameInfo(steps, time);
     this.startTimer();

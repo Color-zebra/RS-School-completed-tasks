@@ -172,12 +172,6 @@ body {
   align-items: center;
   gap: 0.1rem;
 
-  &__text {
-  }
-
-  &__inputs {
-  }
-
   &__label {
     cursor: pointer;
     margin: 0 0.2rem;
@@ -212,33 +206,28 @@ body {
   align-items: center;
   border-bottom: 0.2rem solid var(--add-color-1);
 
-  &__steps {
-  }
-
-  &__stat {
-  }
-
   &__flags {
     display: flex;
+    align-items: center;
   }
 
   &__flag-icon {
     background: url('./assets/textures-small/mark.png') center/contain no-repeat;
-    width: 5vmin;
-    height: auto;
+    width: 2rem;
+    height: 2rem;
+    /* width: 5vmin;
+    height: auto; */
   }
 
   &__bombs {
     display: flex;
+    align-items: center;
   }
   
   &__bomb-icon {
     background: url('./assets/textures-small/Bomb.png') center/contain no-repeat;
-    width: 5vmin;
-    height: auto;
-  }
-
-  &__time {
+    width: 2rem;
+    height: 2rem;
   }
 }
 
@@ -443,6 +432,16 @@ body {
   .controls__sound {
     width: 1rem;
     height: 1rem;
+  }
+
+  .statistics__bomb-icon {
+    width: 5vmin;
+    height: 5vmin;
+  }
+
+  .statistics__flag-icon {
+    width: 5vmin;
+    height: 5vmin;
   }
 
 }
