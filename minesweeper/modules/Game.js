@@ -248,8 +248,8 @@ class Game {
     this.isStarted = true;
     const x = +elem.dataset.x;
     const y = +elem.dataset.y;
-    this.startNewGame([x, y], this.gameSize, this.gameMinesCount);
     this.addSteps();
+    this.startNewGame([x, y], this.gameSize, this.gameMinesCount);
     this.startTimer();
     this.view.static.elements.gameField.removeEventListener('click', this.waitForFirstClick);
   }
