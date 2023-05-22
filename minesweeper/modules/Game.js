@@ -21,7 +21,7 @@ class Game {
     this.gameTime = 0;
     this.gameTimer = null;
     this.prevResults = this.storage.loadPrevRes() || [];
-    this.marksLeft = null;
+    this.bombsLeft = null;
   }
 
   load() {
@@ -74,7 +74,7 @@ class Game {
     }
 
     this.cells = cells;
-    this.updateFlags();
+    this.updateFlagsAndMines();
     this.view.static.elements.gameField.addEventListener('mousedown', this.handleGameClick);
   }
 
@@ -94,7 +94,8 @@ class Game {
     this.gameSize = size;
     this.gameMinesCount = minesCount;
     this.marksLeft = minesCount;
-    this.view.static.elements.flags.innerText = minesCount;
+    this.view.static.elements.flags.innerText = 0;
+    this.view.static.elements.bombs.innerText = minesCount;
     this.view.gameView.renderGameField(this.gameSize);
     this.refreshGameInfo(0, 0);
 
@@ -139,7 +140,7 @@ class Game {
     }, 1000);
   }
 
-  updateFlags() {
+  updateFlagsAndMines() {
     let markedCells = 0;
     for (let i = 0; i < this.gameSize; i += 1) {
       for (let j = 0; j < this.gameSize; j += 1) {
@@ -148,8 +149,9 @@ class Game {
         }
       }
     }
-    this.marksLeft = this.gameMinesCount - markedCells;
-    this.view.static.elements.flags.innerText = this.marksLeft;
+    this.bombsLeft = this.gameMinesCount - markedCells;
+    this.view.static.elements.flags.innerText = markedCells;
+    this.view.static.elements.bombs.innerText = this.bombsLeft >= 0 ? this.bombsLeft : 0;
   }
 
   checkIsWin() {

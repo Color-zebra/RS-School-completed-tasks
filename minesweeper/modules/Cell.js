@@ -51,12 +51,12 @@ class Cell {
       this.gameInstance.sounds.playFlag();
       this.isMarked = false;
       this.elem.classList.remove(this.classes.marked);
-      this.gameInstance.updateFlags();
-    } else if (this.gameInstance.marksLeft > 0) {
+      this.gameInstance.updateFlagsAndMines();
+    } else {
       this.gameInstance.sounds.playFlag();
       this.isMarked = true;
       this.elem.classList.add(this.classes.marked);
-      this.gameInstance.updateFlags();
+      this.gameInstance.updateFlagsAndMines();
     }
   }
 
