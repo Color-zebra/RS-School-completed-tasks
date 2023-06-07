@@ -1,20 +1,23 @@
+import { NewsResponse, SourceResponse } from '../../interfaces/responceInterfaces';
 import News from './news/news';
 import Sources from './sources/sources';
 
 export class AppView {
+    private news: News;
+    private sources: Sources;
+
     constructor() {
         this.news = new News();
         this.sources = new Sources();
     }
 
-    drawNews(data) {
+    drawNews(data: NewsResponse) {
         const values = data?.articles ? data?.articles : [];
         this.news.draw(values);
     }
 
-    drawSources(data) {
+    drawSources(data: SourceResponse) {
         const values = data?.sources ? data?.sources : [];
-        console.log(values);
         this.sources.draw(values);
     }
 }
