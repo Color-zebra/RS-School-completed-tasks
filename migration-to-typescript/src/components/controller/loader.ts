@@ -1,11 +1,17 @@
+import { ChoosenOptions, RequestOptions } from '../../interfaces/appInterfaces';
+import { NewsResponse, SourceResponse } from '../../interfaces/responceInterfaces';
+import { Endpoints, Methods } from '../../types/types';
+
 class Loader {
-    constructor(baseLink, options) {
+    private baseLink;
+    private options;
+    constructor(baseLink: string, options: Pick<RequestOptions, 'apiKey'>) {
         this.baseLink = baseLink;
         this.options = options;
     }
 
-    getResp(
-        { endpoint, options = {} },
+    private getResp(
+        { endpoint, options = {} }: { endpoint: Endpoints; options?: ChoosenOptions },
         callback = () => {
             console.error('No callback for GET response');
         }
@@ -13,7 +19,7 @@ class Loader {
         this.load('GET', endpoint, callback, options);
     }
 
-    errorHandler(res) {
+    private errorHandler(res: Response) {
         if (!res.ok) {
             if (res.status === 401 || res.status === 404)
                 console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
@@ -23,18 +29,18 @@ class Loader {
         return res;
     }
 
-    makeUrl(options, endpoint) {
-        const urlOptions = { ...this.options, ...options };
+    makeUrl(options: ChoosenOptions, endpoint: Endpoints) {
+        const urlOptions: RequestOptions = { ...this.options, ...options };
         let url = `${this.baseLink}${endpoint}?`;
 
         Object.keys(urlOptions).forEach((key) => {
-            url += `${key}=${urlOptions[key]}&`;
+            url += `${key}=${urlOptions[key as keyof ChoosenOptions]}&`;
         });
 
         return url.slice(0, -1);
     }
 
-    load(method, endpoint, callback, options = {}) {
+    load(method: Methods, endpoint: Endpoints, callback: (arg: NewsResponse | SourceResponse) => void, options = {}) {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())

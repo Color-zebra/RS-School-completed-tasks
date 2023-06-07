@@ -1,4 +1,4 @@
-export interface Options {
+export interface ChoosenOptions {
     country?: string;
     category?: string;
     language?: string;
@@ -6,4 +6,8 @@ export interface Options {
     q?: string;
     pageSize?: number;
     page?: number;
+}
+
+export interface RequestOptions extends ChoosenOptions {
+    apiKey: string;
 }
