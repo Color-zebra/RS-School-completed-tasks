@@ -10,7 +10,7 @@ class Loader {
         this.options = options;
     }
 
-    private getResp(
+    protected getResp(
         { endpoint, options = {} }: { endpoint: Endpoints; options?: ChoosenOptions },
         callback = () => {
             console.error('No callback for GET response');
@@ -29,7 +29,7 @@ class Loader {
         return res;
     }
 
-    makeUrl(options: ChoosenOptions, endpoint: Endpoints) {
+    private makeUrl(options: ChoosenOptions, endpoint: Endpoints) {
         const urlOptions: RequestOptions = { ...this.options, ...options };
         let url = `${this.baseLink}${endpoint}?`;
 
@@ -40,7 +40,12 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    load(method: Methods, endpoint: Endpoints, callback: (arg: NewsResponse | SourceResponse) => void, options = {}) {
+    private load(
+        method: Methods,
+        endpoint: Endpoints,
+        callback: (arg: NewsResponse | SourceResponse) => void,
+        options = {}
+    ) {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())
