@@ -13,6 +13,7 @@ export class AppView {
     }
 
     drawSources(data) {
+        console.log(data);
         const values = data?.sources ? data?.sources : [];
         this.sources.draw(values);
     }
