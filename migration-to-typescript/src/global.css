@@ -13,7 +13,10 @@ body {
 }
 
 main {
+    padding: 20px 10px;
     flex: 1 1 auto;
+    display: flex;
+    gap: 20px;
 }
 
 header {
@@ -21,11 +24,14 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    text-align: center;
+    gap: 15px;
 }
 
 header h1 {
     font-size: 40px;
     font-weight: 800;
+    flex: 1 1 100%;
 }
 
 footer {
@@ -51,11 +57,13 @@ footer .copyright:before {
 /* ========================BURGER======================== */
 
 .theme-switcher {
+    flex: 1 0 auto;
     width: 40px;
     height: 40px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    cursor: pointer;
 }
 
 .dark-theme {

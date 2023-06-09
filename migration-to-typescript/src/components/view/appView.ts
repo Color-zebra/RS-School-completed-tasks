@@ -24,6 +24,10 @@ export class AppView {
         const values = data?.sources ? data?.sources : [];
         this.sources.draw(values);
     }
+
+    closeMenu() {
+        this.burger.closeMenu();
+    }
 }
 
 export default AppView;

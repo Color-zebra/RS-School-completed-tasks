@@ -15,11 +15,13 @@ class App {
             src.addEventListener('click', (e) =>
                 this.controller.getNews(e as MouseEvent, (data) => {
                     data && this.view.drawNews(data);
+                    this.view.closeMenu();
                 })
             );
         }
         this.controller.getSources((data) => {
             data && this.view.drawSources(data);
+            this.view.closeMenu();
         });
     }
 }

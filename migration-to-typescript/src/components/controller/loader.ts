@@ -30,7 +30,10 @@ class Loader {
     }
 
     private makeUrl(options: ChoosenOptions, endpoint: Endpoints) {
-        const urlOptions: RequestOptions = { ...this.options, ...options };
+        const lang = {
+            language: 'ru',
+        };
+        const urlOptions: RequestOptions = { ...this.options, ...options, ...lang };
         let url = `${this.baseLink}${endpoint}?`;
 
         Object.keys(urlOptions).forEach((key) => {
