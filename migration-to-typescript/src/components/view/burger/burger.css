@@ -1,0 +1,41 @@
+/* ========================BURGER======================== */
+
+.burger {
+  position: relative;
+  width: 30px;
+  height: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 2px;
+  transition: transform .3s ease;
+}
+
+.burger__line {
+  width: 30px;
+  height: 2px;
+  background-color: #30c5ff;
+  transition: transform .3s ease;
+}
+
+/* .burger_shown {
+  transform: rotate(90deg);
+} */
+
+.burger_shown > .burger__line:first-child {
+  transform: rotate(45deg) translateY(-50%);
+  position: relative;
+  top: 50%;
+}
+
+.burger_shown > .burger__line:nth-child(2) {
+  transform: scale(0);
+}
+
+.burger_shown > .burger__line:last-child {
+  transform: rotate(-45deg) translateY(50%);
+  position: relative;
+  bottom: 50%;
+}
+

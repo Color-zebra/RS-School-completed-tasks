@@ -1,14 +1,18 @@
 import { NewsResponse, SourceResponse } from '../../interfaces/responceInterfaces';
 import News from './news/news';
 import Sources from './sources/sources';
+import Burger from './burger/burger';
 
 export class AppView {
     private news: News;
     private sources: Sources;
+    private burger: Burger;
 
     constructor() {
         this.news = new News();
         this.sources = new Sources();
+        this.burger = new Burger();
+        this.burger.init();
     }
 
     drawNews(data: NewsResponse) {

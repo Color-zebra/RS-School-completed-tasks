@@ -32,3 +32,19 @@
     font-weight: 400;
     white-space: nowrap;
 }
+
+.sources.sources_shown {
+    left: 0;
+}
+
+@media (max-width: 767.7px) {
+    .sources {
+        position: absolute;
+        z-index: 2;
+        top: 60px;
+        left: -100vw;
+        flex-direction: column;
+        height: calc(100vh - 100px);
+        transition: all .3s ease;
+    }
+}
