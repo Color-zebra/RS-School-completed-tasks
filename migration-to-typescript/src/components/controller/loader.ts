@@ -3,8 +3,8 @@ import { NewsResponse, SourceResponse } from '../../interfaces/responceInterface
 import { Endpoints, Methods } from '../../types/types';
 
 class Loader {
-    private baseLink;
-    private options;
+    private baseLink: string;
+    private options: Pick<RequestOptions, 'apiKey'>;
     constructor(baseLink: string, options: Pick<RequestOptions, 'apiKey'>) {
         this.baseLink = baseLink;
         this.options = options;
@@ -30,10 +30,7 @@ class Loader {
     }
 
     private makeUrl(options: ChoosenOptions, endpoint: Endpoints) {
-        const lang = {
-            language: 'ru',
-        };
-        const urlOptions: RequestOptions = { ...this.options, ...options, ...lang };
+        const urlOptions: RequestOptions = { ...this.options, ...options };
         let url = `${this.baseLink}${endpoint}?`;
 
         Object.keys(urlOptions).forEach((key) => {

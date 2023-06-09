@@ -2,16 +2,31 @@ import { NewsResponse, SourceResponse } from '../../interfaces/responceInterface
 import AppLoader from './appLoader';
 
 class AppController extends AppLoader {
-    getSources(callback: (arg0?: SourceResponse) => void) {
+    public lang: null | HTMLElement;
+
+    constructor() {
+        super();
+        this.lang = document.getElementById('langSwitcher');
+    }
+
+    private getLang() {
+        const choosenLang = (this.lang as HTMLInputElement).value;
+        return choosenLang ? choosenLang : 'ru';
+    }
+
+    public getSources(callback: (arg0?: SourceResponse) => void) {
         super.getResp(
             {
                 endpoint: 'sources',
+                options: {
+                    language: this.getLang(),
+                },
             },
             callback
         );
     }
 
-    getNews(e: MouseEvent, callback: (arg0?: NewsResponse) => void) {
+    public getNews(e: MouseEvent, callback: (arg0?: NewsResponse) => void) {
         let target = e.target as HTMLElement;
         const newsContainer = e.currentTarget as HTMLElement;
 
@@ -25,6 +40,7 @@ class AppController extends AppLoader {
                             endpoint: 'everything',
                             options: {
                                 sources: sourceId,
+                                language: this.getLang(),
                             },
                         },
                         callback

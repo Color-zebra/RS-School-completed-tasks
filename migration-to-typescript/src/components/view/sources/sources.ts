@@ -2,6 +2,10 @@ import { Source } from '../../../interfaces/responceInterfaces';
 import './sources.css';
 
 class Sources {
+    private sources: null | HTMLElement;
+    constructor() {
+        this.sources = document.querySelector('.sources');
+    }
     public draw(data: Source[]) {
         const fragment = document.createDocumentFragment();
         const sourceItemTemp: HTMLTemplateElement | null = document.querySelector('#sourceItemTemp');
@@ -24,7 +28,10 @@ class Sources {
             fragment.append(sourceClone);
         });
 
-        document.querySelector('.sources')?.append(fragment);
+        if (this.sources) {
+            this.sources.innerText = '';
+            this.sources.append(fragment);
+        }
     }
 }
 

@@ -4,9 +4,18 @@ import { AppView } from '../view/appView';
 class App {
     private controller: AppController;
     private view: AppView;
+    private changeSources: () => void;
     constructor() {
         this.controller = new AppController();
         this.view = new AppView();
+        this.changeSources = this.onLanguageChange.bind(this);
+    }
+
+    onLanguageChange() {
+        this.controller.getSources((data) => {
+            data && this.view.drawSources(data);
+            this.view.closeMenu();
+        });
     }
 
     start() {
@@ -23,6 +32,7 @@ class App {
             data && this.view.drawSources(data);
             this.view.closeMenu();
         });
+        this.controller.lang?.addEventListener('input', this.changeSources);
     }
 }
 
