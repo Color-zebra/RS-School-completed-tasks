@@ -39,21 +39,18 @@ footer {
     height: 100px;
     display: flex;
     align-items: center;
-    justify-content: center;
-}
-footer .copyright {
-    font-size: 14px;
-    color: #333;
-    text-align: center;
-}
-footer .copyright a {
+    justify-content: space-around;
     color: #444;
+    background-color: var(--header);
 }
-footer .copyright a:hover {
-    color: #555;
+
+footer > a > img {
+    width: 80px;
+    height: 40px;
 }
-footer .copyright:before {
-    content: '©';
+
+footer > a {
+    color: inherit;
 }
 
 @media (max-width: 767.7px) {
