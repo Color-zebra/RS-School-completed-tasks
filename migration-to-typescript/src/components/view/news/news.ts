@@ -16,7 +16,7 @@ class News {
 
             const newsPhoto: HTMLElement | null = newsClone.querySelector('.news__meta-photo');
             if (newsPhoto) {
-                newsPhoto.style.backgroundImage = `url(${item.urlToImage || 'img/news_placeholder.jpg'})`;
+                newsPhoto.style.backgroundImage = `url(${item.urlToImage || './assets/placeholder.png'})`;
             }
 
             const newsAuthor: HTMLElement | null = newsClone.querySelector('.news__meta-photo');
