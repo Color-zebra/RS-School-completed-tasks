@@ -1,17 +1,19 @@
 import { NewsResponse, SourceResponse } from '../../interfaces/responceInterfaces';
+import { Langs } from '../../types/types';
 import AppLoader from './appLoader';
 
 class AppController extends AppLoader {
-    public lang: null | HTMLElement;
+    public lang: null | HTMLInputElement;
 
     constructor() {
         super();
-        this.lang = document.getElementById('langSwitcher');
+        this.lang = <HTMLInputElement>document.getElementById('langSwitcher');
     }
 
     private getLang() {
-        const choosenLang = (this.lang as HTMLInputElement).value;
-        return choosenLang ? choosenLang : 'ru';
+        const choosenLang = this.lang?.value;
+        if (choosenLang && choosenLang in Langs) return choosenLang;
+        return 'ru';
     }
 
     public getSources(callback: (arg0?: SourceResponse) => void) {

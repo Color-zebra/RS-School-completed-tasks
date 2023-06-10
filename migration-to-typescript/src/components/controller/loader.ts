@@ -1,17 +1,17 @@
 import { ChoosenOptions, RequestOptions } from '../../interfaces/appInterfaces';
 import { NewsResponse, SourceResponse } from '../../interfaces/responceInterfaces';
-import { Endpoints, Methods } from '../../types/types';
+import { Endpoints, LoadCallback, Methods } from '../../types/types';
 
 class Loader {
-    private baseLink: string;
-    private options: Pick<RequestOptions, 'apiKey'>;
+    private readonly baseLink: string;
+    private readonly options: Pick<RequestOptions, 'apiKey'>;
     constructor(baseLink: string, options: Pick<RequestOptions, 'apiKey'>) {
         this.baseLink = baseLink;
         this.options = options;
     }
 
     protected getResp(
-        { endpoint, options = {} }: { endpoint: Endpoints; options?: ChoosenOptions },
+        { endpoint, options = {} }: { endpoint: Endpoints; options?: Partial<ChoosenOptions> },
         callback = () => {
             console.error('No callback for GET response');
         }
@@ -29,8 +29,8 @@ class Loader {
         return res;
     }
 
-    private makeUrl(options: ChoosenOptions, endpoint: Endpoints) {
-        const urlOptions: RequestOptions = { ...this.options, ...options };
+    private makeUrl(options: Partial<ChoosenOptions>, endpoint: Endpoints) {
+        const urlOptions: Partial<RequestOptions> = { ...this.options, ...options };
         let url = `${this.baseLink}${endpoint}?`;
 
         Object.keys(urlOptions).forEach((key) => {
@@ -40,16 +40,16 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    private load(
+    private load<T extends SourceResponse | NewsResponse>(
         method: Methods,
         endpoint: Endpoints,
-        callback: (arg: NewsResponse | SourceResponse) => void,
+        callback: LoadCallback<T>,
         options = {}
     ) {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())
-            .then((data) => callback(data))
+            .then((data: T) => callback(data))
             .catch((err) => console.error(err));
     }
 }
