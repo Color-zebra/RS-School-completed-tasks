@@ -15,7 +15,7 @@
 .burger__line {
   width: 30px;
   height: 2px;
-  background-color: #30c5ff;
+  background-color: var(--btn);
   transition: transform .3s ease;
 }
 

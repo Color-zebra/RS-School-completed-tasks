@@ -2,8 +2,8 @@ body, html {
     height: 100%;
 }
 body {
-    color: #fff;
-    background: #17181c;
+    color: var(--text);
+    background: var(--background);
     font-family: sans-serif;
     display: flex;
     flex-direction: column;
@@ -26,6 +26,7 @@ header {
     align-items: center;
     text-align: center;
     gap: 15px;
+    background-color: var(--header);
 }
 
 header h1 {
@@ -53,25 +54,6 @@ footer .copyright a:hover {
 }
 footer .copyright:before {
     content: '©';
-}
-/* ========================BURGER======================== */
-
-.theme-switcher {
-    flex: 1 0 auto;
-    width: 40px;
-    height: 40px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    cursor: pointer;
-}
-
-.dark-theme {
-    background-image: url('./assets/moon.png');
-}
-
-.light-theme {
-    background-image: url('./assets/sun.png');
 }
 
 @media (max-width: 767.7px) {

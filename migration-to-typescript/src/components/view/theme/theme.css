@@ -1,0 +1,28 @@
+body[data-theme="dark" ] {
+  --background: #17181c;
+  --text: #fff;
+  --header: #17181c;
+  --btn: #70d6ff;
+  --btn-hov: #3fcc59;
+  --theme-icon: url('../../../assets/moon.png');
+}
+
+body[data-theme="light" ] {
+  --background: #FAFAFA;
+  --text: #17181c;
+  --header: DeepSkyBlue;
+  --btn: #17181c;
+  --btn-hov: OrangeRed;
+  --theme-icon: url('../../../assets/sun.png');
+}
+
+.theme-switcher {
+  flex: 1 0 auto;
+  width: 40px;
+  height: 40px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: var(--theme-icon);
+  cursor: pointer;
+}
