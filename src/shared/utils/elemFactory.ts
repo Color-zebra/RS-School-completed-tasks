@@ -1,0 +1,10 @@
+export class ElemFactory {
+  createElem(tagName: string, classes?: string[], content?: Array<appendArg>, id?: string) {
+    const elem = document.createElement(tagName);
+    classes && elem.classList.add(...classes);
+    id && elem.setAttribute('id', id);
+    content && elem.append(...content);
+
+    return elem;
+  }
+}

@@ -1,0 +1,1 @@
+type appendArg = HTMLElement | string;

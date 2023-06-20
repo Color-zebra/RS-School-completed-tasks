@@ -1,4 +1,5 @@
-import "./style.scss";
-import "./index.html";
+import './index.html';
+import { App } from './src/app/app';
 
-console.log("Hello world");
+const app = new App();
+app.start();

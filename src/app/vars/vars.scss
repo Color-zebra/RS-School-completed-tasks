@@ -1,4 +1,4 @@
-body[date-theme = "light"] {
+body[data-theme="light"] {
   --color-bg: #F5F5F5;
   --color-text: #160040;
   --color-decor: #F05454;
@@ -6,7 +6,7 @@ body[date-theme = "light"] {
   --color-code-text: #000000;
 }
 
-body[date-theme = "dark"] {
+body[data-theme = "dark"] {
   --color-bg: #160040;
   --color-text: #F5F5F5;
   --color-decor: #9A0680;
