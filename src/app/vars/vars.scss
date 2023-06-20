@@ -1,0 +1,15 @@
+body[date-theme = "light"] {
+  --color-bg: #F5F5F5;
+  --color-text: #160040;
+  --color-decor: #F05454;
+  --color-code-bg: #EDEDED;
+  --color-code-text: #000000;
+}
+
+body[date-theme = "dark"] {
+  --color-bg: #160040;
+  --color-text: #F5F5F5;
+  --color-decor: #9A0680;
+  --color-code-bg: #423F3E;
+  --color-code-text: #EDEDED;
+}
