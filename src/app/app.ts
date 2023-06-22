@@ -1,6 +1,7 @@
-import { MainPage } from '../pages/mainPage';
+import { MainPage } from '../pages/MainPage';
 import './normalize/normalize.scss';
 import './vars/vars.scss';
+import './app.scss';
 
 export class App {
   mainPage: MainPage;
@@ -10,7 +11,6 @@ export class App {
   }
 
   start() {
-    this.mainPage.init();
     document.body.append(this.mainPage.getElem());
   }
 }

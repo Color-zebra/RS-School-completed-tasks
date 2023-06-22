@@ -1,6 +1,7 @@
 import { gameLevels } from '../../shared/data/gameLevels';
 import { Burger } from '../../features/burger/Burger';
 import { ElemController } from '../../shared/utils/elemController';
+import './aside.scss';
 
 export class Aside extends ElemController {
   private classes: Record<string, string>;
@@ -13,6 +14,7 @@ export class Aside extends ElemController {
     this.classes = {
       completed: 'competed',
       incompleted: 'incomplited',
+      baseClass: 'aside',
     };
     this.texts = {
       title: 'Levels',
@@ -22,10 +24,13 @@ export class Aside extends ElemController {
   }
 
   protected init() {
-    console.log('init aside');
     const levels = gameLevels.map((_level, index) => this.createLevelStr(index, false));
-    console.log(this.burger);
-    this.elem = this.factory.createElem('div', ['aside'], [this.texts.title, ...levels, this.burger.getElem()]);
+
+    this.elem = this.factory.createElem(
+      'div',
+      [this.classes.baseClass],
+      [this.texts.title, ...levels, this.burger.getElem()]
+    );
   }
 
   private createLevelStr(number: number, isComplete: boolean): HTMLElement {

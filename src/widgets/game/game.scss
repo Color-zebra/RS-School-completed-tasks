@@ -1,0 +1,20 @@
+.game {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  &__table {
+    flex: 0 0 100%;
+    border: 5px solid black;
+  }
+
+  &__editor {
+    flex: 0 0 50%;
+    border: 5px solid black;
+  }
+
+  &__viewer {
+    flex: 0 0 50%;
+    border: 5px solid black;
+  }
+}
