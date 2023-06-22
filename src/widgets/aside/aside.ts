@@ -1,5 +1,5 @@
-import { Burger } from '../../features/burger/burger';
 import { gameLevels } from '../../shared/data/gameLevels';
+import { Burger } from '../../features/burger/Burger';
 import { ElemController } from '../../shared/utils/elemController';
 
 export class Aside extends ElemController {
@@ -17,11 +17,14 @@ export class Aside extends ElemController {
     this.texts = {
       title: 'Levels',
     };
+
+    this.init();
   }
 
-  public init() {
-    this.burger.init();
+  protected init() {
+    console.log('init aside');
     const levels = gameLevels.map((_level, index) => this.createLevelStr(index, false));
+    console.log(this.burger);
     this.elem = this.factory.createElem('div', ['aside'], [this.texts.title, ...levels, this.burger.getElem()]);
   }
 

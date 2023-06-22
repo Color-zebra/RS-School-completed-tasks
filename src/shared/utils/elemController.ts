@@ -1,7 +1,7 @@
 import { ElemFactory } from './elemFactory';
 
 export abstract class ElemController extends ElemFactory {
-  abstract init(): void;
+  protected abstract init(): void;
   protected elem: null | HTMLElement;
   protected factory: ElemFactory;
 

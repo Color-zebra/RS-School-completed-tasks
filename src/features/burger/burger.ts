@@ -6,20 +6,22 @@ export class Burger extends ElemController {
 
   constructor() {
     super();
+
     this.classes = {
       burger: 'burger',
       line: 'burger__line',
     };
+
+    this.init();
   }
 
-  init() {
+  protected init() {
     const childrens = new Array(3);
 
     for (let i = 0; i < childrens.length; i++) {
+      console.log(this);
       childrens[i] = this.factory.createElem('span', [this.classes.line]);
     }
-
-    console.log(childrens);
 
     this.elem = this.factory.createElem('div', [this.classes.burger], childrens);
   }
