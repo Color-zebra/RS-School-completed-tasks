@@ -5,6 +5,7 @@ import { gameLevels } from '../../shared/data/gameLevels';
 import { GameTag } from '../../shared/types/interfaces';
 import { levels } from '../../shared/types/types';
 import { createGameElem } from '../../shared/utils/createGameElem';
+import { createGameHtml } from '../../shared/utils/createGameHtml';
 import { ElemController } from '../../shared/utils/elemController';
 import './game.scss';
 
@@ -41,8 +42,10 @@ export class Game extends ElemController {
   }
 
   private initCurrLevel(levelNumber: number) {
-    gameLevels[levelNumber].forEach((tag: GameTag) => {
+    const level = gameLevels[levelNumber];
+    level.forEach((tag: GameTag) => {
       this.table.getElem().append(createGameElem(tag));
+      this.htmlViewer.getElem().append(createGameHtml(tag));
     });
   }
 }
