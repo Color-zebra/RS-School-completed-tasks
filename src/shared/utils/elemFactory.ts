@@ -1,3 +1,5 @@
+import { appendArg } from '../types/types';
+
 export class ElemFactory {
   createElem(tagName: string, classes?: string[], content?: Array<appendArg>, id?: string) {
     const elem = document.createElement(tagName);

@@ -1,3 +1,35 @@
 *, *::before, *::after {
   box-sizing: border-box;
 }
+
+my-square {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100px;
+  height: 100px;
+  background-color: yellow;
+}
+
+my-circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: green;
+}
+
+my-rhombus {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 40px;
+  height: 40px;
+  background-color: blue;
+  transform: rotate(45deg);
+}

@@ -1,30 +1,32 @@
-const first = [
+import { gameLevel, levels } from '../types/types';
+
+const first: gameLevel = [
   {
-    tag: 'square',
+    tag: 'my-square',
     children: [
       {
-        tag: 'rhombus',
+        tag: 'my-rhombus',
         children: null,
       },
     ],
   },
   {
-    tag: 'square',
+    tag: 'my-square',
     children: [
       {
-        tag: 'rhombus',
+        tag: 'my-rhombus',
         children: null,
       },
     ],
   },
   {
-    tag: 'square',
+    tag: 'my-square',
     children: [
       {
-        tag: 'rhombus',
+        tag: 'my-circle',
         children: [
           {
-            tag: 'circle',
+            tag: 'my-rhombus',
             children: null,
           },
         ],
@@ -33,4 +35,4 @@ const first = [
   },
 ];
 
-export const gameLevels = [first, [], []];
+export const gameLevels: levels = [first];
