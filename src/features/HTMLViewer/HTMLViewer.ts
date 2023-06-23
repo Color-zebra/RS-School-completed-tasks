@@ -36,7 +36,7 @@ export class HTMLViewer extends ElemController {
   private createGameStr(elem: GameTag, indentLevel: number) {
     const indent = ' '.repeat(indentLevel * this.indentSize);
     const content: appendArg[] | appendArg = [];
-    const tagName = elem.tag.slice(3);
+    const tagName = elem.tag;
 
     if (elem.children) {
       content.push(`${indent}<${tagName}>`);

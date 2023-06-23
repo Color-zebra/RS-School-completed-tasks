@@ -2,6 +2,7 @@ import { CSSEditor } from '../../features/CSSEditor/CSSEditor';
 import { HTMLViewer } from '../../features/HTMLViewer/HTMLViewer';
 import { Table } from '../../features/table/Table';
 import { gameLevels } from '../../shared/data/gameLevels';
+import { rightAnswers } from '../../shared/data/rightAnswers';
 import { levels } from '../../shared/types/types';
 import { ElemController } from '../../shared/utils/elemController';
 import './game.scss';
@@ -15,17 +16,21 @@ export class Game extends ElemController {
   private levels: levels;
   private strElemMap: Map<HTMLElement, HTMLElement>;
   private elemStrMap: Map<HTMLElement, HTMLElement>;
+  private rightElements: NodeList | null;
+  private answers: string[];
 
   constructor() {
     super();
 
     this.table = new Table();
-    this.cssEditor = new CSSEditor();
+    this.cssEditor = new CSSEditor(this.checkAnswer.bind(this));
     this.htmlViewer = new HTMLViewer();
     this.classes = {
       baseClass: 'game',
     };
     this.levels = gameLevels;
+    this.answers = rightAnswers;
+    this.rightElements = null;
     this.strElemMap = new Map();
     this.elemStrMap = new Map();
 
@@ -41,6 +46,7 @@ export class Game extends ElemController {
     );
 
     this.initLevel(0);
+    this.getRightElements(0);
   }
 
   private hydrate() {
@@ -79,5 +85,23 @@ export class Game extends ElemController {
       this.elemStrMap.set(gameElements[index], gameStrings[index]);
       this.strElemMap.set(gameStrings[index], gameElements[index]);
     });
+  }
+
+  private getRightElements(level: number) {
+    this.rightElements = this.table.getElem().querySelectorAll(this.answers[level]);
+  }
+
+  public checkAnswer(ans: string) {
+    const choosenElements = this.table.getElem().querySelectorAll(ans);
+    if (this.rightElements) {
+      for (let i = 0; i < this.rightElements.length; i += 1) {
+        if (this.rightElements[i] !== choosenElements[i]) {
+          console.log('Wrong!');
+          return;
+        }
+      }
+      console.log('Right!');
+      return;
+    }
   }
 }
