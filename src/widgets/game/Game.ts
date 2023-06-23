@@ -14,8 +14,8 @@ export class Game extends ElemController {
   private cssEditor: CSSEditor;
   private htmlViewer: HTMLViewer;
   private levels: levels;
-  private strElemMap: Map<HTMLElement, HTMLElement> | null;
-  private elemStrMap: Map<HTMLElement, HTMLElement> | null;
+  private strElemMap: Map<HTMLElement, HTMLElement>;
+  private elemStrMap: Map<HTMLElement, HTMLElement>;
   private indentSize: number;
   private gameElemTree: HTMLElement[];
   private gameStrTree: HTMLElement[];
@@ -31,8 +31,8 @@ export class Game extends ElemController {
       codeString: 'html-code',
     };
     this.levels = gameLevels;
-    this.elemStrMap = null;
-    this.strElemMap = null;
+    this.strElemMap = new Map();
+    this.elemStrMap = new Map();
     this.gameElemTree = [];
     this.gameStrTree = [];
 
@@ -53,7 +53,27 @@ export class Game extends ElemController {
   }
 
   private hydrate() {
-    
+    this.table.getElem().addEventListener('mouseover', (e) => {
+      if (e.target !== this.table.getElem()) {
+        (e.target as HTMLElement).classList.add('light');
+        this.elemStrMap.get(e.target as HTMLElement)?.classList.add('light');
+      }
+      if (e.relatedTarget) {
+        (e.relatedTarget as HTMLElement).classList.remove('light');
+        this.elemStrMap.get(e.relatedTarget as HTMLElement)?.classList.remove('light');
+      }
+    });
+
+    this.htmlViewer.getElem().addEventListener('mouseover', (e) => {
+      if (e.target !== this.htmlViewer.getElem()) {
+        (e.target as HTMLElement).classList.add('light');
+        this.strElemMap.get(e.target as HTMLElement)?.classList.add('light');
+      }
+      if (e.relatedTarget) {
+        (e.relatedTarget as HTMLElement).classList.remove('light');
+        this.strElemMap.get(e.relatedTarget as HTMLElement)?.classList.remove('light');
+      }
+    });
   }
 
   private createGameElem(elem: GameTag) {
@@ -96,6 +116,10 @@ export class Game extends ElemController {
     level.forEach((tag: GameTag) => {
       this.table.getElem().append(this.createGameElem(tag));
       this.htmlViewer.getElem().append(this.createGameStr(tag, 0));
+    });
+    this.gameElemTree.forEach((_item, index) => {
+      this.elemStrMap.set(this.gameElemTree[index], this.gameStrTree[index]);
+      this.strElemMap.set(this.gameStrTree[index], this.gameElemTree[index]);
     });
   }
 }
