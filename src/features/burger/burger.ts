@@ -19,7 +19,6 @@ export class Burger extends ElemController {
     const childrens = new Array(3);
 
     for (let i = 0; i < childrens.length; i++) {
-      console.log(this);
       childrens[i] = this.factory.createElem('span', [this.classes.line]);
     }
 
