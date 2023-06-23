@@ -2,8 +2,7 @@ import { CSSEditor } from '../../features/CSSEditor/CSSEditor';
 import { HTMLViewer } from '../../features/HTMLViewer/HTMLViewer';
 import { Table } from '../../features/table/Table';
 import { gameLevels } from '../../shared/data/gameLevels';
-import { GameTag } from '../../shared/types/interfaces';
-import { appendArg, levels } from '../../shared/types/types';
+import { levels } from '../../shared/types/types';
 import { ElemController } from '../../shared/utils/elemController';
 import './game.scss';
 
@@ -16,9 +15,6 @@ export class Game extends ElemController {
   private levels: levels;
   private strElemMap: Map<HTMLElement, HTMLElement>;
   private elemStrMap: Map<HTMLElement, HTMLElement>;
-  private indentSize: number;
-  private gameElemTree: HTMLElement[];
-  private gameStrTree: HTMLElement[];
 
   constructor() {
     super();
@@ -28,15 +24,10 @@ export class Game extends ElemController {
     this.htmlViewer = new HTMLViewer();
     this.classes = {
       baseClass: 'game',
-      codeString: 'html-code',
     };
     this.levels = gameLevels;
     this.strElemMap = new Map();
     this.elemStrMap = new Map();
-    this.gameElemTree = [];
-    this.gameStrTree = [];
-
-    this.indentSize = 4;
 
     this.init();
     this.hydrate();
@@ -49,7 +40,7 @@ export class Game extends ElemController {
       [this.table.getElem(), this.cssEditor.getElem(), this.htmlViewer.getElem()]
     );
 
-    this.initCurrLevel(0);
+    this.initLevel(0);
   }
 
   private hydrate() {
@@ -76,50 +67,17 @@ export class Game extends ElemController {
     });
   }
 
-  private createGameElem(elem: GameTag) {
-    const currElem = document.createElement(`${elem.tag}`);
-    if (elem.children) {
-      const children: appendArg[] = [];
-      elem.children.forEach((tag: GameTag) => {
-        children.push(this.createGameElem(tag));
-      });
-      currElem.append(...children);
-    }
-    this.gameElemTree.push(currElem);
-    return currElem;
-  }
-
-  private createGameStr(elem: GameTag, indentLevel: number) {
-    const indent = ' '.repeat(indentLevel * this.indentSize);
-    const content: appendArg[] | appendArg = [];
-    const tagName = elem.tag.slice(3);
-
-    if (elem.children) {
-      content.push(`${indent}<${tagName}>`);
-      content.push(
-        ...elem.children.map((tag: GameTag) => {
-          return this.createGameStr(tag, indentLevel + 1);
-        })
-      );
-      content.push(`${indent}</${tagName}>`);
-    } else {
-      content.push(`${indent}<${tagName} />`);
-    }
-
-    const resElem = this.createElem('div', [this.classes.codeString], [...content]);
-    this.gameStrTree.push(resElem);
-    return resElem;
-  }
-
-  private initCurrLevel(levelNumber: number) {
+  private initLevel(levelNumber: number) {
     const level = gameLevels[levelNumber];
-    level.forEach((tag: GameTag) => {
-      this.table.getElem().append(this.createGameElem(tag));
-      this.htmlViewer.getElem().append(this.createGameStr(tag, 0));
-    });
-    this.gameElemTree.forEach((_item, index) => {
-      this.elemStrMap.set(this.gameElemTree[index], this.gameStrTree[index]);
-      this.strElemMap.set(this.gameStrTree[index], this.gameElemTree[index]);
+    this.table.initLevel(level);
+    this.htmlViewer.initLevel(level);
+
+    const gameElements = this.table.getGameElements();
+    const gameStrings = this.htmlViewer.getGameStrings();
+
+    gameElements.forEach((_item, index) => {
+      this.elemStrMap.set(gameElements[index], gameStrings[index]);
+      this.strElemMap.set(gameStrings[index], gameElements[index]);
     });
   }
 }
