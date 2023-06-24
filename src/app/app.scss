@@ -24,15 +24,19 @@ square > * {
   height: 30%;
 }
 
-square:nth-child(1) {
+square > *:nth-child(1) {
   z-index: 3;
 }
 
-square:nth-child(2) {
+square > *:nth-child(2) {
+  position: relative;
+  top: -10%;
   z-index: 2;
 }
 
-square:nth-child(3) {
+square > *:nth-child(3) {
+  position: relative;
+  top: -20%;
   z-index: 1;
 }
 
@@ -53,15 +57,19 @@ circle > * {
   height: 30%;
 }
 
-circle:nth-child(1) {
+circle > *:nth-child(1) {
   z-index: 3;
 }
 
-circle:nth-child(2) {
+circle > *:nth-child(2) {
+  position: relative;
+  top: -10%;
   z-index: 2;
 }
 
-circle:nth-child(3) {
+circle > *:nth-child(3) {
+  position: relative;
+  top: -20%;
   z-index: 1;
 }
 
@@ -74,7 +82,7 @@ rhombus {
   background-color: red;
   border: 1px solid black;
   box-shadow: 5px 5px 5px black;
-  transform: rotate(45deg);
+  transform: rotate(45deg) scale(0.7);
 }
 
 rhombus > * {
@@ -84,15 +92,19 @@ rhombus > * {
   transform: rotate(-45deg);
 }
 
-rhombus:nth-child(1) {
+rhombus *:nth-child(1) {
   z-index: 3;
 }
 
-rhombus:nth-child(2) {
+rhombus *:nth-child(2) {
+  position: relative;
+  top: -10%;
   z-index: 2;
 }
 
-rhombus:nth-child(3) {
+rhombus *:nth-child(3) {
+  position: relative;
+  top: -20%;
   z-index: 1;
 }
 

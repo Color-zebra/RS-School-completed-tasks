@@ -45,8 +45,7 @@ export class Game extends ElemController {
       [this.table.getElem(), this.cssEditor.getElem(), this.htmlViewer.getElem()]
     );
 
-    this.initLevel(0);
-    this.getRightElements(0);
+    this.initLevel(1);
   }
 
   private hydrate() {
@@ -73,7 +72,7 @@ export class Game extends ElemController {
     });
   }
 
-  private initLevel(levelNumber: number) {
+  public initLevel(levelNumber: number) {
     const level = gameLevels[levelNumber];
     this.table.initLevel(level);
     this.htmlViewer.initLevel(level);
@@ -85,6 +84,8 @@ export class Game extends ElemController {
       this.elemStrMap.set(gameElements[index], gameStrings[index]);
       this.strElemMap.set(gameStrings[index], gameElements[index]);
     });
+
+    this.getRightElements(levelNumber);
   }
 
   private getRightElements(level: number) {

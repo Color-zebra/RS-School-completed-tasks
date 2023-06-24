@@ -14,7 +14,7 @@ export class MainPage extends ElemController {
 
   constructor() {
     super();
-    this.aside = new Aside();
+    this.aside = new Aside(this.changeLevel.bind(this));
     this.header = new Header();
     this.footer = new Footer();
     this.game = new Game();
@@ -32,5 +32,10 @@ export class MainPage extends ElemController {
       [this.classes.baseClass],
       [this.header.getElem(), this.game.getElem(), this.aside.getElem(), this.footer.getElem()]
     );
+  }
+
+  public changeLevel(level: number) {
+    console.log(this);
+    this.game.initLevel(level);
   }
 }

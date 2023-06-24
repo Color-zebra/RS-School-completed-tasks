@@ -3,52 +3,36 @@ import { gameLevel, levels } from '../types/types';
 const first: gameLevel = [
   {
     tag: 'circle',
-    children: [
-      {
-        tag: 'square',
-        children: null,
-      },
-    ],
+    children: null,
   },
   {
     tag: 'square',
-    children: [
-      {
-        tag: 'rhombus',
-        children: null,
-      },
-      {
-        tag: 'rhombus',
-        children: null,
-      },
-      {
-        tag: 'rhombus',
-        children: null,
-      },
-    ],
+    children: null,
+  },
+  {
+    tag: 'rhombus',
+    children: null,
+  },
+];
+
+const second: gameLevel = [
+  {
+    tag: 'circle',
+    children: null,
+  },
+  {
+    tag: 'square',
+    children: null,
   },
   {
     tag: 'rhombus',
     children: [
       {
         tag: 'square',
-        children: [
-          {
-            tag: 'circle',
-            children: null,
-          },
-          {
-            tag: 'circle',
-            children: null,
-          },
-          {
-            tag: 'circle',
-            children: null,
-          },
-        ],
+        children: null,
       },
     ],
   },
 ];
 
-export const gameLevels: levels = [first];
+export const gameLevels: levels = [first, second];

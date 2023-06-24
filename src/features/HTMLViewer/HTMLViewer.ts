@@ -24,6 +24,8 @@ export class HTMLViewer extends ElemController {
   }
 
   public initLevel(level: gameLevel) {
+    if (!this.elem) return;
+    this.elem.innerHTML = '';
     level.forEach((tag: GameTag) => {
       this.elem?.append(this.createGameStr(tag, 0));
     });
