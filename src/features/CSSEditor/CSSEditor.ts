@@ -64,5 +64,8 @@ export class CSSEditor extends ElemController {
     if (this.input) {
       this.input.value = '';
     }
+    if (this.timeout) {
+      clearInterval(this.timeout);
+    }
   }
 }
