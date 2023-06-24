@@ -2,14 +2,10 @@ import { gameLevel, levels } from '../types/types';
 
 const first: gameLevel = [
   {
-    tag: 'square',
-    children: null,
-  },
-  {
-    tag: 'square',
+    tag: 'circle',
     children: [
       {
-        tag: 'rhombus',
+        tag: 'square',
         children: null,
       },
     ],
@@ -18,10 +14,35 @@ const first: gameLevel = [
     tag: 'square',
     children: [
       {
-        tag: 'circle',
+        tag: 'rhombus',
+        children: null,
+      },
+      {
+        tag: 'rhombus',
+        children: null,
+      },
+      {
+        tag: 'rhombus',
+        children: null,
+      },
+    ],
+  },
+  {
+    tag: 'rhombus',
+    children: [
+      {
+        tag: 'square',
         children: [
           {
-            tag: 'rhombus',
+            tag: 'circle',
+            children: null,
+          },
+          {
+            tag: 'circle',
+            children: null,
+          },
+          {
+            tag: 'circle',
             children: null,
           },
         ],

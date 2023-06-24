@@ -1,0 +1,12 @@
+.table {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.table > * {
+  width: 25cqw;
+  height: 25cqw;
+  max-width: 180px;
+  max-height: 180px;
+}

@@ -11,9 +11,29 @@ square {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 100px;
-  height: 100px;
+
   background-color: yellow;
+  border: 1px solid black;
+  box-shadow: 0 5px 5px black;
+
+  padding: 5px;
+}
+
+square > * {
+  width: 30%;
+  height: 30%;
+}
+
+square:nth-child(1) {
+  z-index: 3;
+}
+
+square:nth-child(2) {
+  z-index: 2;
+}
+
+square:nth-child(3) {
+  z-index: 1;
 }
 
 circle {
@@ -21,10 +41,28 @@ circle {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
+
   background-color: green;
+  border: 1px solid black;
+  box-shadow: 0 5px 5px black;
+  border-radius: 50%;
+}
+
+circle > * {
+  width: 30%;
+  height: 30%;
+}
+
+circle:nth-child(1) {
+  z-index: 3;
+}
+
+circle:nth-child(2) {
+  z-index: 2;
+}
+
+circle:nth-child(3) {
+  z-index: 1;
 }
 
 rhombus {
@@ -32,10 +70,30 @@ rhombus {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 40px;
-  height: 40px;
-  background-color: blue;
+
+  background-color: red;
+  border: 1px solid black;
+  box-shadow: 5px 5px 5px black;
   transform: rotate(45deg);
+}
+
+rhombus > * {
+  width: 30%;
+  height: 30%;
+  
+  transform: rotate(-45deg);
+}
+
+rhombus:nth-child(1) {
+  z-index: 3;
+}
+
+rhombus:nth-child(2) {
+  z-index: 2;
+}
+
+rhombus:nth-child(3) {
+  z-index: 1;
 }
 
 .light {

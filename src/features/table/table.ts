@@ -1,6 +1,7 @@
 import { GameTag } from '../../shared/types/interfaces';
 import { appendArg, gameLevel } from '../../shared/types/types';
 import { ElemController } from '../../shared/utils/elemController';
+import './table.scss';
 
 export class Table extends ElemController {
   classes: Record<string, string>;
@@ -11,6 +12,7 @@ export class Table extends ElemController {
 
     this.classes = {
       baseClass: 'game__table',
+      mainClass: 'table',
     };
     this.gameElements = [];
 
@@ -18,7 +20,7 @@ export class Table extends ElemController {
   }
 
   protected init() {
-    this.elem = this.createElem('div', [this.classes.baseClass], ["I'm table for HTML tags visualisation"]);
+    this.elem = this.createElem('div', [this.classes.baseClass, this.classes.mainClass], []);
   }
 
   public initLevel(level: gameLevel) {
