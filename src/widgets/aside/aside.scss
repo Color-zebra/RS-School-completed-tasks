@@ -2,17 +2,64 @@
   position: fixed;
   top: 0;
   right: 0;
+  padding: 1rem 0;
 
   display: flex;
   flex-direction: column;
-  background-color: var(--color-bg);
+
   width: 200px;
   height: 100vh;
+  background-color: var(--color-bg);
   overflow-y: auto;
+  transition: all .3s ease;
+
+  &__title {
+    text-align: center;
+    font-family: monospace;
+    font-size: 2rem;
+  }
+
+  &__levels {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    overflow-y: auto;
+    margin: 0 0 2rem 0;
+  }
+
+  &__level {
+    color: var(--color-text);
+    font-size: 1.5rem;
+    font-family: monospace;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: contain;
+    transition: all .3s ease;
+    cursor: pointer;
+  }
+
+  &__level:hover {
+    background-color: var(--color-text);
+    color: var((--color-bg));
+  }
+}
+
+
+.completed {
+  background-image: url('../../shared/assets/img/done.png');
+}
+
+.incompleted {
+  background-image: url('../../shared/assets/img/cross.png');
 }
 
 @media (width < 767.7px) {
   .aside {
-    display: none;
+    right: -100vw;
+  }
+
+  .aside-shown {
+    right: 0;
   }
 }

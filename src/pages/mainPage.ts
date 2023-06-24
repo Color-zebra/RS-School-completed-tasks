@@ -15,7 +15,7 @@ export class MainPage extends ElemController {
   constructor() {
     super();
     this.aside = new Aside(this.changeLevel.bind(this), this.help.bind(this));
-    this.header = new Header();
+    this.header = new Header(this.openMenu.bind(this), this.closeMenu.bind(this));
     this.footer = new Footer();
     this.game = new Game();
 
@@ -34,11 +34,27 @@ export class MainPage extends ElemController {
     );
   }
 
+  openMenu() {
+    const burger = this.header.burger.getElem();
+    const aside = this.aside.getElem();
+    aside.classList.add('aside-shown');
+    burger.classList.add('burger-shown');
+  }
+
+  closeMenu() {
+    const burger = this.header.burger.getElem();
+    const aside = this.aside.getElem();
+    aside.classList.remove('aside-shown');
+    burger.classList.remove('burger-shown');
+  }
+
   public changeLevel(level: number) {
     this.game.initLevel(level);
+    this.closeMenu();
   }
 
   public help() {
     this.game.help();
+    this.closeMenu();
   }
 }

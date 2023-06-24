@@ -6,6 +6,10 @@
   white-space: pre;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 square {
   display: flex;
   justify-content: center;

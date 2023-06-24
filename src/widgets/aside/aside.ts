@@ -1,5 +1,4 @@
 import { gameLevels } from '../../shared/data/gameLevels';
-import { Burger } from '../../features/burger/Burger';
 import { ElemController } from '../../shared/utils/elemController';
 import './aside.scss';
 import { Button } from '../../shared/elements/Button';
@@ -7,7 +6,6 @@ import { Button } from '../../shared/elements/Button';
 export class Aside extends ElemController {
   private classes: Record<string, string>;
   private texts: Record<string, string>;
-  private burger: Burger;
   private levelsElem: HTMLElement | null;
   private helpButton: Button;
   private onLevelClick: (level: number) => void;
@@ -16,13 +14,13 @@ export class Aside extends ElemController {
   constructor(onLevelClick: (level: number) => void, onHelpClick: () => void) {
     super();
 
-    this.burger = new Burger();
     this.helpButton = new Button();
 
     this.classes = {
       completed: 'competed',
-      incompleted: 'incomplited',
+      incompleted: 'incompleted',
       baseClass: 'aside',
+      title: 'aside__title',
       levels: 'aside__levels',
       level: 'aside__level',
     };
@@ -47,7 +45,7 @@ export class Aside extends ElemController {
     this.elem = this.createElem(
       'div',
       [this.classes.baseClass],
-      [this.texts.title, this.levelsElem, this.helpButton.getElem(), this.burger.getElem()]
+      [this.createTitle(), this.levelsElem, this.helpButton.getElem()]
     );
   }
 
@@ -72,5 +70,10 @@ export class Aside extends ElemController {
   private createLevels() {
     const levels = gameLevels.map((_level, index) => this.createLevelStr(index, false));
     this.levelsElem = this.createElem('div', [this.classes.levels], [...levels]);
+  }
+
+  private createTitle() {
+    const title = this.createElem('h3', [this.classes.title], [this.texts.title]);
+    return title;
   }
 }
