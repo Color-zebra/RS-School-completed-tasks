@@ -18,6 +18,7 @@ export class Game extends ElemController {
   private elemStrMap: Map<HTMLElement, HTMLElement>;
   private rightElements: NodeList | null;
   private answers: string[];
+  private currLevel: number;
 
   constructor() {
     super();
@@ -30,6 +31,7 @@ export class Game extends ElemController {
     };
     this.levels = gameLevels;
     this.answers = rightAnswers;
+    this.currLevel = 0;
     this.rightElements = null;
     this.strElemMap = new Map();
     this.elemStrMap = new Map();
@@ -45,7 +47,7 @@ export class Game extends ElemController {
       [this.table.getElem(), this.cssEditor.getElem(), this.htmlViewer.getElem()]
     );
 
-    this.initLevel(1);
+    this.initLevel(0);
   }
 
   private hydrate() {
@@ -74,6 +76,7 @@ export class Game extends ElemController {
 
   public initLevel(levelNumber: number) {
     const level = gameLevels[levelNumber];
+    this.currLevel = levelNumber;
     this.table.initLevel(level);
     this.htmlViewer.initLevel(level);
 
@@ -97,12 +100,26 @@ export class Game extends ElemController {
     if (this.rightElements) {
       for (let i = 0; i < this.rightElements.length; i += 1) {
         if (this.rightElements[i] !== choosenElements[i]) {
-          console.log('Wrong!');
+          this.handleWrongAnswer();
           return;
         }
       }
-      console.log('Right!');
+      this.handleRightAnswer();
       return;
     }
+  }
+
+  private handleRightAnswer() {
+    const nextLevel = this.currLevel + 1;
+    if (this.levels[nextLevel]) {
+      console.log('Right!');
+      this.initLevel(nextLevel);
+    } else {
+      alert('You finish the GAME!');
+    }
+  }
+
+  private handleWrongAnswer() {
+    console.log('Wrong!');
   }
 }
