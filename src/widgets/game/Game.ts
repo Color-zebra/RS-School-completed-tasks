@@ -79,6 +79,7 @@ export class Game extends ElemController {
     this.currLevel = levelNumber;
     this.table.initLevel(level);
     this.htmlViewer.initLevel(level);
+    this.cssEditor.clearInput();
 
     const gameElements = this.table.getGameElements();
     const gameStrings = this.htmlViewer.getGameStrings();
@@ -95,7 +96,10 @@ export class Game extends ElemController {
     this.rightElements = this.table.getElem().querySelectorAll(this.answers[level]);
   }
 
-  public checkAnswer(ans: string) {
+  public checkAnswer() {
+    const ans = this.cssEditor.getAnswer();
+    if (!ans) return;
+
     const choosenElements = this.table.getElem().querySelectorAll(ans);
     if (this.rightElements) {
       for (let i = 0; i < this.rightElements.length; i += 1) {
@@ -107,6 +111,10 @@ export class Game extends ElemController {
       this.handleRightAnswer();
       return;
     }
+  }
+
+  public help() {
+    this.cssEditor.giveAnswer(this.currLevel, this.checkAnswer.bind(this));
   }
 
   private handleRightAnswer() {
