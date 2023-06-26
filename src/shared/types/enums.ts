@@ -1,5 +1,5 @@
-export enum levelState {
-  'incompleted',
-  'completed',
-  'helped',
+export enum levelStateValues {
+  incompleted = 'incompleted',
+  completed = 'completed',
+  helped = 'helped',
 }

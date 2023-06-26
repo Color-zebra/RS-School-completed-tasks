@@ -3,7 +3,8 @@ import { HTMLViewer } from '../../features/HTMLViewer/HTMLViewer';
 import { Table } from '../../features/table/Table';
 import { gameLevels } from '../../shared/data/gameLevels';
 import { rightAnswers } from '../../shared/data/rightAnswers';
-import { levels } from '../../shared/types/types';
+import { StorageAPI } from '../../shared/storage/StorageAPI';
+import { gameState, levels } from '../../shared/types/types';
 import { ElemController } from '../../shared/utils/elemController';
 import './game.scss';
 
@@ -13,28 +14,37 @@ export class Game extends ElemController {
   private table: Table;
   private cssEditor: CSSEditor;
   private htmlViewer: HTMLViewer;
-  private levels: levels;
+  private storageAPI: StorageAPI;
+
   private strElemMap: Map<HTMLElement, HTMLElement>;
   private elemStrMap: Map<HTMLElement, HTMLElement>;
+
+  private levels: levels;
   private rightElements: NodeList | null;
   private answers: string[];
   private currLevel: number;
+  private gameState: gameState;
 
   constructor() {
     super();
 
-    this.table = new Table();
-    this.cssEditor = new CSSEditor(this.checkAnswer.bind(this));
-    this.htmlViewer = new HTMLViewer();
     this.classes = {
       baseClass: 'game',
     };
+
+    this.table = new Table();
+    this.cssEditor = new CSSEditor(this.checkAnswer.bind(this));
+    this.htmlViewer = new HTMLViewer();
+    this.storageAPI = new StorageAPI();
+
+    this.strElemMap = new Map();
+    this.elemStrMap = new Map();
+
     this.levels = gameLevels;
     this.answers = rightAnswers;
     this.currLevel = 0;
     this.rightElements = null;
-    this.strElemMap = new Map();
-    this.elemStrMap = new Map();
+    this.gameState = this.storageAPI.loadGameState();
 
     this.init();
     this.hydrate();
