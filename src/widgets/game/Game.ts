@@ -25,7 +25,7 @@ export class Game extends ElemController {
   private currLevel: number;
   private gameState: gameState;
 
-  constructor() {
+  constructor(level: number) {
     super();
 
     this.classes = {
@@ -42,7 +42,7 @@ export class Game extends ElemController {
 
     this.levels = gameLevels;
     this.answers = rightAnswers;
-    this.currLevel = 0;
+    this.currLevel = level;
     this.rightElements = null;
     this.gameState = this.storageAPI.loadGameState();
 
@@ -57,7 +57,7 @@ export class Game extends ElemController {
       [this.table.getElem(), this.cssEditor.getElem(), this.htmlViewer.getElem()]
     );
 
-    this.initLevel(0);
+    this.initLevel(this.currLevel);
   }
 
   private hydrate() {

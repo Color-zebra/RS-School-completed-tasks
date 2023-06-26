@@ -16,6 +16,5 @@ export class Button extends ElemController {
   protected init() {
     this.elem = this.createElem('button', [this.classes.baseClass], ['Help me!']);
     this.elem.setAttribute('type', 'button');
-    console.log(this.elem);
   }
 }
