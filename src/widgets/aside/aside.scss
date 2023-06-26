@@ -54,6 +54,14 @@
   background-image: url('../../shared/assets/img/cross.png');
 }
 
+.helped {
+  background-image: url('../../shared/assets/img/ask.png');
+}
+
+.current {
+  border: 2px solid var(--color-text);
+}
+
 @media (width < 767.7px) {
   .aside {
     right: -100vw;
