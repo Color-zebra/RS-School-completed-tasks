@@ -3,9 +3,11 @@ import './button.scss';
 
 export class Button extends ElemController {
   private classes: Record<string, string>;
+  private text: string;
 
-  constructor() {
+  constructor(text: string) {
     super();
+    this.text = text;
     this.classes = {
       baseClass: 'btn',
     };
@@ -14,7 +16,12 @@ export class Button extends ElemController {
   }
 
   protected init() {
-    this.elem = this.createElem('button', [this.classes.baseClass], ['Help me!']);
+    this.elem = this.createElem('button', [this.classes.baseClass], []);
     this.elem.setAttribute('type', 'button');
+    this.setText(this.text);
+  }
+
+  private setText(text: string) {
+    this.elem?.append(text);
   }
 }

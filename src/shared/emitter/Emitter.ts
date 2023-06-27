@@ -23,7 +23,7 @@ export class EventEmitter {
     this.events[name].push(func);
   }
 
-  emit(name: string, data: gameState | number) {
+  emit(name: string, data: gameState | number | null) {
     const event = this.events[name];
     if (event) {
       event.forEach((func: emitterCallback) => {

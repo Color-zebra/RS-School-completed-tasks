@@ -5,10 +5,10 @@ export class CSSEditor extends ElemController {
   classes: Record<string, string>;
   input: HTMLInputElement | null;
   inputSpeed: number;
-  onInputCallBack: (ans: string) => void;
+  onInputCallBack: () => void;
   timeout: ReturnType<typeof setInterval> | null;
 
-  constructor(onInputCallBack: (ans: string) => void) {
+  constructor(onInputCallBack: () => void) {
     super();
 
     this.classes = {
@@ -27,7 +27,7 @@ export class CSSEditor extends ElemController {
     this.input = this.createElem('input', [], []) as HTMLInputElement;
     this.input.addEventListener('keydown', (e) => {
       if (e.code === 'Enter') {
-        this.input && this.onInputCallBack(this.input.value);
+        this.input && this.onInputCallBack();
       }
     });
     this.elem = this.createElem('div', [this.classes.baseClass], [this.input]);

@@ -46,10 +46,28 @@ export class MainPage extends ElemController {
     );
 
     this.emitter.subscribe('level-change', (level) => {
-      console.log('Emit!');
-      if (typeof level !== 'number') return;
-      this.aside.updateChoosenLevel(level);
-      this.storageAPI.setCurrLevel(level);
+      if (typeof level === 'number') {
+        this.aside.setChoosenLevel(level);
+        this.storageAPI.setCurrLevel(level);
+      }
+      this.aside.updateAside();
+    });
+
+    this.emitter.subscribe('state-change', (gameState) => {
+      if (gameState && typeof gameState !== 'number') {
+        this.storageAPI.setCurrGameState(gameState);
+        this.aside.setGameState(gameState);
+      }
+      this.aside.updateAside();
+    });
+
+    this.emitter.subscribe('reset-game', () => {
+      console.log('reset');
+      const emptyState = this.storageAPI.reset();
+      this.aside.setGameState(emptyState);
+      this.aside.setChoosenLevel(0);
+      this.aside.updateAside();
+      this.changeLevel(0);
     });
   }
 

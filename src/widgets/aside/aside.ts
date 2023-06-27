@@ -4,6 +4,7 @@ import './aside.scss';
 import { Button } from '../../shared/elements/Button';
 import { gameState, levelState } from '../../shared/types/types';
 import { levelStateValues } from '../../shared/types/enums';
+import { EventEmitter } from '../../shared/emitter/Emitter';
 
 export class Aside extends ElemController {
   private classes: Record<string, string>;
@@ -11,8 +12,11 @@ export class Aside extends ElemController {
   private levelsElem: HTMLElement | null;
   private levelElems: HTMLElement[] | null;
   private helpButton: Button;
+  private resetButton: Button;
   private onLevelClick: (level: number) => void;
   private onHelpClick: () => void;
+
+  private emitter: EventEmitter;
 
   private currLevel: number;
   private gameState: gameState;
@@ -20,10 +24,11 @@ export class Aside extends ElemController {
   constructor(currLevel: number, gameState: gameState, onLevelClick: (level: number) => void, onHelpClick: () => void) {
     super();
 
-    this.helpButton = new Button();
+    this.helpButton = new Button('Help me!');
+    this.resetButton = new Button('Reset game');
 
     this.classes = {
-      completed: 'competed',
+      completed: 'completed',
       incompleted: 'incompleted',
       helped: 'helped',
       baseClass: 'aside',
@@ -35,6 +40,8 @@ export class Aside extends ElemController {
     this.texts = {
       title: 'Levels',
     };
+
+    this.emitter = new EventEmitter();
 
     this.currLevel = currLevel;
     this.gameState = gameState;
@@ -57,17 +64,24 @@ export class Aside extends ElemController {
     this.elem = this.createElem(
       'div',
       [this.classes.baseClass],
-      [this.createTitle(), this.levelsElem, this.helpButton.getElem()]
+      [this.createTitle(), this.levelsElem, this.helpButton.getElem(), this.resetButton.getElem()]
     );
   }
 
-  updateChoosenLevel(level: number) {
-    this.currLevel = level;
+  updateAside() {
     this.levelElems?.forEach((item, index) => {
-      item.classList.remove(this.classes.choosenLevel);
+      item.classList.remove(
+        this.classes.choosenLevel,
+        this.classes.completed,
+        this.classes.incompleted,
+        this.classes.helped
+      );
+
       if (index === this.currLevel) {
         item.classList.add(this.classes.choosenLevel);
       }
+
+      item.classList.add(levelStateValues[this.gameState[index]]);
     });
   }
 
@@ -82,19 +96,22 @@ export class Aside extends ElemController {
     });
 
     this.helpButton.getElem().addEventListener('click', this.onHelpClick);
+    this.resetButton.getElem().addEventListener('click', () => {
+      console.log(this);
+      this.emitter.emit('reset-game', null);
+    });
   }
 
-  private createLevelStr(number: number, isComplete: boolean): HTMLElement {
-    const className: string = isComplete ? this.classes.completed : this.classes.incompleted;
-    return this.createElem('div', [className, this.classes.level], [`${number}`]);
+  private createLevelStr(number: number): HTMLElement {
+    return this.createElem('div', [this.classes.level], [`${number}`]);
   }
 
   private createLevels() {
-    const levels = gameLevels.map((_level, index) => this.createLevelStr(index, false));
+    const levels = gameLevels.map((_level, index) => this.createLevelStr(index));
     this.gameState.forEach((levelState: levelState, index) => {
       switch (levelState) {
         case levelStateValues.completed:
-          levels[index].classList.add(this.classes.competed);
+          levels[index].classList.add(this.classes.completed);
           break;
         case levelStateValues.incompleted:
           levels[index].classList.add(this.classes.incompleted);
@@ -116,5 +133,17 @@ export class Aside extends ElemController {
 
   public getChoosenLevel() {
     return this.currLevel;
+  }
+
+  public setChoosenLevel(level: number) {
+    this.currLevel = level;
+  }
+
+  public getGameState() {
+    return this.gameState;
+  }
+
+  public setGameState(gameState: gameState) {
+    this.gameState = gameState;
   }
 }

@@ -27,6 +27,13 @@ export class StorageAPI {
     }
   }
 
+  private init() {
+    window.addEventListener('beforeunload', () => {
+      this.saveCurrLevel(this.choosenLevel);
+      this.saveGameState(this.gameState);
+    });
+  }
+
   private saveGameState(gameState: gameState) {
     const string = JSON.stringify(gameState);
     localStorage.setItem(this.fields.gameState, string);
@@ -37,11 +44,11 @@ export class StorageAPI {
     localStorage.setItem(this.fields.gameLevel, string);
   }
 
-  setCurrLevel(level: number) {
+  public setCurrLevel(level: number) {
     this.choosenLevel = level;
   }
 
-  setCurrGameState(gameState: gameState) {
+  public setCurrGameState(gameState: gameState) {
     this.gameState = gameState;
   }
 
@@ -57,12 +64,9 @@ export class StorageAPI {
     return JSON.parse(string);
   }
 
-  private init() {
-    window.addEventListener('beforeunload', () => {
-      console.log(this.choosenLevel, this.gameState);
-      alert('ЪУЪ!');
-      this.saveCurrLevel(this.choosenLevel);
-      this.saveGameState(this.gameState);
-    });
+  public reset() {
+    this.choosenLevel = 0;
+    this.gameState = this.emptyGame;
+    return this.emptyGame;
   }
 }

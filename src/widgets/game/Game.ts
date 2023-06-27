@@ -3,7 +3,9 @@ import { HTMLViewer } from '../../features/HTMLViewer/HTMLViewer';
 import { Table } from '../../features/table/Table';
 import { gameLevels } from '../../shared/data/gameLevels';
 import { rightAnswers } from '../../shared/data/rightAnswers';
+import { EventEmitter } from '../../shared/emitter/Emitter';
 import { StorageAPI } from '../../shared/storage/StorageAPI';
+import { levelStateValues } from '../../shared/types/enums';
 import { gameState, levels } from '../../shared/types/types';
 import { ElemController } from '../../shared/utils/elemController';
 import './game.scss';
@@ -15,6 +17,7 @@ export class Game extends ElemController {
   private cssEditor: CSSEditor;
   private htmlViewer: HTMLViewer;
   private storageAPI: StorageAPI;
+  private emitter: EventEmitter;
 
   private strElemMap: Map<HTMLElement, HTMLElement>;
   private elemStrMap: Map<HTMLElement, HTMLElement>;
@@ -36,6 +39,7 @@ export class Game extends ElemController {
     this.cssEditor = new CSSEditor(this.checkAnswer.bind(this));
     this.htmlViewer = new HTMLViewer();
     this.storageAPI = new StorageAPI();
+    this.emitter = new EventEmitter();
 
     this.strElemMap = new Map();
     this.elemStrMap = new Map();
@@ -58,6 +62,7 @@ export class Game extends ElemController {
     );
 
     this.initLevel(this.currLevel);
+    console.log(this.gameState);
   }
 
   private hydrate() {
@@ -106,7 +111,7 @@ export class Game extends ElemController {
     this.rightElements = this.table.getElem().querySelectorAll(this.answers[level]);
   }
 
-  public checkAnswer() {
+  public checkAnswer(withHelp = false) {
     const ans = this.cssEditor.getAnswer();
     if (!ans) return;
 
@@ -118,16 +123,18 @@ export class Game extends ElemController {
           return;
         }
       }
-      this.handleRightAnswer();
+      this.handleRightAnswer(withHelp);
       return;
     }
   }
 
   public help() {
-    this.cssEditor.giveAnswer(this.currLevel, this.checkAnswer.bind(this));
+    this.cssEditor.giveAnswer(this.currLevel, this.checkAnswer.bind(this, true));
   }
 
-  private handleRightAnswer() {
+  private handleRightAnswer(withHelp: boolean) {
+    this.gameState[this.currLevel] = withHelp ? levelStateValues.helped : levelStateValues.completed;
+    this.storageAPI.setCurrGameState(this.gameState);
     const nextLevel = this.currLevel + 1;
     if (this.levels[nextLevel]) {
       console.log('Right!');
@@ -135,6 +142,9 @@ export class Game extends ElemController {
     } else {
       alert('You finish the GAME!');
     }
+
+    console.log(this.gameState);
+    this.emitter.emit('state-change', this.gameState);
   }
 
   private handleWrongAnswer() {
