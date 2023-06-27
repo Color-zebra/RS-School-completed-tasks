@@ -3,6 +3,7 @@ import { gameLevel, levels } from '../types/types';
 const first: gameLevel = [
   {
     tag: 'circle',
+    className: ['big-red-circle'],
     children: [
       {
         tag: 'circle',
@@ -12,6 +13,8 @@ const first: gameLevel = [
   },
   {
     tag: 'square',
+    className: ['some-class'],
+    id: 'some-id',
     children: null,
   },
   {

@@ -4,6 +4,19 @@
 
 .html-code {
   white-space: pre;
+  cursor: default;
+}
+
+.html-tag {
+  color: mediumblue;
+}
+
+.html-attr {
+  color: deepskyblue;
+}
+
+.html-value {
+  color: chocolate;
 }
 
 body {
