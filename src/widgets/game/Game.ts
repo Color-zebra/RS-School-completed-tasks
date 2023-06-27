@@ -26,7 +26,7 @@ export class Game extends ElemController {
   private rightElements: NodeList | null;
   private answers: string[];
   private currLevel: number;
-  private gameState: gameState;
+  public gameState: gameState;
 
   constructor(level: number) {
     super();
@@ -138,16 +138,22 @@ export class Game extends ElemController {
     const nextLevel = this.currLevel + 1;
     if (this.levels[nextLevel]) {
       console.log('Right!');
+      this.currLevel = nextLevel;
       this.initLevel(nextLevel);
     } else {
       alert('You finish the GAME!');
     }
 
-    console.log(this.gameState);
+    console.log(this);
     this.emitter.emit('state-change', this.gameState);
+    this.emitter.emit('level-change', this.currLevel);
   }
 
   private handleWrongAnswer() {
     console.log('Wrong!');
+  }
+
+  public setGameState(gameState: gameState) {
+    this.gameState = gameState;
   }
 }

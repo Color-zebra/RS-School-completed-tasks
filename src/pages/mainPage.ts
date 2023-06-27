@@ -62,12 +62,13 @@ export class MainPage extends ElemController {
     });
 
     this.emitter.subscribe('reset-game', () => {
-      console.log('reset');
       const emptyState = this.storageAPI.reset();
       this.aside.setGameState(emptyState);
+      this.game.setGameState(emptyState);
       this.aside.setChoosenLevel(0);
       this.aside.updateAside();
       this.changeLevel(0);
+      console.log(this.game.gameState);
     });
   }
 
