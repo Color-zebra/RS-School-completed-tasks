@@ -78,13 +78,23 @@ export class Game extends ElemController {
     });
 
     this.htmlViewer.getElem().addEventListener('mouseover', (e) => {
-      if (e.target !== this.htmlViewer.getElem()) {
-        (e.target as HTMLElement).classList.add('light');
-        this.strElemMap.get(e.target as HTMLElement)?.classList.add('light');
+      const currTag = (e.target as HTMLElement).closest('.html-code');
+      const relatedTag = (e.relatedTarget as HTMLElement)?.closest('.html-code');
+
+      if (e.target === this.htmlViewer.getElem() && relatedTag) {
+        (relatedTag as HTMLElement).classList.remove('light');
+        this.strElemMap.get(relatedTag as HTMLElement)?.classList.remove('light');
+        return;
       }
-      if (e.relatedTarget) {
-        (e.relatedTarget as HTMLElement).classList.remove('light');
-        this.strElemMap.get(e.relatedTarget as HTMLElement)?.classList.remove('light');
+
+      if (currTag) {
+        (currTag as HTMLElement).classList.add('light');
+        this.strElemMap.get(currTag as HTMLElement)?.classList.add('light');
+      }
+
+      if (relatedTag && relatedTag !== currTag) {
+        (relatedTag as HTMLElement).classList.remove('light');
+        this.strElemMap.get(relatedTag as HTMLElement)?.classList.remove('light');
       }
     });
   }
