@@ -1,9 +1,13 @@
 import { rightAnswers } from '../../shared/data/rightAnswers';
+import { Button } from '../../shared/elements/Button';
 import { ElemController } from '../../shared/utils/elemController';
+
+import './csseditor.scss';
 
 export class CSSEditor extends ElemController {
   classes: Record<string, string>;
   input: HTMLInputElement | null;
+  enterButton: Button;
   inputSpeed: number;
   onInputCallBack: () => void;
   timeout: ReturnType<typeof setInterval> | null;
@@ -12,11 +16,15 @@ export class CSSEditor extends ElemController {
     super();
 
     this.classes = {
-      baseClass: 'game__editor',
+      baseClass: 'editor',
+      mainClass: 'game__editor',
+      inputClass: 'editor__input',
+      buttonClass: 'editor__button',
     };
     this.inputSpeed = 200;
     this.input = null;
     this.timeout = null;
+    this.enterButton = new Button('enter', this.classes.buttonClass);
 
     this.onInputCallBack = onInputCallBack;
 
@@ -24,13 +32,18 @@ export class CSSEditor extends ElemController {
   }
 
   protected init() {
-    this.input = this.createElem('input', [], []) as HTMLInputElement;
+    this.input = this.createElem('input', [this.classes.inputClass], []) as HTMLInputElement;
+    this.input.setAttribute('placeholder', 'Type your selector here');
     this.input.addEventListener('keydown', (e) => {
       if (e.code === 'Enter') {
         this.input && this.onInputCallBack();
       }
     });
-    this.elem = this.createElem('div', [this.classes.baseClass], [this.input]);
+    this.elem = this.createElem(
+      'div',
+      [this.classes.mainClass, this.classes.baseClass],
+      [this.input, this.enterButton.getElem()]
+    );
   }
 
   public getAnswer() {
