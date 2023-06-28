@@ -18,3 +18,23 @@
     border: 5px solid black;
   }
 }
+
+@media (width < 992px) {
+  .game {
+  
+    &__table {
+      flex: 0 0 100%;
+      border: 5px solid black;
+    }
+  
+    &__editor {
+      flex: 0 0 100%;
+      border: 5px solid black;
+    }
+  
+    &__viewer {
+      flex: 0 0 100%;
+      border: 5px solid black;
+    }
+  }
+}

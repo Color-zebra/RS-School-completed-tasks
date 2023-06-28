@@ -2,6 +2,8 @@ import { GameTag } from '../../shared/types/interfaces';
 import { appendArg, gameLevel } from '../../shared/types/types';
 import { ElemController } from '../../shared/utils/elemController';
 
+import './HTMLViewer.scss';
+
 export class HTMLViewer extends ElemController {
   classes: Record<string, string>;
   private gameStrings: HTMLElement[];
@@ -10,7 +12,8 @@ export class HTMLViewer extends ElemController {
   constructor() {
     super();
     this.classes = {
-      baseClass: 'game__viewer',
+      baseClass: 'viewer',
+      mainClass: 'game__viewer',
       codeString: 'html-code',
       codeTag: 'html-tag',
       codeAttr: 'html-attr',
@@ -23,7 +26,7 @@ export class HTMLViewer extends ElemController {
   }
 
   init() {
-    this.elem = this.createElem('div', [this.classes.baseClass], ["I'm HTML code viewer"]);
+    this.elem = this.createElem('div', [this.classes.mainClass, this.classes.baseClass], ["I'm HTML code viewer"]);
   }
 
   public initLevel(level: gameLevel) {
