@@ -347,3 +347,8 @@ template {
 [hidden] {
   display: none;
 }
+
+a, a:visited {
+  color: inherit;
+  text-decoration: none;
+}

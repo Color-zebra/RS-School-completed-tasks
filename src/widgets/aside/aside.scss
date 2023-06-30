@@ -13,6 +13,9 @@
   overflow-y: auto;
   transition: all .3s ease;
 
+  border-left: 0.1rem solid var(--color-text);
+  box-shadow: -0.2rem 0 0.5rem var(--color-text);
+
   &__title {
     text-align: center;
     font-family: monospace;

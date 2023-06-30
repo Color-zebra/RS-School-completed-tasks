@@ -39,6 +39,11 @@ export class CSSEditor extends ElemController {
         this.input && this.onInputCallBack();
       }
     });
+
+    this.enterButton.getElem().addEventListener('click', () => {
+      this.onInputCallBack();
+    });
+
     this.elem = this.createElem(
       'div',
       [this.classes.mainClass, this.classes.baseClass],

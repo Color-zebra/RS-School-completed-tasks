@@ -1,0 +1,21 @@
+.footer {
+  height: 80px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: var(--color-bg);
+  border-top: 0.1rem solid var(--color-text);
+
+  &__link {
+
+  }
+
+  &__year {
+    
+  }
+
+  &__course {
+    width: 100px;
+    height: 40px;
+  }
+}
