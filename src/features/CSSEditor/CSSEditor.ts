@@ -7,6 +7,7 @@ import './csseditor.scss';
 export class CSSEditor extends ElemController {
   classes: Record<string, string>;
   input: HTMLInputElement | null;
+  label: HTMLElement | null;
   enterButton: Button;
   inputSpeed: number;
   onInputCallBack: () => void;
@@ -18,11 +19,17 @@ export class CSSEditor extends ElemController {
     this.classes = {
       baseClass: 'editor',
       mainClass: 'game__editor',
+      inputContainerClass: 'editor__input-container',
+      inputLabel: 'editor__label',
       inputClass: 'editor__input',
       buttonClass: 'editor__button',
+      codeOperator: 'code-operator',
+      codeClass: 'code-class',
+      codeId: 'code-id',
     };
     this.inputSpeed = 200;
     this.input = null;
+    this.label = null;
     this.timeout = null;
     this.enterButton = new Button('enter', this.classes.buttonClass);
 
@@ -32,6 +39,7 @@ export class CSSEditor extends ElemController {
   }
 
   protected init() {
+    console.log(this.transformInput('.class.another #some-id'));
     this.input = this.createElem('input', [this.classes.inputClass], []) as HTMLInputElement;
     this.input.setAttribute('placeholder', 'Type your selector here');
     this.input.addEventListener('keydown', (e) => {
@@ -39,15 +47,26 @@ export class CSSEditor extends ElemController {
         this.input && this.onInputCallBack();
       }
     });
+    this.input.addEventListener('input', (e) => {
+      if (!this.input || !this.label) return;
+      this.label.innerHTML = this.transformInput(this.input.value);
+      const scrollLeft = this.input.scrollLeft + 10;
+      if (scrollLeft) this.label.scrollLeft = scrollLeft;
+      console.log(this.label.innerHTML);
+    });
 
     this.enterButton.getElem().addEventListener('click', () => {
       this.onInputCallBack();
     });
 
+    this.label = this.createElem('span', [this.classes.inputLabel], []);
+
+    const inputContainer = this.createElem('div', [this.classes.inputContainerClass], [this.input, this.label]);
+
     this.elem = this.createElem(
       'div',
       [this.classes.mainClass, this.classes.baseClass],
-      [this.input, this.enterButton.getElem()]
+      [inputContainer, this.enterButton.getElem()]
     );
   }
 
@@ -85,5 +104,38 @@ export class CSSEditor extends ElemController {
     if (this.timeout) {
       clearInterval(this.timeout);
     }
+  }
+
+  transformInput(str: string) {
+    const deviders = ' #.,+>~';
+    const operators = '+>~';
+
+    let res = '';
+    const stack = [];
+    for (let i = 0; i < str.length; i++) {
+      if (deviders.includes(str[i]) && stack.length !== 0) {
+        console.log('close');
+        res += '</span>';
+        stack.pop();
+      }
+
+      if (operators.includes(str[i])) {
+        res += '<span class="code-operator">' + str[i] + '</span>';
+        continue;
+      }
+      if (str[i] === '.') {
+        res += '<span class="code-class">';
+        stack.push('*');
+      }
+      if (str[i] === '#') {
+        res += '<span class="code-id">';
+        stack.push('*');
+      }
+      res += str[i];
+    }
+
+    if (stack.length !== 0) res += '</span>';
+
+    return res;
   }
 }
