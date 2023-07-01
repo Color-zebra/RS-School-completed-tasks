@@ -1,1 +1,1 @@
-export const rightAnswers: string[] = ['circle', 'rhombus > square'];
+export const rightAnswers: string[] = ['square', 'rhombus > square'];

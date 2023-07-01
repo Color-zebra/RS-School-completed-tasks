@@ -119,6 +119,9 @@ export class Game extends ElemController {
 
   private getRightElements(level: number) {
     this.rightElements = this.table.getElem().querySelectorAll(this.answers[level]);
+    this.rightElements.forEach((elem) => {
+      if (elem) (elem as HTMLElement).classList.add('choose-me');
+    });
   }
 
   public checkAnswer(withHelp = false) {
