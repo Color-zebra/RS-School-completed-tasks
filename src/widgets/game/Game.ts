@@ -62,7 +62,6 @@ export class Game extends ElemController {
     );
 
     this.initLevel(this.currLevel);
-    console.log(this.gameState);
   }
 
   private hydrate() {
@@ -129,7 +128,6 @@ export class Game extends ElemController {
     if (!ans) return;
 
     const choosenElements = this.table.getElem().querySelectorAll(ans);
-    console.log(choosenElements);
 
     if (!this.rightElements) return;
     if (this.rightElements.length !== choosenElements.length) {
@@ -167,14 +165,12 @@ export class Game extends ElemController {
     this.storageAPI.setCurrGameState(this.gameState);
     const nextLevel = this.currLevel + 1;
     if (this.levels[nextLevel]) {
-      console.log('Right!');
       this.currLevel = nextLevel;
       this.initLevel(nextLevel);
     } else {
       alert('You finish the GAME!');
     }
 
-    console.log(this);
     this.emitter.emit('state-change', this.gameState);
     this.emitter.emit('level-change', this.currLevel);
   }

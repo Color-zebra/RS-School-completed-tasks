@@ -37,7 +37,7 @@ export class HTMLViewer extends ElemController {
     });
   }
 
-  getGameStrings() {
+  public getGameStrings() {
     return this.gameStrings;
   }
 

@@ -95,7 +95,7 @@ export class CSSEditor extends ElemController {
     }, speed);
   }
 
-  clearInput() {
+  public clearInput() {
     if (this.input && this.label) {
       this.input.value = '';
       this.label.innerHTML = '';
@@ -105,7 +105,7 @@ export class CSSEditor extends ElemController {
     }
   }
 
-  transformInput(str: string) {
+  public transformInput(str: string) {
     const deviders = ' #.,+>~';
     const operators = '+>~';
 
@@ -113,7 +113,6 @@ export class CSSEditor extends ElemController {
     const stack = [];
     for (let i = 0; i < str.length; i++) {
       if (deviders.includes(str[i]) && stack.length !== 0) {
-        console.log('close');
         res += '</span>';
         stack.pop();
       }
