@@ -129,28 +129,33 @@ export class Game extends ElemController {
     if (!ans) return;
 
     const choosenElements = this.table.getElem().querySelectorAll(ans);
-    if (this.rightElements) {
-      for (let i = 0; i < this.rightElements.length; i += 1) {
-        if (this.rightElements[i] !== choosenElements[i]) {
-          this.handleWrongAnswer();
-          return;
-        }
-      }
-      this.rightElements.forEach((elem) => {
-        if (elem) {
-          (elem as HTMLElement).classList.remove('choose-me');
-          (elem as HTMLElement).classList.add('right');
-        }
-      });
-      this.rightElements[0].addEventListener(
-        'animationend',
-        () => {
-          this.handleRightAnswer(withHelp);
-        },
-        { once: true }
-      );
+    console.log(choosenElements);
+
+    if (!this.rightElements) return;
+    if (this.rightElements.length !== choosenElements.length) {
+      this.handleWrongAnswer(choosenElements);
       return;
     }
+    for (let i = 0; i < this.rightElements.length; i += 1) {
+      if (this.rightElements[i] !== choosenElements[i]) {
+        this.handleWrongAnswer(choosenElements);
+        return;
+      }
+    }
+    this.rightElements.forEach((elem) => {
+      if (elem) {
+        (elem as HTMLElement).classList.remove('choose-me');
+        (elem as HTMLElement).classList.add('right');
+      }
+    });
+    this.rightElements[0].addEventListener(
+      'animationend',
+      () => {
+        this.handleRightAnswer(withHelp);
+      },
+      { once: true }
+    );
+    return;
   }
 
   public help() {
@@ -174,8 +179,19 @@ export class Game extends ElemController {
     this.emitter.emit('level-change', this.currLevel);
   }
 
-  private handleWrongAnswer() {
-    console.log('Wrong!');
+  private handleWrongAnswer(choosenElements: NodeListOf<Element>) {
+    choosenElements.forEach((elem) => {
+      if (elem) {
+        (elem as HTMLElement).classList.add('wrong');
+      }
+    });
+    choosenElements[0].addEventListener('animationend', () => {
+      choosenElements.forEach((elem) => {
+        if (elem) {
+          (elem as HTMLElement).classList.remove('wrong');
+        }
+      });
+    });
   }
 
   public setGameState(gameState: gameState) {

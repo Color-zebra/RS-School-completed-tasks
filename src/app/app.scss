@@ -175,6 +175,10 @@ circle.light::before {
   animation: right .5s ease-in-out;
 }
 
+.wrong {
+  animation: wrong .5s ease-in-out;
+}
+
 @keyframes choose {
   0% {
     transform: translate(-0.1rem, 0.1rem);
@@ -208,5 +212,23 @@ circle.light::before {
   }
   100% {
     transform: scale(0);
+  }
+}
+
+@keyframes wrong {
+  0% {
+    box-shadow: 0 0 0.1rem red;
+  }
+  25% {
+    box-shadow: 0 0 0.5rem red, 0 0 0.5rem red, 0 0 0.5rem red;
+  }
+  50% {
+    box-shadow: 0 0 1rem red, 0 0 1rem red, 0 0 1rem red, 0 0 1rem red, 0 0 1rem red;
+  }
+  75% {
+    box-shadow: 0 0 0.5rem red, 0 0 0.5rem red, 0 0 0.5rem red;
+  }
+  100% {
+    box-shadow: 0 0 0.1rem red;
   }
 }
