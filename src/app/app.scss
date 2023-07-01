@@ -12,6 +12,8 @@ square {
   align-items: center;
   flex-direction: column;
 
+  position: relative;
+
   background-color: yellow;
   border: 1px solid black;
   box-shadow: 0 5px 5px black;
@@ -46,6 +48,8 @@ circle {
   align-items: center;
   flex-direction: column;
 
+  position: relative;
+
   background-color: green;
   border: 1px solid black;
   box-shadow: 0 5px 5px black;
@@ -79,6 +83,8 @@ rhombus {
   align-items: center;
   flex-direction: column;
 
+  position: relative;
+
   background-color: red;
   border: 1px solid black;
   box-shadow: 5px 5px 5px black;
@@ -108,6 +114,55 @@ rhombus *:nth-child(3) {
   z-index: 1;
 }
 
-.light {
-  outline: 2px solid silver;
+square.light::before {
+  content: '/square';
+  width: 4rem;
+  height: 1.5rem;
+  position: absolute;
+  top: -2rem;
+  left: 0;
+  z-index: 5;
+
+  background-color: var(--color-bg);
+  border: 0.1rem solid black;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+rhombus.light::before {
+  content: '/rhombus';
+  width: 4rem;
+  height: 1.5rem;
+  position: absolute;
+  top: -4rem;
+  left: 0;
+  z-index: 5;
+
+  background-color: var(--color-bg);
+  border: 0.1rem solid black;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transform: rotate(-45deg) scale(1.3);
+}
+
+circle.light::before {
+  content: '/square';
+  width: 4rem;
+  height: 1.5rem;
+  position: absolute;
+  top: -2rem;
+  left: 0;
+  z-index: 5;
+
+  background-color: var(--color-bg);
+  border: 0.1rem solid black;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
