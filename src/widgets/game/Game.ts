@@ -136,7 +136,19 @@ export class Game extends ElemController {
           return;
         }
       }
-      this.handleRightAnswer(withHelp);
+      this.rightElements.forEach((elem) => {
+        if (elem) {
+          (elem as HTMLElement).classList.remove('choose-me');
+          (elem as HTMLElement).classList.add('right');
+        }
+      });
+      this.rightElements[0].addEventListener(
+        'animationend',
+        () => {
+          this.handleRightAnswer(withHelp);
+        },
+        { once: true }
+      );
       return;
     }
   }

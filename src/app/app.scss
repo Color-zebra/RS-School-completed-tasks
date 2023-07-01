@@ -171,6 +171,10 @@ circle.light::before {
   animation: choose .3s ease infinite;
 }
 
+.right {
+  animation: right .5s ease-in-out;
+}
+
 @keyframes choose {
   0% {
     transform: translate(-0.1rem, 0.1rem);
@@ -186,5 +190,23 @@ circle.light::before {
   }
   100% {
     transform: translate(-0.1rem, 0.1rem);
+  }
+}
+
+@keyframes right {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(0.75);
+  }
+  50% {
+    transform: scale(0.5);
+  }
+  75% {
+    transform: scale(0.25);
+  }
+  100% {
+    transform: scale(0);
   }
 }
