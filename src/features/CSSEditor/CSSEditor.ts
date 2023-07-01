@@ -39,7 +39,6 @@ export class CSSEditor extends ElemController {
   }
 
   protected init() {
-    console.log(this.transformInput('.class.another #some-id'));
     this.input = this.createElem('input', [this.classes.inputClass], []) as HTMLInputElement;
     this.input.setAttribute('placeholder', 'Type your selector here');
     this.input.addEventListener('keydown', (e) => {
@@ -47,12 +46,11 @@ export class CSSEditor extends ElemController {
         this.input && this.onInputCallBack();
       }
     });
-    this.input.addEventListener('input', (e) => {
+    this.input.addEventListener('input', () => {
       if (!this.input || !this.label) return;
       this.label.innerHTML = this.transformInput(this.input.value);
       const scrollLeft = this.input.scrollLeft + 10;
       if (scrollLeft) this.label.scrollLeft = scrollLeft;
-      console.log(this.label.innerHTML);
     });
 
     this.enterButton.getElem().addEventListener('click', () => {
@@ -98,8 +96,9 @@ export class CSSEditor extends ElemController {
   }
 
   clearInput() {
-    if (this.input) {
+    if (this.input && this.label) {
       this.input.value = '';
+      this.label.innerHTML = '';
     }
     if (this.timeout) {
       clearInterval(this.timeout);
