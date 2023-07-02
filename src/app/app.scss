@@ -284,6 +284,10 @@ apple.light::before {
   animation: right .5s ease-in-out;
 }
 
+.right > * {
+  animation: anti-right .5s ease-in-out;
+}
+
 .wrong {
   animation: wrong .5s ease-in-out;
 }
@@ -308,19 +312,37 @@ apple.light::before {
 
 @keyframes right {
   0% {
-    transform: scale(1);
+    transform: translateY(0);
   }
   25% {
-    transform: scale(0.75);
+    transform: translateY(-25vh);
   }
   50% {
-    transform: scale(0.5);
+    transform: translateY(-50vh);
   }
   75% {
-    transform: scale(0.25);
+    transform: translateY(-75vh);
   }
   100% {
-    transform: scale(0);
+    transform: translateY(-100vh);
+  }
+}
+
+@keyframes anti-right {
+  0% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(25vh);
+  }
+  50% {
+    transform: translateY(50vh);
+  }
+  75% {
+    transform: translateY(75vh);
+  }
+  100% {
+    transform: translateY(100vh);
   }
 }
 
