@@ -4,6 +4,8 @@
   padding: 0.5rem 0.5rem 0.5rem 2rem;
 
   background-color: var(--color-bg);
+  
+  color: var(--color-text);
 
   display: flex;
   justify-content: space-between;
@@ -34,7 +36,7 @@
     font-size: 1rem;
     line-height: 1.5;
 
-    color: blue;
+    color: var(--color-text);
   }
 
   &__input {

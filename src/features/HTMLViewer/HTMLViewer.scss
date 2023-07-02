@@ -8,7 +8,7 @@
 }
 
 .html-tag {
-  color: mediumblue;
+  color: var(--color-text);
 }
 
 .html-attr {
@@ -24,6 +24,8 @@
   overflow-y: auto;
 
   padding: 0.5rem 0.5rem 0.5rem 2rem;
+
+  color: var(--color-text);
 
   background-color: var(--color-bg);
 

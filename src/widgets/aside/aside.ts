@@ -24,8 +24,8 @@ export class Aside extends ElemController {
   constructor(currLevel: number, gameState: gameState, onLevelClick: (level: number) => void, onHelpClick: () => void) {
     super();
 
-    this.helpButton = new Button('Help me!');
-    this.resetButton = new Button('Reset game');
+    this.helpButton = new Button('Help me!', 'aside__button');
+    this.resetButton = new Button('Reset game', 'aside__button');
 
     this.classes = {
       completed: 'completed',

@@ -5,6 +5,7 @@
 body {
   overflow-x: hidden;
   position: relative;
+  background-color: var(--color-body-bg);
 }
 
 bento {
@@ -29,10 +30,14 @@ bento > * {
 
 bento > orange::before {
   left: 130%;
+  color: var(--color-text);
+  transform: scale(1.5)
 }
 
 bento > apple::before {
   left: 130%;
+  color: var(--color-text);
+  transform: scale(1.5)
 }
 
 bento > *:nth-child(1) {
@@ -72,10 +77,14 @@ plate {
 
 plate > orange::before {
   left: 130%;
+  color: var(--color-text);
+  transform: scale(1.5)
 }
 
 plate > apple::before {
   left: 130%;
+  color: var(--color-text);
+  transform: scale(1.5)
 }
 
 plate > * {
@@ -114,10 +123,14 @@ napkin {
 
 napkin > orange::before {
   left: 130%;
+  color: var(--color-text);
+  transform: scale(1.5)
 }
 
 napkin > apple::before {
   left: 130%;
+  color: var(--color-text);
+  transform: scale(1.5)
 }
 
 napkin > * {
@@ -152,10 +165,14 @@ bento.light::before {
 
   background-color: var(--color-bg);
   border: 0.1rem solid black;
+  
+  color: var(--color-text);
 
   display: flex;
   justify-content: center;
   align-items: center;
+  
+  transform: scale(1.5)
 }
 
 napkin.light::before {
@@ -169,10 +186,14 @@ napkin.light::before {
 
   background-color: var(--color-bg);
   border: 0.1rem solid black;
+  
+  color: var(--color-text);
 
   display: flex;
   justify-content: center;
   align-items: center;
+  
+  transform: scale(1.5)
 }
 
 plate.light::before {
@@ -186,10 +207,14 @@ plate.light::before {
 
   background-color: var(--color-bg);
   border: 0.1rem solid black;
+  
+  color: var(--color-text);
 
   display: flex;
   justify-content: center;
   align-items: center;
+  
+  transform: scale(1.5)
 }
 
 orange {
