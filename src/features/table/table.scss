@@ -2,6 +2,15 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+
+  background-image: url('../../shared/assets/img/wooden-back.jpg');
+  background-size: cover;
+
+  border-radius: 1rem;
+  box-shadow: inset 0 0 2rem white, 0 0.5rem 0 brown;
+  border: 0.2rem solid brown;
+
+  transform: rotateX(5deg) scale(0.8);
 }
 
 .table > * {

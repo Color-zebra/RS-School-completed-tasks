@@ -36,7 +36,8 @@ export class Table extends ElemController {
   }
 
   private createGameElem(elem: GameTag) {
-    const currElem = document.createElement(`${elem.tag}`);
+    const currElem = this.createElem(`${elem.tag}`, elem.className ? elem.className : [], []);
+    // const currElem = document.createElement(`${elem.tag}`);
     if (elem.children) {
       const children: appendArg[] = [];
       elem.children.forEach((tag: GameTag) => {
@@ -44,6 +45,7 @@ export class Table extends ElemController {
       });
       currElem.append(...children);
     }
+
     this.gameElements.push(currElem);
     return currElem;
   }

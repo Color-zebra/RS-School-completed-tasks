@@ -3,7 +3,7 @@ import { GameTag } from './interfaces';
 
 export type appendArg = HTMLElement | string;
 
-export type tags = 'square' | 'rhombus' | 'circle';
+export type tags = 'bento' | 'napkin' | 'plate' | 'orange' | 'pickle' | 'apple';
 
 export type levels = Array<gameLevel>;
 
