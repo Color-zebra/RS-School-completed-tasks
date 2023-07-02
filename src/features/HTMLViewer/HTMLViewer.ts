@@ -50,13 +50,13 @@ export class HTMLViewer extends ElemController {
 
     if (elem.className) {
       const classAttr = this.createElem('span', [this.classes.codeAttr], [` class=`]);
-      const classValue = this.createElem('span', [this.classes.codeValue], [elem.className.join(' ')]);
+      const classValue = this.createElem('span', [this.classes.codeValue], ['"', elem.className.join(' '), '"']);
       classes.push(classAttr, classValue);
     }
 
     if (elem.id) {
       const idAttr = this.createElem('span', [this.classes.codeAttr], [` id=`]);
-      const idValue = this.createElem('span', [this.classes.codeValue], [elem.id]);
+      const idValue = this.createElem('span', [this.classes.codeValue], ['"', elem.id], '"');
       classes.push(idAttr, idValue);
     }
 

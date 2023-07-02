@@ -179,6 +179,7 @@ const seventh: gameLevel = [
       },
       {
         tag: 'apple',
+        id: 'one-more-id',
         children: null,
       },
     ],
@@ -212,11 +213,6 @@ const seventh: gameLevel = [
       {
         tag: 'apple',
         id: 'another-id',
-        children: null,
-      },
-      {
-        tag: 'apple',
-        id: 'one-more-id',
         children: null,
       },
     ],

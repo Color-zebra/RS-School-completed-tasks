@@ -108,7 +108,7 @@ export class CSSEditor extends ElemController {
   }
 
   public transformInput(str: string) {
-    const deviders = ' #.,+>~';
+    const deviders = ' #.,+>~()';
     const operators = '+>~';
 
     let res = '';

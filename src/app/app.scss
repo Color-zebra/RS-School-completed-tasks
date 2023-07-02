@@ -252,11 +252,14 @@ orange.light::before {
   z-index: 5;
 
   background-color: var(--color-bg);
+  color: var(--color-text);
   border: 0.1rem solid black;
 
   display: flex;
   justify-content: center;
   align-items: center;
+
+  transform: scale(1.5);
 }
 
 apple {
@@ -294,6 +297,7 @@ apple.light::before {
   z-index: 5;
 
   background-color: var(--color-bg);
+  color: var(--color-text);
   border: 0.1rem solid black;
 
   display: flex;
