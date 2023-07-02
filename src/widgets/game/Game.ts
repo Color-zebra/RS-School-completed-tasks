@@ -3,6 +3,7 @@ import { HTMLViewer } from '../../features/HTMLViewer/HTMLViewer';
 import { Table } from '../../features/table/Table';
 import { gameLevels } from '../../shared/data/gameLevels';
 import { rightAnswers } from '../../shared/data/rightAnswers';
+import { Popup } from '../../shared/elements/Popup';
 import { EventEmitter } from '../../shared/emitter/Emitter';
 import { StorageAPI } from '../../shared/storage/StorageAPI';
 import { levelStateValues } from '../../shared/types/enums';
@@ -16,6 +17,7 @@ export class Game extends ElemController {
   private table: Table;
   private cssEditor: CSSEditor;
   private htmlViewer: HTMLViewer;
+  // private popup: Popup;
   private storageAPI: StorageAPI;
   private emitter: EventEmitter;
 
@@ -168,7 +170,7 @@ export class Game extends ElemController {
       this.currLevel = nextLevel;
       this.initLevel(nextLevel);
     } else {
-      alert('You finish the GAME!');
+      this.emitter.emit('open-popup', null);
     }
 
     this.emitter.emit('state-change', this.gameState);

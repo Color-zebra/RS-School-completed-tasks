@@ -4,6 +4,7 @@
 
 body {
   overflow-x: hidden;
+  position: relative;
 }
 
 bento {
@@ -24,6 +25,14 @@ bento {
 bento > * {
   width: 30%;
   height: 30%;
+}
+
+bento > orange::before {
+  left: 130%;
+}
+
+bento > apple::before {
+  left: 130%;
 }
 
 bento > *:nth-child(1) {
@@ -61,6 +70,14 @@ plate {
   border-radius: 50%;
 }
 
+plate > orange::before {
+  left: 130%;
+}
+
+plate > apple::before {
+  left: 130%;
+}
+
 plate > * {
   width: 30%;
   height: 30%;
@@ -93,6 +110,14 @@ napkin {
   background-image: url('../shared/assets/img/napkin.jpg');
   border: 1px solid black;
   box-shadow: 0 0.1rem 0.1rem black;
+}
+
+napkin > orange::before {
+  left: 130%;
+}
+
+napkin > apple::before {
+  left: 130%;
 }
 
 napkin > * {
@@ -198,7 +223,7 @@ orange.light::before {
   height: 1.5rem;
   position: absolute;
   top: -2rem;
-  right: -130%;
+  right: 0;
   z-index: 5;
 
   background-color: var(--color-bg);
@@ -240,7 +265,7 @@ apple.light::before {
   height: 1.5rem;
   position: absolute;
   top: -2rem;
-  right: -130%;
+  right: 0;
   z-index: 5;
 
   background-color: var(--color-bg);

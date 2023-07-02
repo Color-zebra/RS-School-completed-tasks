@@ -1,3 +1,4 @@
+import { Popup } from '../shared/elements/Popup';
 import { EventEmitter } from '../shared/emitter/Emitter';
 import { StorageAPI } from '../shared/storage/StorageAPI';
 import { ElemController } from '../shared/utils/elemController';
@@ -15,6 +16,7 @@ export class MainPage extends ElemController {
   private storageAPI: StorageAPI;
   private classes: Record<string, string>;
   private emitter: EventEmitter;
+  private popup: Popup;
 
   constructor() {
     super();
@@ -24,6 +26,7 @@ export class MainPage extends ElemController {
     this.header = new Header(this.openMenu.bind(this), this.closeMenu.bind(this));
     this.footer = new Footer();
     this.game = new Game(this.storageAPI.choosenLevel);
+    this.popup = new Popup();
     this.aside = new Aside(
       this.storageAPI.choosenLevel,
       this.storageAPI.gameState,
@@ -42,7 +45,7 @@ export class MainPage extends ElemController {
     this.elem = this.factory.createElem(
       'div',
       [this.classes.baseClass],
-      [this.header.getElem(), this.game.getElem(), this.aside.getElem(), this.footer.getElem()]
+      [this.popup.getElem(), this.header.getElem(), this.game.getElem(), this.aside.getElem(), this.footer.getElem()]
     );
 
     this.emitter.subscribe('level-change', (level) => {
@@ -68,7 +71,10 @@ export class MainPage extends ElemController {
       this.aside.setChoosenLevel(0);
       this.aside.updateAside();
       this.changeLevel(0);
-      console.log(this.game.gameState);
+    });
+
+    this.emitter.subscribe('open-popup', () => {
+      this.popup.showPopup();
     });
   }
 
