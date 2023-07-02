@@ -1,11 +1,11 @@
 import { StorageAPI } from '../shared/storage/StorageAPI';
 
 describe('Test saving', () => {
-  const storage = new StorageAPI() as any;
-  const spy = jest.spyOn(storage, 'saveGameState');
+  const storage = new StorageAPI();
+  storage['saveGameState'] = jest.fn();
+  window.dispatchEvent(new Event('beforeunload'));
 
   it('Should saving while page unloading', () => {
-    window.dispatchEvent(new Event('beforeunload'));
-    expect(spy).toBeCalled();
+    expect(storage['saveGameState']).toBeCalled();
   });
 });

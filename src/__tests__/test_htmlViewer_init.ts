@@ -1,8 +1,8 @@
 import { HTMLViewer } from '../features/HTMLViewer/HTMLViewer';
 
 describe('HTMLViewer initialization', () => {
-  const spy = jest.spyOn(HTMLViewer.prototype as any, 'init'); //any используется что бы "открыть" для jest приватный метод init();
-  const htmlViewer = new HTMLViewer();
+  const spy = jest.spyOn(HTMLViewer.prototype, 'init');
+  new HTMLViewer();
   it('Should call init() method while creating instance', () => {
     expect(spy).toHaveBeenCalled();
   });
