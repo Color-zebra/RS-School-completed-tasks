@@ -1,10 +1,13 @@
 import { Game } from '../widgets/game/Game';
 
 describe('Test level initializing', () => {
-  const game = new Game(0) as any;
-  const spyTable = jest.spyOn(game.table, 'initLevel');
-  const spyViewer = jest.spyOn(game.htmlViewer, 'initLevel');
-  const spyInput = jest.spyOn(game.cssEditor, 'clearInput');
+  const game = new Game(0);
+  const table = game['table'];
+  const viewer = game['htmlViewer'];
+  const editor = game['cssEditor'];
+  const spyTable = jest.spyOn(table, 'initLevel');
+  const spyViewer = jest.spyOn(viewer, 'initLevel');
+  const spyInput = jest.spyOn(editor, 'clearInput');
 
   game.initLevel(1);
 

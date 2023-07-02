@@ -1,6 +1,6 @@
 import { CSSEditor } from '../features/CSSEditor/CSSEditor';
 
-const cssEditor = new CSSEditor(() => console.log('ЪУЪ'));
+const cssEditor = new CSSEditor(() => console.log('test callback'));
 
 describe('CSS clear input', () => {
   if (cssEditor.input) {
