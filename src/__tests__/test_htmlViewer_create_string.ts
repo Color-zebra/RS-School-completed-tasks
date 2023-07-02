@@ -6,7 +6,7 @@ describe('HTMLViewer create strings', () => {
   it('Returned elem should have class "html-code"', () => {
     const str = testedFunc(
       {
-        tag: 'circle',
+        tag: 'bento',
         children: null,
       },
       0
@@ -18,7 +18,7 @@ describe('HTMLViewer create strings', () => {
   it('Returned string should have right space before it', () => {
     const str = testedFunc(
       {
-        tag: 'circle',
+        tag: 'bento',
         children: null,
       },
       0
@@ -30,7 +30,7 @@ describe('HTMLViewer create strings', () => {
   it('Returned string should have right space before it', () => {
     const str = testedFunc(
       {
-        tag: 'circle',
+        tag: 'bento',
         children: null,
       },
       4

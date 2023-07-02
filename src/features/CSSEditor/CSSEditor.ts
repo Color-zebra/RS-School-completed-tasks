@@ -91,6 +91,7 @@ export class CSSEditor extends ElemController {
         return;
       }
       inp.value += ans[i];
+      this.input?.dispatchEvent(new Event('input'));
       i++;
     }, speed);
   }
