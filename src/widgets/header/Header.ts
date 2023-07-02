@@ -18,6 +18,6 @@ export class Header extends ElemController {
   }
 
   protected init() {
-    this.elem = this.createElem('header', [this.classes.baseClass], ["I'm header", this.burger.getElem()]);
+    this.elem = this.createElem('header', [this.classes.baseClass], ['RSS CSS Selectors', this.burger.getElem()]);
   }
 }

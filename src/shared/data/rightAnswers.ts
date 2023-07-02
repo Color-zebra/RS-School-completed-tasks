@@ -1,1 +1,1 @@
-export const rightAnswers: string[] = ['plate', 'rhombus > square'];
+export const rightAnswers: string[] = ['plate', 'orange', 'apple'];
