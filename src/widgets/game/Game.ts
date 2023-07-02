@@ -3,7 +3,6 @@ import { HTMLViewer } from '../../features/HTMLViewer/HTMLViewer';
 import { Table } from '../../features/table/Table';
 import { gameLevels } from '../../shared/data/gameLevels';
 import { rightAnswers } from '../../shared/data/rightAnswers';
-import { Popup } from '../../shared/elements/Popup';
 import { EventEmitter } from '../../shared/emitter/Emitter';
 import { StorageAPI } from '../../shared/storage/StorageAPI';
 import { levelStateValues } from '../../shared/types/enums';
@@ -17,7 +16,6 @@ export class Game extends ElemController {
   private table: Table;
   private cssEditor: CSSEditor;
   private htmlViewer: HTMLViewer;
-  // private popup: Popup;
   private storageAPI: StorageAPI;
   private emitter: EventEmitter;
 
@@ -178,13 +176,14 @@ export class Game extends ElemController {
   }
 
   private handleWrongAnswer(choosenElements: NodeListOf<Element>) {
-    choosenElements.forEach((elem) => {
+    const elements = [...choosenElements, this.cssEditor.enterButton.getElem()];
+    elements.forEach((elem) => {
       if (elem) {
         (elem as HTMLElement).classList.add('wrong');
       }
     });
-    choosenElements[0].addEventListener('animationend', () => {
-      choosenElements.forEach((elem) => {
+    elements[0].addEventListener('animationend', () => {
+      elements.forEach((elem) => {
         if (elem) {
           (elem as HTMLElement).classList.remove('wrong');
         }

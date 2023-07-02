@@ -37,7 +37,6 @@ export class Popup extends ElemController {
     this.button.getElem().addEventListener(
       'click',
       () => {
-        console.log(this);
         this.closePopup();
       },
       { once: true }
