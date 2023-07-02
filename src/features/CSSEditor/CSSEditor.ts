@@ -42,7 +42,7 @@ export class CSSEditor extends ElemController {
     this.input = this.createElem('input', [this.classes.inputClass], []) as HTMLInputElement;
     this.input.setAttribute('placeholder', 'Type your selector here');
     this.input.addEventListener('keydown', (e) => {
-      if (e.code === 'Enter') {
+      if (e.code === 'Enter' || e.code === 'NumpadEnter') {
         this.input && this.onInputCallBack();
       }
     });
