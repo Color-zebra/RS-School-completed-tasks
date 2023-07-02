@@ -37,7 +37,9 @@ export class Table extends ElemController {
 
   private createGameElem(elem: GameTag) {
     const currElem = this.createElem(`${elem.tag}`, elem.className ? elem.className : [], []);
-    // const currElem = document.createElement(`${elem.tag}`);
+    if (elem.id) {
+      currElem.setAttribute('id', elem.id);
+    }
     if (elem.children) {
       const children: appendArg[] = [];
       elem.children.forEach((tag: GameTag) => {

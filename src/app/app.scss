@@ -276,16 +276,21 @@ apple.light::before {
   align-items: center;
 }
 
+.small {
+  width: 8cqw;
+  height: 8cqw;
+}
+
 .choose-me {
   animation: choose .3s ease infinite;
 }
 
-.right {
-  animation: right .5s ease-in-out;
+.right > *:not(.right) {
+  animation: anti-right .5s ease-in-out;
 }
 
-.right > * {
-  animation: anti-right .5s ease-in-out;
+.right {
+  animation: right .5s ease-in-out;
 }
 
 .wrong {

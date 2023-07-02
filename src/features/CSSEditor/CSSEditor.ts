@@ -47,9 +47,10 @@ export class CSSEditor extends ElemController {
       }
     });
     this.input.addEventListener('input', () => {
+      const scrollOffset = 10;
       if (!this.input || !this.label) return;
       this.label.innerHTML = this.transformInput(this.input.value);
-      const scrollLeft = this.input.scrollLeft + 10;
+      const scrollLeft = this.input.scrollLeft + scrollOffset;
       if (scrollLeft) this.label.scrollLeft = scrollLeft;
     });
 
