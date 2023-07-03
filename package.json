@@ -1,5 +1,6 @@
 {
   "name": "color-zebra-jsfe2023q1",
+  "exclude": ["./node_modules"],
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
