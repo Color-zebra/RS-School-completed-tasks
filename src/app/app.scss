@@ -155,9 +155,9 @@ napkin *:nth-child(3) {
 }
 
 bento.light::before {
-  content: '/bento';
-  width: 4rem;
-  height: 1.5rem;
+  content: attr(data-content);
+  width: fit-content;
+  white-space: nowrap;
   position: absolute;
   top: -2rem;
   left: 0;
@@ -176,9 +176,9 @@ bento.light::before {
 }
 
 napkin.light::before {
-  content: '/napkin';
-  width: 4rem;
-  height: 1.5rem;
+  content: attr(data-content);
+  width: fit-content;
+  white-space: nowrap;
   position: absolute;
   top: -4rem;
   left: 0;
@@ -197,9 +197,9 @@ napkin.light::before {
 }
 
 plate.light::before {
-  content: '/plate';
-  width: 4rem;
-  height: 1.5rem;
+  content: attr(data-content);
+  width: fit-content;
+  white-space: nowrap;
   position: absolute;
   top: -2rem;
   left: 0;
@@ -223,6 +223,7 @@ orange {
   border-radius: 50%;
   border: 1px solid black;
   box-shadow: 0 3px 3px black;
+  container-type: size;
 }
 
 orange.big {
@@ -243,12 +244,12 @@ orange::after {
 }
 
 orange.light::before {
-  content: '/orange';
-  width: 4rem;
-  height: 1.5rem;
+  content: attr(data-content);
+  width: fit-content;
+  white-space: nowrap;
   position: absolute;
   top: -2rem;
-  right: 0;
+  left: 100cqw;
   z-index: 5;
 
   background-color: var(--color-bg);
@@ -262,12 +263,21 @@ orange.light::before {
   transform: scale(1.5);
 }
 
+orange.light:nth-child(2):before {
+  top: -5rem;
+}
+
+orange.light:nth-child(3):before {
+  top: -7rem;
+}
+
 apple {
   position: relative;
   background-color: rgb(180, 3, 3);
   border-radius: 50%;
   border: 1px solid black;
   box-shadow: 0 3px 3px black;
+  container-type: size;
 }
 
 apple.big {
@@ -288,13 +298,13 @@ apple::after {
 }
 
 apple.light::before {
-  content: '/apple';
-  width: 4rem;
-  height: 1.5rem;
+  content: attr(data-content);
+  width: fit-content;
+  white-space: nowrap;
   position: absolute;
   top: -2rem;
-  right: 0;
-  z-index: 5;
+  left: -100cqw;
+  z-index: 100;
 
   background-color: var(--color-bg);
   color: var(--color-text);
@@ -305,9 +315,25 @@ apple.light::before {
   align-items: center;
 }
 
+apple.light:nth-child(2):before {
+  top: -5rem;
+}
+
+apple.light:nth-child(3):before {
+  top: -7rem;
+}
+
+.big.light::before {
+  transform: scale(1.5);
+}
+
 .small {
   width: 8cqw;
   height: 8cqw;
+}
+
+.small.light::before {
+  top: -5rem;
 }
 
 .choose-me {

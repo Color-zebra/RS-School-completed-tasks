@@ -1,46 +1,5 @@
 import { gameLevel, levels } from '../types/types';
 
-/* const first: gameLevel = [
-  {
-    tag: 'plate',
-    className: ['big-red-plate'],
-    children: [
-      {
-        tag: 'apple',
-        children: null,
-      },
-    ],
-  },
-  {
-    tag: 'bento',
-    className: ['some-class'],
-    id: 'some-id',
-    children: [
-      {
-        tag: 'apple',
-        children: null,
-      },
-      {
-        tag: 'orange',
-        children: null,
-      },
-      {
-        tag: 'apple',
-        children: null,
-      },
-    ],
-  },
-  {
-    tag: 'napkin',
-    children: [
-      {
-        tag: 'apple',
-        children: null,
-      },
-    ],
-  },
-]; */
-
 const first: gameLevel = [
   {
     tag: 'plate',

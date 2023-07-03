@@ -68,7 +68,10 @@ export class Game extends ElemController {
     this.table.getElem().addEventListener('mouseover', (e) => {
       if (e.target !== this.table.getElem()) {
         (e.target as HTMLElement).classList.add('light');
-        this.elemStrMap.get(e.target as HTMLElement)?.classList.add('light');
+        const broElem = this.elemStrMap.get(e.target as HTMLElement);
+        if (!broElem) return;
+        broElem.classList.add('light');
+        (e.target as HTMLElement).setAttribute('data-content', this.createElemText(e.target as HTMLElement));
       }
       if (e.relatedTarget) {
         (e.relatedTarget as HTMLElement).classList.remove('light');
@@ -88,7 +91,11 @@ export class Game extends ElemController {
 
       if (currTag) {
         (currTag as HTMLElement).classList.add('light');
-        this.strElemMap.get(currTag as HTMLElement)?.classList.add('light');
+
+        const broElem = this.strElemMap.get(currTag as HTMLElement);
+        if (!broElem) return;
+        broElem.classList.add('light');
+        broElem.setAttribute('data-content', this.createElemText(broElem));
       }
 
       if (relatedTag && relatedTag !== currTag) {
@@ -96,6 +103,18 @@ export class Game extends ElemController {
         this.strElemMap.get(relatedTag as HTMLElement)?.classList.remove('light');
       }
     });
+  }
+
+  private createElemText(elem: HTMLElement) {
+    const textElem = this.createElem(
+      elem.tagName,
+      [...elem.classList].filter((className) => className !== 'light' && className !== 'choose-me'),
+      []
+    );
+    const id = elem.getAttribute('id');
+    if (id) textElem.setAttribute('id', id);
+    const text = textElem.outerHTML;
+    return text;
   }
 
   public initLevel(levelNumber: number) {
