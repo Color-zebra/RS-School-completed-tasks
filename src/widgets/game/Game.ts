@@ -27,6 +27,7 @@ export class Game extends ElemController {
   private answers: string[];
   private currLevel: number;
   public gameState: gameState;
+  selectorForEmptyCollection: string;
 
   constructor(level: number) {
     super();
@@ -34,6 +35,7 @@ export class Game extends ElemController {
     this.classes = {
       baseClass: 'game',
     };
+    this.selectorForEmptyCollection = 'veryWrongButValidSelector';
 
     this.table = new Table();
     this.cssEditor = new CSSEditor(this.checkAnswer.bind(this));
@@ -146,7 +148,12 @@ export class Game extends ElemController {
     const ans = this.cssEditor.getAnswer();
     if (!ans) return;
 
-    const choosenElements = this.table.getElem().querySelectorAll(ans);
+    let choosenElements: NodeListOf<Element> | null;
+    try {
+      choosenElements = this.table.getElem().querySelectorAll(ans);
+    } catch (error) {
+      choosenElements = this.table.getElem().querySelectorAll(this.selectorForEmptyCollection);
+    }
 
     if (!this.rightElements) return;
     if (this.rightElements.length !== choosenElements.length) {
