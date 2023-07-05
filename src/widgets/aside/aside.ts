@@ -97,7 +97,6 @@ export class Aside extends ElemController {
 
     this.helpButton.getElem().addEventListener('click', this.onHelpClick);
     this.resetButton.getElem().addEventListener('click', () => {
-      console.log(this);
       this.emitter.emit('reset-game', null);
     });
   }

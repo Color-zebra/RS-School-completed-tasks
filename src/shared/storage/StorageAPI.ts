@@ -49,12 +49,12 @@ export class StorageAPI {
   }
 
   public setCurrGameState(gameState: gameState) {
-    this.gameState = gameState;
+    this.gameState = [...gameState];
   }
 
   public loadGameState() {
     const string = localStorage.getItem(this.fields.gameState);
-    if (!string) return this.emptyGame;
+    if (!string) return [...this.emptyGame];
     return JSON.parse(string);
   }
 
@@ -66,7 +66,7 @@ export class StorageAPI {
 
   public reset() {
     this.choosenLevel = 0;
-    this.gameState = this.emptyGame;
-    return this.emptyGame;
+    this.gameState = [...this.emptyGame];
+    return [...this.emptyGame];
   }
 }
