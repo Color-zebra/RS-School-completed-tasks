@@ -1,6 +1,6 @@
-import { CSSEditor } from '../features/CSSEditor/CSSEditor';
+import { CssEditor } from '../features/CssEditor/CssEditor';
 
-const cssEditor = new CSSEditor(() => console.log('ЪУЪ'));
+const cssEditor = new CssEditor(() => jest.fn());
 
 describe('CSS transform', () => {
   it('Should transform class string to HTML text', () => {

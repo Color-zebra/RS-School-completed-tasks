@@ -2,12 +2,8 @@ import { Burger } from '../features/burger/Burger';
 
 describe('Test burger', () => {
   const burger = new Burger(
-    () => {
-      console.log('open menu');
-    },
-    () => {
-      console.log('close menu');
-    }
+    () => jest.fn(),
+    () => jest.fn()
   );
 
   const spyClose = jest.spyOn(burger, 'closeMenu');

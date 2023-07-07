@@ -4,7 +4,7 @@ import { ElemController } from '../../shared/utils/elemController';
 
 import './csseditor.scss';
 
-export class CSSEditor extends ElemController {
+export class CssEditor extends ElemController {
   classes: Record<string, string>;
   input: HTMLInputElement | null;
   label: HTMLElement | null;

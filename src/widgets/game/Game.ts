@@ -1,4 +1,4 @@
-import { CSSEditor } from '../../features/CSSEditor/CSSEditor';
+import { CssEditor } from '../../features/CssEditor/CssEditor';
 import { HTMLViewer } from '../../features/HTMLViewer/HTMLViewer';
 import { Table } from '../../features/table/Table';
 import { gameLevels } from '../../shared/data/gameLevels';
@@ -14,7 +14,7 @@ export class Game extends ElemController {
   private classes: Record<string, string>;
 
   private table: Table;
-  private cssEditor: CSSEditor;
+  private cssEditor: CssEditor;
   private htmlViewer: HTMLViewer;
   private storageAPI: StorageAPI;
   private emitter: EventEmitter;
@@ -38,7 +38,7 @@ export class Game extends ElemController {
     this.selectorForEmptyCollection = 'veryWrongButValidSelector';
 
     this.table = new Table();
-    this.cssEditor = new CSSEditor(this.checkAnswer.bind(this));
+    this.cssEditor = new CssEditor(this.checkAnswer.bind(this));
     this.htmlViewer = new HTMLViewer();
     this.storageAPI = new StorageAPI();
     this.emitter = new EventEmitter();

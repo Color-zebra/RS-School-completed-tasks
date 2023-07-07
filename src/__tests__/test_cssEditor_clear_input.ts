@@ -1,6 +1,6 @@
-import { CSSEditor } from '../features/CSSEditor/CSSEditor';
+import { CssEditor } from '../features/CssEditor/CssEditor';
 
-const cssEditor = new CSSEditor(() => console.log('test callback'));
+const cssEditor = new CssEditor(() => jest.fn());
 
 describe('CSS clear input', () => {
   if (cssEditor.input) {
