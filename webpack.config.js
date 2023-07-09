@@ -37,11 +37,11 @@ module.exports = {
         loader: "html-loader",
       },
       {
-        test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
+        test: /\.(?:ico|gif|png|jpg|jpeg|svg)$/i,
         type: 'asset/resource',
       },
       {
-        test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
+        test: /\.(woff(2)?|eot|ttf|otf)$/,
         type: 'asset/inline',
       },
       {
@@ -57,6 +57,6 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: '[name].bundle.js',
-    assetModuleFilename: 'assets/[hash][ext]'
+    assetModuleFilename: 'assets/[name][ext]'
   },
 }
