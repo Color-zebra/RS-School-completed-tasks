@@ -22,8 +22,8 @@ export class App {
     const useElem2 = document.createElementNS(svgNS, 'use');
     useElem2.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', './assets/sprite.svg#car-icon');
     svgElem2.setAttribute('color', 'aqua');
-    svgElem2.setAttribute('width', '20vh');
-    svgElem2.setAttribute('height', '20vh');
+    svgElem2.setAttribute('width', '8vh');
+    svgElem2.setAttribute('height', '8vh');
     svgElem2.appendChild(useElem2);
 
     document.body.appendChild(svgElem1);
