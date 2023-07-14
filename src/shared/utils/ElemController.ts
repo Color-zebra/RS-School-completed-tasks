@@ -1,4 +1,4 @@
-import { appendArg, classArg } from '../types/types';
+import { AppendArg, ClassArg } from '../types/types';
 
 export default abstract class ElemController {
   protected abstract init(): void;
@@ -8,10 +8,10 @@ export default abstract class ElemController {
     this.elem = null;
   }
 
-  static createElem<T extends appendArg>(
+  static createElem<T extends AppendArg>(
     tag: string,
     content: Array<T> | null,
-    classes: classArg,
+    classes: ClassArg | null,
     id?: string,
     attributes?: Record<string, string>
   ) {
@@ -20,18 +20,15 @@ export default abstract class ElemController {
     if (content) {
       elem.append(...content);
     }
-
     if (id) {
       elem.setAttribute('id', id);
     }
-
     if (attributes) {
       Object.entries(attributes).forEach((pair) => {
         const [attr, value] = [...pair];
         elem.setAttribute(attr, value);
       });
     }
-
     if (classes) {
       const currClasses = Array.isArray(classes) ? classes : [classes];
       elem.classList.add(...currClasses);
