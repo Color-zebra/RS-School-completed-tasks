@@ -25,12 +25,12 @@ export default class Button extends ElemController {
     this.init();
   }
 
-  init() {
+  protected init() {
     this.elem = this.createElem('button', [this.text], [this.classes.baseClass, ...this.addClasses]);
     this.hydrate();
   }
 
-  hydrate() {
+  private hydrate() {
     if (this.elem && this.callBack) {
       const CB = this.callBack;
       this.elem.addEventListener('click', CB);

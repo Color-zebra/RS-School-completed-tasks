@@ -1,21 +1,19 @@
 import './app.scss';
 import '../shared/assets/img/sprite.svg';
-import ServerAPI from '../shared/utils/ServerAPI';
-import Button from '../shared/elements/Button/Button';
+import Router from '../processes/Router/Router';
 
 export default class App {
-  private serverAPI: ServerAPI;
+  protected router: Router;
 
   constructor() {
-    this.serverAPI = ServerAPI.getInstance();
+    this.router = new Router();
   }
 
   start() {
-    this.testSVG();
-    this.test();
+    document.body.append(this.router.getElem());
   }
 
-  testSVG() {
+  /* testSVG() {
     const svgNS = 'http://www.w3.org/2000/svg';
 
     const svgElem1 = document.createElementNS(svgNS, 'svg');
@@ -45,10 +43,5 @@ export default class App {
       }
       svgElem2.setAttribute('color', `#${color}`);
     });
-  }
-
-  test() {
-    const btn = new Button('Press me', null);
-    document.body.append(btn.getElem());
-  }
+  } */
 }
