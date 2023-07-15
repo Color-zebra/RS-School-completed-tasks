@@ -1,6 +1,7 @@
 import './app.scss';
 import '../shared/assets/img/sprite.svg';
 import ServerAPI from '../shared/utils/ServerAPI';
+import Button from '../shared/elements/Button/Button';
 
 export default class App {
   private serverAPI: ServerAPI;
@@ -10,11 +11,10 @@ export default class App {
   }
 
   start() {
-    // this.testSVG();
-    this.testServerApi();
+    this.testSVG();
+    this.test();
   }
 
-  // eslint-disable-next-line class-methods-use-this
   testSVG() {
     const svgNS = 'http://www.w3.org/2000/svg';
 
@@ -47,29 +47,8 @@ export default class App {
     });
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  async testServerApi() {
-    console.log(await this.serverAPI.getCars());
-    // console.log(await this.serverAPI.getCar(1));
-    // console.log(await this.serverAPI.saveCar({ name: 'test', color: 'testcolor' }));
-    // console.log(await this.serverAPI.deleteCar(1));
-    // console.log(await this.serverAPI.updateCar({ name: 'new', color: 'black', id: 1 }));
-    // console.log(await this.serverAPI.getCars());
-    // console.log(await this.serverAPI.startCarEngine(1));
-    // console.log(await this.serverAPI.driveCar(1));
-    // console.log(await this.serverAPI.stopCarEngine(1));
-    console.log(
-      await this.serverAPI.saveWinner({
-        id: 109,
-        wins: 1,
-        time: 10,
-      })
-    );
-    console.log(await this.serverAPI.getWinners('byId', 'RIGHT'));
-    // console.log(await this.serverAPI.updateWinner({ id: 1, time: 115, wins: 100500 }));
-    console.log(await this.serverAPI.saveWinner({ id: 1, time: 115, wins: 100500 }));
-    console.log(await this.serverAPI.getWinners('byId', 'RIGHT'));
-    console.log(await this.serverAPI.deleteWinner(1));
-    console.log(await this.serverAPI.getWinners('byId', 'RIGHT'));
+  test() {
+    const btn = new Button('Press me', null);
+    document.body.append(btn.getElem());
   }
 }

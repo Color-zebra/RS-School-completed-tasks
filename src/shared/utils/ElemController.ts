@@ -8,7 +8,7 @@ export default abstract class ElemController {
     this.elem = null;
   }
 
-  static createElem<T extends AppendArg>(
+  protected createElem<T extends AppendArg>(
     tag: string,
     content: Array<T> | null,
     classes: ClassArg | null,
@@ -35,5 +35,9 @@ export default abstract class ElemController {
     }
 
     return elem;
+  }
+
+  getElem() {
+    return this.elem || this.createElem('div', null, null);
   }
 }
