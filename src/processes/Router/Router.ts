@@ -5,6 +5,8 @@ import Footer from '../../widgets/Footer/Footer';
 import Header from '../../widgets/Header/Header';
 
 export default class Router extends ElemController {
+  protected classes: Record<string, string>;
+
   protected header: Header;
 
   protected footer: Footer;
@@ -16,17 +18,25 @@ export default class Router extends ElemController {
   constructor() {
     super();
 
+    this.classes = {
+      baseClass: 'wrapper',
+    };
+
     this.header = new Header(null);
     this.footer = new Footer(null);
-    this.garagePage = new Garage();
+    this.garagePage = new Garage(null);
     this.winnersPage = new Winners();
 
     this.init();
   }
 
   protected init() {
-    const page = this.createElem('main', [this.garagePage.getElem(), this.winnersPage.getElem()], null);
-    this.elem = this.createElem('div', [this.header.getElem(), page, this.footer.getElem()], 'wrapper');
+    const page = this.createElem(
+      'main',
+      [this.garagePage.getElem(), this.winnersPage.getElem()],
+      this.classes.baseClass
+    );
+    this.elem = this.createElem('div', [this.header.getElem(), page, this.footer.getElem()], this.classes.baseClass);
     this.hydrate();
   }
 

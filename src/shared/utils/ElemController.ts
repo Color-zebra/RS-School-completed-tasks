@@ -2,6 +2,8 @@ import { AppendArg, ClassArg } from '../types/types';
 
 export default abstract class ElemController {
   protected abstract init(): void;
+  protected abstract classes: Record<string, string>;
+
   protected elem: null | HTMLElement;
 
   constructor() {

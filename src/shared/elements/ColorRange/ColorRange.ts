@@ -2,7 +2,7 @@ import ElemController from '../../utils/ElemController';
 import './colorrange.scss';
 
 export default class ColorRange extends ElemController {
-  private classes: Record<string, string>;
+  protected classes: Record<string, string>;
 
   private choosenColor: string;
 
