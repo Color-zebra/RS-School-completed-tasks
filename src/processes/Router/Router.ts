@@ -1,10 +1,13 @@
 import Garage from '../../pages/Garage/Garage';
 import Winners from '../../pages/Winners/Winners';
 import ElemController from '../../shared/utils/ElemController';
+import Footer from '../../widgets/Footer/Footer';
 import Header from '../../widgets/Header/Header';
 
 export default class Router extends ElemController {
   protected header: Header;
+
+  protected footer: Footer;
 
   protected winnersPage: Winners;
 
@@ -14,6 +17,7 @@ export default class Router extends ElemController {
     super();
 
     this.header = new Header(null);
+    this.footer = new Footer(null);
     this.garagePage = new Garage();
     this.winnersPage = new Winners();
 
@@ -22,7 +26,7 @@ export default class Router extends ElemController {
 
   protected init() {
     const page = this.createElem('main', [this.garagePage.getElem(), this.winnersPage.getElem()], null);
-    this.elem = this.createElem('div', [this.header.getElem(), page], 'wrapper');
+    this.elem = this.createElem('div', [this.header.getElem(), page, this.footer.getElem()], 'wrapper');
     this.hydrate();
   }
 
