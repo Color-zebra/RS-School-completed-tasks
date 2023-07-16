@@ -6,7 +6,7 @@ import './cartrack.scss';
 export default class CarTrack extends ElemController {
   protected classes: Record<string, string>;
 
-  protected addClasses: Array<string> | Array<never>;
+  protected addClasses: Array<string>;
 
   protected startButton: Button;
 
@@ -32,18 +32,16 @@ export default class CarTrack extends ElemController {
     };
     this.addClasses = addClasses || [];
 
-    this.startButton = new Button('start', null, this.startCar);
-    this.stopButton = new Button('stop', null, this.stopCar);
-    this.changeButton = new Button('change', null, this.changeCar);
-    this.deleteButton = new Button('update', null, this.deleteCar);
+    this.startButton = new Button('start', null, () => this.startCar());
+    this.stopButton = new Button('stop', null, () => this.stopCar());
+    this.changeButton = new Button('change', null, () => this.changeCar());
+    this.deleteButton = new Button('delete', null, () => this.deleteCar());
 
     this.carName = car.name;
     this.carColor = car.color;
     this.carId = car.id;
 
     this.init();
-    console.log('init');
-    console.log(this.carColor);
   }
 
   init() {
@@ -59,18 +57,18 @@ export default class CarTrack extends ElemController {
   }
 
   startCar() {
-    console.log('starting');
+    console.log('starting', this.carId);
   }
 
   stopCar() {
-    console.log('stopping');
+    console.log('stopping', this.carId);
   }
 
   changeCar() {
-    console.log('changing');
+    console.log('changing', this.carId);
   }
 
   deleteCar() {
-    console.log('deleting');
+    console.log('deleting', this.carId);
   }
 }

@@ -40,7 +40,7 @@ export default class Race extends ElemController {
     const data = await this.serverAPI.getCars();
 
     if (data) {
-      this.cars = data?.cars;
+      this.cars = data.cars;
     }
 
     this.cars.forEach((car: Car) => {

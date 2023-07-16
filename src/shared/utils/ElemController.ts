@@ -12,7 +12,7 @@ export default abstract class ElemController {
     tag: string,
     content: Array<T> | null,
     classes: ClassArg | null,
-    id?: string,
+    id?: string | null,
     attributes?: Record<string, string>
   ) {
     const elem = document.createElement(tag);
