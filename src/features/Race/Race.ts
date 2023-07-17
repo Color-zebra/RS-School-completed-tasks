@@ -34,6 +34,14 @@ export default class Race extends ElemController {
   init() {
     this.elem = this.createElem('div', null, this.classes.trackClass);
     this.renderCars();
+    this.hydrate();
+  }
+
+  hydrate() {
+    this.elem?.addEventListener('car-delete', (e) => {
+      const id: number = (e as CustomEvent).detail.carId;
+      this.deleteCar(id);
+    });
   }
 
   async renderCars() {
@@ -60,5 +68,10 @@ export default class Race extends ElemController {
     if (!this.elem) return;
     this.elem.innerHTML = '';
     this.carTracks = [];
+  }
+
+  private async deleteCar(id: number) {
+    await this.serverAPI.deleteCar(id);
+    this.renderCars();
   }
 }

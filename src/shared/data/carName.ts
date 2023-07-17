@@ -1,0 +1,63 @@
+export const brands = [
+  'Lexus',
+  'Genesis',
+  'Kia',
+  'Chevrolet',
+  'Mitsubishi',
+  'Toyota',
+  'Hyundai',
+  'Nissan',
+  'Dodge',
+  'Cadillac',
+  'Mazda',
+  'Ford',
+  'BMW',
+];
+
+export const models = [
+  'Q1',
+  'A5',
+  'Jazz',
+  'Alhambra',
+  'Sandero',
+  'Duster',
+  'Aircross',
+  'Logan',
+  'GLC',
+  'Megane',
+  'Diablo',
+  'Vitara',
+  'Highlander',
+];
+
+export const brandTransformer = {
+  Lexus: 'Sabrina',
+  Genesis: 'Luna',
+  Kia: 'Samantha',
+  Chevrolet: 'Ursula',
+  Mitsubishi: 'Morgana',
+  Toyota: 'Raven',
+  Hyundai: 'Agnes',
+  Nissan: 'Hecate',
+  Dodge: 'Cassandra',
+  Cadillac: 'Tabitha',
+  Mazda: 'Morrigan',
+  Ford: 'Yennifer',
+  BMW: 'Triss',
+};
+
+export const modelTransformer = {
+  Q1: 'the Ripper',
+  A5: 'Le Fay',
+  Jazz: 'of Endor',
+  Alhambra: 'Greenteeth',
+  Sandero: 'the Weird',
+  Duster: 'of Vengerberg',
+  Aircross: 'the Doom',
+  Logan: 'the Spider',
+  GLC: 'of Underworld',
+  Megane: 'of Duskwood',
+  Diablo: 'the Drowned',
+  Vitara: 'of Aedirn',
+  Highlander: 'of Swamp',
+};

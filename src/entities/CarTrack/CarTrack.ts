@@ -17,6 +17,8 @@ export default class CarTrack extends ElemController {
 
   private deleteButton: Button;
 
+  private nameElem: null | HTMLElement;
+
   private carName: string;
 
   private carColor: string;
@@ -41,6 +43,7 @@ export default class CarTrack extends ElemController {
     this.deleteButton = new Button('delete', null, () => this.deleteCar());
 
     this.icon = new CarIcon(car);
+    this.nameElem = null;
 
     this.carName = car.name;
     this.carColor = car.color;
@@ -50,9 +53,17 @@ export default class CarTrack extends ElemController {
   }
 
   init() {
+    this.nameElem = this.createElem('span', [this.carName], null);
+
     const controls = this.createElem(
       'div',
-      [this.startButton.getElem(), this.stopButton.getElem(), this.changeButton.getElem(), this.deleteButton.getElem()],
+      [
+        this.nameElem,
+        this.startButton.getElem(),
+        this.stopButton.getElem(),
+        this.changeButton.getElem(),
+        this.deleteButton.getElem(),
+      ],
       this.classes.controlsClass
     );
 
