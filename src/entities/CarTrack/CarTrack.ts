@@ -74,6 +74,13 @@ export default class CarTrack extends ElemController {
   }
 
   deleteCar() {
-    console.log('deleting', this.carId);
+    const event = new CustomEvent('car-delete', {
+      bubbles: true,
+      detail: {
+        carId: this.carId,
+      },
+    });
+
+    this.elem?.dispatchEvent(event);
   }
 }

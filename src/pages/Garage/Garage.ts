@@ -2,8 +2,10 @@ import CarCreator from '../../entities/CarCreator/CarCreator';
 import CarUpdater from '../../entities/CarUpdater/CarUpdater';
 import Button from '../../shared/elements/Button/Button';
 import ElemController from '../../shared/utils/ElemController';
-import Race from '../../widgets/Race/Race';
+import Race from '../../features/Race/Race';
 import './garage.scss';
+import ServerAPI from '../../shared/utils/ServerAPI';
+import { CarInfo } from '../../shared/types/interfaces';
 
 export default class Garage extends ElemController {
   classes: Record<string, string>;
@@ -20,6 +22,8 @@ export default class Garage extends ElemController {
 
   private stopRaceButton: Button;
 
+  private serverAPI: ServerAPI;
+
   constructor(addClasses: string[] | null) {
     super();
 
@@ -34,6 +38,8 @@ export default class Garage extends ElemController {
     this.carCreator = new CarCreator();
     this.startRaceButton = new Button('start race', null, () => this.startRace());
     this.stopRaceButton = new Button('stop race', null, () => this.stopRace());
+
+    this.serverAPI = ServerAPI.getInstance();
 
     this.init();
   }
@@ -50,6 +56,19 @@ export default class Garage extends ElemController {
       this.classes.controlsClass
     );
     this.elem = this.createElem('div', [controlsBlock, this.race.getElem()], this.classes.baseClass);
+
+    this.hydrate();
+  }
+
+  private hydrate() {
+    this.elem?.addEventListener('car-delete', (e) => {
+      const id: number = (e as CustomEvent).detail.carId;
+      this.deleteCar(id);
+    });
+    this.elem?.addEventListener('car-create', (e) => {
+      const carInfo: CarInfo = (e as CustomEvent).detail.car;
+      this.createCar(carInfo);
+    });
   }
 
   private startRace() {
@@ -58,5 +77,16 @@ export default class Garage extends ElemController {
 
   private stopRace() {
     console.log('Race stopped');
+  }
+
+  private async deleteCar(id: number) {
+    await this.serverAPI.deleteCar(id);
+    this.race.renderCars();
+  }
+
+  private async createCar(car: CarInfo) {
+    console.log(car);
+    await this.serverAPI.saveCar(car);
+    this.race.renderCars();
   }
 }

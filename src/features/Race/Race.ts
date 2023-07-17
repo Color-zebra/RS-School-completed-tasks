@@ -37,6 +37,10 @@ export default class Race extends ElemController {
   }
 
   async renderCars() {
+    if (!this.elem) return;
+
+    this.clear();
+
     const data = await this.serverAPI.getCars();
 
     if (data) {
@@ -48,6 +52,13 @@ export default class Race extends ElemController {
       this.carTracks.push(track);
     });
     const carTracksElems = this.carTracks.map((track) => track.getElem());
-    this.elem?.append(...carTracksElems);
+    if (!this.elem) return;
+    this.elem.append(...carTracksElems);
+  }
+
+  clear() {
+    if (!this.elem) return;
+    this.elem.innerHTML = '';
+    this.carTracks = [];
   }
 }
