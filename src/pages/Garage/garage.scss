@@ -1,4 +1,7 @@
 .garage {
   display: flex;
   flex-direction: column;
+  &__controls {
+    display: flex;
+  }
 }

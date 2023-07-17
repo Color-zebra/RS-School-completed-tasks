@@ -11,9 +11,10 @@ export default class App {
 
   start() {
     document.body.append(this.router.getElem());
+    // this.testSVG();
   }
 
-  /* testSVG() {
+  testSVG() {
     const svgNS = 'http://www.w3.org/2000/svg';
 
     const svgElem1 = document.createElementNS(svgNS, 'svg');
@@ -35,13 +36,13 @@ export default class App {
     document.body.appendChild(svgElem1);
     document.body.appendChild(svgElem2);
 
-    document.getElementById('click-me')?.addEventListener('click', () => {
+    /* document.getElementById('click-me')?.addEventListener('click', () => {
       let color = '';
       for (let i = 0; i < 3; i += 1) {
         color += Math.floor(Math.random() * 256).toString(16);
         console.log(color);
       }
       svgElem2.setAttribute('color', `#${color}`);
-    });
-  } */
+    }); */
+  }
 }

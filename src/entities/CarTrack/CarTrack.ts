@@ -1,4 +1,5 @@
 import Button from '../../shared/elements/Button/Button';
+import CarIcon from '../../shared/elements/CarIcon/CarIcon';
 import { Car } from '../../shared/types/interfaces';
 import ElemController from '../../shared/utils/ElemController';
 import './cartrack.scss';
@@ -6,21 +7,23 @@ import './cartrack.scss';
 export default class CarTrack extends ElemController {
   protected classes: Record<string, string>;
 
-  protected addClasses: Array<string>;
+  private addClasses: Array<string>;
 
-  protected startButton: Button;
+  private startButton: Button;
 
-  protected stopButton: Button;
+  private stopButton: Button;
 
-  protected changeButton: Button;
+  private changeButton: Button;
 
-  protected deleteButton: Button;
+  private deleteButton: Button;
 
   private carName: string;
 
   private carColor: string;
 
   private carId: number;
+
+  private icon: CarIcon;
 
   constructor(addClasses: [string] | null, car: Car) {
     super();
@@ -37,6 +40,8 @@ export default class CarTrack extends ElemController {
     this.changeButton = new Button('change', null, () => this.changeCar());
     this.deleteButton = new Button('delete', null, () => this.deleteCar());
 
+    this.icon = new CarIcon(car);
+
     this.carName = car.name;
     this.carColor = car.color;
     this.carId = car.id;
@@ -51,7 +56,7 @@ export default class CarTrack extends ElemController {
       this.classes.controlsClass
     );
 
-    const track = this.createElem('div', null, this.classes.trackClass);
+    const track = this.createElem('div', [this.icon.getElem()], this.classes.trackClass);
 
     this.elem = this.createElem('div', [controls, track], this.classes.baseClass);
   }
