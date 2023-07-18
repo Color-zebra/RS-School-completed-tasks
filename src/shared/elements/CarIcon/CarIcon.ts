@@ -43,8 +43,8 @@ export default class CarIcon extends ElemController {
   init() {
     this.useElem.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', './assets/sprite.svg#car-icon');
     this.svgElem.setAttribute('color', this.color);
-    this.svgElem.setAttribute('width', '8vh');
-    this.svgElem.setAttribute('height', '8vh');
+    this.svgElem.setAttribute('width', '70px');
+    this.svgElem.setAttribute('height', '70px');
     this.svgElem.appendChild(this.useElem);
     const container = this.createElem('div', [this.svgElem], this.classes.baseClass);
 

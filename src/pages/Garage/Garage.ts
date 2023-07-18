@@ -1,8 +1,8 @@
-import CarCreator from '../../entities/CarCreator/CarCreator';
-import CarUpdater from '../../entities/CarUpdater/CarUpdater';
+import CarCreator from '../../features/CarCreator/CarCreator';
+import CarUpdater from '../../features/CarUpdater/CarUpdater';
 import Button from '../../shared/elements/Button/Button';
 import ElemController from '../../shared/utils/ElemController';
-import Race from '../../features/Race/Race';
+import Race from '../../widgets/Race/Race';
 import './garage.scss';
 import ServerAPI from '../../shared/utils/ServerAPI';
 import { CarInfo } from '../../shared/types/interfaces';
