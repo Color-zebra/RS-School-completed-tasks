@@ -1,5 +1,6 @@
 import CarTrack from '../../features/CarTrack/CarTrack';
 import Pagination from '../../features/Pagination/Pagination';
+import { CustomEvents } from '../../shared/types/enums';
 import { Car } from '../../shared/types/interfaces';
 import ElemController from '../../shared/utils/ElemController';
 import ServerAPI from '../../shared/utils/ServerAPI';
@@ -62,7 +63,7 @@ export default class Race extends ElemController {
   }
 
   hydrate() {
-    this.elem?.addEventListener('car-delete', (e) => {
+    this.elem?.addEventListener(CustomEvents.delete, (e) => {
       const id: number = (e as CustomEvent).detail.carId;
       this.deleteCar(id);
     });

@@ -36,4 +36,12 @@ export default class Button extends ElemController {
       this.elem.addEventListener('click', CB);
     }
   }
+
+  public disable() {
+    this.elem?.setAttribute('disabled', 'disabled');
+  }
+
+  public enable() {
+    this.elem?.removeAttribute('disabled');
+  }
 }

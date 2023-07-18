@@ -8,3 +8,7 @@ export enum SortTypes {
   byWins = 'wins',
   byTime = 'time',
 }
+
+export enum CustomEvents {
+  delete = 'car-delete',
+}

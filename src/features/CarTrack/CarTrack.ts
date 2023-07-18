@@ -1,5 +1,6 @@
 import Button from '../../shared/elements/Button/Button';
 import CarIcon from '../../shared/elements/CarIcon/CarIcon';
+import { CustomEvents } from '../../shared/types/enums';
 import { Car } from '../../shared/types/interfaces';
 import ElemController from '../../shared/utils/ElemController';
 import './cartrack.scss';
@@ -107,7 +108,7 @@ export default class CarTrack extends ElemController {
   }
 
   deleteCar() {
-    const event = new CustomEvent('car-delete', {
+    const event = new CustomEvent(CustomEvents.delete, {
       bubbles: true,
       detail: {
         carId: this.carId,
