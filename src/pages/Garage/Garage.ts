@@ -7,6 +7,7 @@ import './garage.scss';
 import ServerAPI from '../../shared/utils/ServerAPI';
 import { Car, CarInfo } from '../../shared/types/interfaces';
 import CarInfoGenerator from '../../shared/utils/CarInfoGenerator';
+import { CustomEvents } from '../../shared/types/enums';
 
 export default class Garage extends ElemController {
   classes: Record<string, string>;
@@ -73,18 +74,17 @@ export default class Garage extends ElemController {
   }
 
   private hydrate() {
-    this.elem?.addEventListener('car-create', (e) => {
+    this.elem?.addEventListener(CustomEvents.create, (e) => {
       const carInfo: CarInfo = (e as CustomEvent).detail.car;
       this.createCar(carInfo);
     });
 
-    this.elem?.addEventListener('car-updating-start', (e) => {
+    this.elem?.addEventListener(CustomEvents.updateStart, (e) => {
       const car: Car = { ...(e as CustomEvent).detail.car };
       this.carUpdater.initCarUpdate(car);
     });
 
-    this.elem?.addEventListener('car-updating-finish', (e) => {
-      console.log('DOne!');
+    this.elem?.addEventListener(CustomEvents.updateEnd, (e) => {
       const car: Car = { ...(e as CustomEvent).detail.car };
       this.race.updateSingleCar(car);
     });
@@ -106,7 +106,6 @@ export default class Garage extends ElemController {
   }
 
   private async createCar(car: CarInfo) {
-    console.log(car);
     await this.serverAPI.saveCar(car);
     this.race.renderCars();
   }

@@ -1,5 +1,6 @@
 import Button from '../../shared/elements/Button/Button';
 import ColorRange from '../../shared/elements/ColorRange/ColorRange';
+import { CustomEvents } from '../../shared/types/enums';
 import { Car } from '../../shared/types/interfaces';
 import ElemController from '../../shared/utils/ElemController';
 import ServerAPI from '../../shared/utils/ServerAPI';
@@ -18,6 +19,8 @@ export default class CarUpdater extends ElemController {
 
   serverAPI: ServerAPI;
 
+  baseColor: string;
+
   constructor() {
     super();
 
@@ -29,6 +32,7 @@ export default class CarUpdater extends ElemController {
     this.submitButton = new Button('update car', null, () => this.finishCarUpdate());
     this.nameInput = this.createElem('input', null, null, null, { type: 'text' }) as HTMLInputElement;
     this.updatedCarId = null;
+    this.baseColor = '#000000';
 
     this.serverAPI = ServerAPI.getInstance();
 
@@ -63,7 +67,7 @@ export default class CarUpdater extends ElemController {
 
     await this.serverAPI.updateCar(updatedCar);
 
-    const event = new CustomEvent('car-updating-finish', {
+    const event = new CustomEvent(CustomEvents.updateEnd, {
       bubbles: true,
       detail: {
         car: updatedCar,
@@ -76,7 +80,7 @@ export default class CarUpdater extends ElemController {
   }
 
   clear() {
-    this.colorRange.setColor('#000000');
+    this.colorRange.setColor(this.baseColor);
     this.nameInput.value = '';
     this.updatedCarId = null;
     this.submitButton.disable();

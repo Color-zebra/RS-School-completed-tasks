@@ -97,7 +97,7 @@ export default class CarTrack extends ElemController {
       id: this.carId,
     };
 
-    const event = new CustomEvent('car-updating-start', {
+    const event = new CustomEvent(CustomEvents.updateStart, {
       bubbles: true,
       detail: {
         car,

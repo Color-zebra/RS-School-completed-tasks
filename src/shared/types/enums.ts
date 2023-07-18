@@ -11,4 +11,7 @@ export enum SortTypes {
 
 export enum CustomEvents {
   delete = 'car-delete',
+  updateStart = 'car-updating-start',
+  updateEnd = 'car-updating-finish',
+  create = 'car-create',
 }
