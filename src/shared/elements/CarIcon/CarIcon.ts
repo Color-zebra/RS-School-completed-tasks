@@ -70,4 +70,9 @@ export default class CarIcon extends ElemController {
       this.enableFunMod();
     }
   }
+
+  changeColor(color: string) {
+    this.color = color;
+    this.svgElem.setAttribute('color', this.color);
+  }
 }

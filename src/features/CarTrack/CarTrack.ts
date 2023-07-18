@@ -23,7 +23,7 @@ export default class CarTrack extends ElemController {
 
   private carColor: string;
 
-  private carId: number;
+  public readonly carId: number;
 
   private icon: CarIcon;
 
@@ -39,7 +39,7 @@ export default class CarTrack extends ElemController {
 
     this.startButton = new Button('start', null, () => this.startCar());
     this.stopButton = new Button('stop', null, () => this.stopCar());
-    this.changeButton = new Button('change', null, () => this.changeCar());
+    this.changeButton = new Button('change', null, () => this.initCarChanging());
     this.deleteButton = new Button('delete', null, () => this.deleteCar());
 
     this.icon = new CarIcon(car);
@@ -80,8 +80,30 @@ export default class CarTrack extends ElemController {
     console.log('stopping', this.carId);
   }
 
-  changeCar() {
-    console.log('changing', this.carId);
+  changeCar(newColor: string, newName: string) {
+    this.carColor = newColor;
+    this.carName = newName;
+
+    if (!this.nameElem) return;
+    this.nameElem.innerText = this.carName;
+    this.icon.changeColor(newColor);
+  }
+
+  initCarChanging() {
+    const car = {
+      name: this.carName,
+      color: this.carColor,
+      id: this.carId,
+    };
+
+    const event = new CustomEvent('car-updating-start', {
+      bubbles: true,
+      detail: {
+        car,
+      },
+    });
+
+    this.elem?.dispatchEvent(event);
   }
 
   deleteCar() {

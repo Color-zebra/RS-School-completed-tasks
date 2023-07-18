@@ -5,7 +5,7 @@ import ElemController from '../../shared/utils/ElemController';
 import Race from '../../widgets/Race/Race';
 import './garage.scss';
 import ServerAPI from '../../shared/utils/ServerAPI';
-import { CarInfo } from '../../shared/types/interfaces';
+import { Car, CarInfo } from '../../shared/types/interfaces';
 import CarInfoGenerator from '../../shared/utils/CarInfoGenerator';
 
 export default class Garage extends ElemController {
@@ -76,6 +76,17 @@ export default class Garage extends ElemController {
     this.elem?.addEventListener('car-create', (e) => {
       const carInfo: CarInfo = (e as CustomEvent).detail.car;
       this.createCar(carInfo);
+    });
+
+    this.elem?.addEventListener('car-updating-start', (e) => {
+      const car: Car = { ...(e as CustomEvent).detail.car };
+      this.carUpdater.initCarUpdate(car);
+    });
+
+    this.elem?.addEventListener('car-updating-finish', (e) => {
+      console.log('DOne!');
+      const car: Car = { ...(e as CustomEvent).detail.car };
+      this.race.updateSingleCar(car);
     });
   }
 

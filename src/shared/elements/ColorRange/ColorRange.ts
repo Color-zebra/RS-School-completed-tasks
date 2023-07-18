@@ -37,4 +37,9 @@ export default class ColorRange extends ElemController {
   public getColor() {
     return this.choosenColor;
   }
+
+  public setColor(color: string) {
+    this.choosenColor = color;
+    (this.elem as HTMLInputElement).value = color;
+  }
 }

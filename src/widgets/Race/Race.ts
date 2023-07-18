@@ -87,6 +87,13 @@ export default class Race extends ElemController {
     this.totalPages = Math.ceil(this.totalCars / this.carsPerPage);
   }
 
+  updateSingleCar(car: Car) {
+    const carForUpdate = this.carTracks.find((item) => item.carId === car.id);
+    if (carForUpdate) {
+      carForUpdate.changeCar(car.color, car.name);
+    }
+  }
+
   updateCurrPageCars(cars: Car[]) {
     if (cars.length === 0 && this.currPage > 1) {
       this.prevPage();
