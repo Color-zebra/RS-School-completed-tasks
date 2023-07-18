@@ -3,6 +3,7 @@ import CarIcon from '../../shared/elements/CarIcon/CarIcon';
 import { CustomEvents } from '../../shared/types/enums';
 import { Car } from '../../shared/types/interfaces';
 import ElemController from '../../shared/utils/ElemController';
+import ServerAPI from '../../shared/utils/ServerAPI';
 import './cartrack.scss';
 
 export default class CarTrack extends ElemController {
@@ -28,6 +29,12 @@ export default class CarTrack extends ElemController {
 
   private icon: CarIcon;
 
+  serverAPI: ServerAPI;
+
+  finishOffset: number;
+
+  trackLength: number;
+
   constructor(addClasses: [string] | null, car: Car) {
     super();
 
@@ -42,13 +49,16 @@ export default class CarTrack extends ElemController {
     this.stopButton = new Button('stop', null, () => this.stopCar());
     this.changeButton = new Button('change', null, () => this.initCarChanging());
     this.deleteButton = new Button('delete', null, () => this.deleteCar());
-
     this.icon = new CarIcon(car);
     this.nameElem = null;
+    this.finishOffset = 90;
+    this.trackLength = window.innerWidth - this.finishOffset;
 
     this.carName = car.name;
     this.carColor = car.color;
     this.carId = car.id;
+
+    this.serverAPI = ServerAPI.getInstance();
 
     this.init();
   }
@@ -71,10 +81,43 @@ export default class CarTrack extends ElemController {
     const track = this.createElem('div', [this.icon.getElem()], this.classes.trackClass);
 
     this.elem = this.createElem('div', [controls, track], this.classes.baseClass);
+
+    this.hydrate();
   }
 
-  startCar() {
-    console.log('starting', this.carId);
+  hydrate() {
+    window.addEventListener('resize', () => {
+      this.trackLength = window.innerWidth - this.finishOffset;
+      console.log(this.trackLength);
+    });
+  }
+
+  async startCar() {
+    this.disableControls();
+    const params = await this.serverAPI.startCarEngine(this.carId);
+
+    if (!params) return;
+    const speed = params.distance / (params.velocity * 1000);
+
+    let currVal = 0;
+    let isEngineWork = true;
+
+    const move = () => {
+      this.icon.getElem().style.transform = `translateX(${currVal}px)`;
+      currVal += speed;
+      if (currVal <= this.trackLength && isEngineWork) {
+        requestAnimationFrame(move);
+      } else {
+        this.enableControls();
+      }
+    };
+
+    requestAnimationFrame(move);
+
+    const res = await this.serverAPI.driveCar(this.carId);
+    if (res === 500) {
+      isEngineWork = false;
+    }
   }
 
   stopCar() {
@@ -116,5 +159,19 @@ export default class CarTrack extends ElemController {
     });
 
     this.elem?.dispatchEvent(event);
+  }
+
+  disableControls() {
+    this.stopButton.disable();
+    this.startButton.disable();
+    this.changeButton.disable();
+    this.deleteButton.disable();
+  }
+
+  enableControls() {
+    this.stopButton.enable();
+    this.startButton.enable();
+    this.changeButton.enable();
+    this.deleteButton.enable();
   }
 }
