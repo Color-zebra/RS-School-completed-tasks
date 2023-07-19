@@ -35,6 +35,10 @@ export default class CarTrack extends ElemController {
 
   trackLength: number;
 
+  isEngineWork: boolean;
+
+  currDistance: number;
+
   constructor(addClasses: [string] | null, car: Car) {
     super();
 
@@ -51,8 +55,11 @@ export default class CarTrack extends ElemController {
     this.deleteButton = new Button('delete', null, () => this.deleteCar());
     this.icon = new CarIcon(car);
     this.nameElem = null;
+
     this.finishOffset = 90;
     this.trackLength = window.innerWidth - this.finishOffset;
+    this.isEngineWork = true;
+    this.currDistance = 0;
 
     this.carName = car.name;
     this.carColor = car.color;
@@ -88,40 +95,46 @@ export default class CarTrack extends ElemController {
   hydrate() {
     window.addEventListener('resize', () => {
       this.trackLength = window.innerWidth - this.finishOffset;
-      console.log(this.trackLength);
     });
+    this.setControlsStateToStart();
   }
 
   async startCar() {
-    this.disableControls();
+    this.disableAllContols();
+
     const params = await this.serverAPI.startCarEngine(this.carId);
 
     if (!params) return;
     const speed = params.distance / (params.velocity * 1000);
 
-    let currVal = 0;
-    let isEngineWork = true;
+    this.currDistance = 0;
+    this.isEngineWork = true;
 
     const move = () => {
-      this.icon.getElem().style.transform = `translateX(${currVal}px)`;
-      currVal += speed;
-      if (currVal <= this.trackLength && isEngineWork) {
+      this.icon.getElem().style.transform = `translateX(${this.currDistance}px)`;
+      this.currDistance += speed;
+      if (this.currDistance <= this.trackLength && this.isEngineWork) {
         requestAnimationFrame(move);
-      } else {
-        this.enableControls();
       }
     };
 
     requestAnimationFrame(move);
 
+    this.setControlsStateToRace();
+
     const res = await this.serverAPI.driveCar(this.carId);
     if (res === 500) {
-      isEngineWork = false;
+      this.isEngineWork = false;
     }
   }
 
-  stopCar() {
-    console.log('stopping', this.carId);
+  async stopCar() {
+    this.disableAllContols();
+    await this.serverAPI.stopCarEngine(this.carId);
+    this.isEngineWork = false;
+    this.icon.getElem().style.transform = 'none';
+    this.currDistance = 0;
+    this.setControlsStateToStart();
   }
 
   changeCar(newColor: string, newName: string) {
@@ -161,17 +174,24 @@ export default class CarTrack extends ElemController {
     this.elem?.dispatchEvent(event);
   }
 
-  disableControls() {
-    this.stopButton.disable();
+  setControlsStateToRace() {
+    this.stopButton.enable();
     this.startButton.disable();
     this.changeButton.disable();
     this.deleteButton.disable();
   }
 
-  enableControls() {
-    this.stopButton.enable();
+  setControlsStateToStart() {
+    this.stopButton.disable();
     this.startButton.enable();
     this.changeButton.enable();
     this.deleteButton.enable();
+  }
+
+  disableAllContols() {
+    this.stopButton.disable();
+    this.startButton.disable();
+    this.changeButton.disable();
+    this.deleteButton.disable();
   }
 }
