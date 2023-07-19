@@ -1,7 +1,7 @@
 import CarTrack from '../../features/CarTrack/CarTrack';
 import Pagination from '../../features/Pagination/Pagination';
 import { CustomEvents } from '../../shared/types/enums';
-import { Car } from '../../shared/types/interfaces';
+import { Car, Winner } from '../../shared/types/interfaces';
 import ElemController from '../../shared/utils/ElemController';
 import ServerAPI from '../../shared/utils/ServerAPI';
 import './race.scss';
@@ -29,6 +29,8 @@ export default class Race extends ElemController {
 
   private carsPerPage: number;
 
+  isWinnerSet: boolean;
+
   constructor(addClasses: [string] | null) {
     super();
 
@@ -52,6 +54,8 @@ export default class Race extends ElemController {
     this.totalCars = 0;
     this.carsPerPage = 7;
 
+    this.isWinnerSet = false;
+
     this.init();
   }
 
@@ -66,6 +70,14 @@ export default class Race extends ElemController {
     this.elem?.addEventListener(CustomEvents.delete, (e) => {
       const id: number = (e as CustomEvent).detail.carId;
       this.deleteCar(id);
+    });
+
+    this.elem?.addEventListener(CustomEvents.finish, (e) => {
+      const id: number = (e as CustomEvent).detail.carId;
+      const time: number = (e as CustomEvent).detail.totalTime;
+      if (this.isWinnerSet) return;
+      this.setWinner(id, time);
+      this.isWinnerSet = true;
     });
   }
 
@@ -137,5 +149,37 @@ export default class Race extends ElemController {
     this.currPage -= 1;
     this.pagination.updatePageNumber(this.currPage);
     this.renderCars();
+  }
+
+  async startRace() {
+    const startPromises = this.carTracks.map((carTrack) => carTrack.startEngine());
+    await Promise.all(startPromises);
+    this.carTracks.map((carTrack) => carTrack.startCar(true));
+    this.isWinnerSet = false;
+  }
+
+  stopRace() {
+    console.log('Race stopped');
+  }
+
+  async setWinner(carId: number, time: number) {
+    const winner = await this.serverAPI.getWinner(carId);
+    if (winner === null) {
+      const newWinner: Winner = {
+        id: carId,
+        wins: 1,
+        time,
+      };
+
+      await this.serverAPI.saveWinner(newWinner);
+    } else {
+      const updatedWinner: Winner = {
+        id: carId,
+        wins: winner.wins + 1,
+        time: Math.min(time, winner.time),
+      };
+
+      await this.serverAPI.updateWinner(updatedWinner);
+    }
   }
 }

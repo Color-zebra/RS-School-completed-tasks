@@ -91,7 +91,7 @@ export default class Garage extends ElemController {
   }
 
   private startRace() {
-    console.log('Race started');
+    this.race.startRace();
   }
 
   private stopRace() {
@@ -108,5 +108,23 @@ export default class Garage extends ElemController {
   private async createCar(car: CarInfo) {
     await this.serverAPI.saveCar(car);
     this.race.renderCars();
+  }
+
+  setControlsStateToRace() {
+    this.stopRaceButton.enable();
+    this.startRaceButton.disable();
+    this.carGeneratorButton.disable();
+  }
+
+  setControlsStateToStart() {
+    this.stopRaceButton.disable();
+    this.startRaceButton.enable();
+    this.carGeneratorButton.enable();
+  }
+
+  disableAllContols() {
+    this.stopRaceButton.disable();
+    this.startRaceButton.disable();
+    this.carGeneratorButton.disable();
   }
 }

@@ -14,4 +14,5 @@ export enum CustomEvents {
   updateStart = 'car-updating-start',
   updateEnd = 'car-updating-finish',
   create = 'car-create',
+  finish = 'car-finished',
 }

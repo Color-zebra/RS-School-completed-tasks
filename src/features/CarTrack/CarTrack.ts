@@ -39,6 +39,12 @@ export default class CarTrack extends ElemController {
 
   currDistance: number;
 
+  speed: number;
+
+  startTime: number;
+
+  totalTime: number;
+
   constructor(addClasses: [string] | null, car: Car) {
     super();
 
@@ -49,7 +55,10 @@ export default class CarTrack extends ElemController {
     };
     this.addClasses = addClasses || [];
 
-    this.startButton = new Button('start', null, () => this.startCar());
+    this.startButton = new Button('start', null, async () => {
+      await this.startEngine();
+      this.startCar();
+    });
     this.stopButton = new Button('stop', null, () => this.stopCar());
     this.changeButton = new Button('change', null, () => this.initCarChanging());
     this.deleteButton = new Button('delete', null, () => this.deleteCar());
@@ -60,6 +69,9 @@ export default class CarTrack extends ElemController {
     this.trackLength = window.innerWidth - this.finishOffset;
     this.isEngineWork = true;
     this.currDistance = 0;
+    this.speed = 0;
+    this.startTime = 0;
+    this.totalTime = 0;
 
     this.carName = car.name;
     this.carColor = car.color;
@@ -99,26 +111,19 @@ export default class CarTrack extends ElemController {
     this.setControlsStateToStart();
   }
 
-  async startCar() {
-    this.disableAllContols();
-
-    const params = await this.serverAPI.startCarEngine(this.carId);
-
-    if (!params) return;
-    const speed = params.distance / (params.velocity * 1000);
-
-    this.currDistance = 0;
-    this.isEngineWork = true;
-
+  async startCar(isRace?: boolean) {
     const move = () => {
       this.icon.getElem().style.transform = `translateX(${this.currDistance}px)`;
-      this.currDistance += speed;
+      this.currDistance += this.speed;
       if (this.currDistance <= this.trackLength && this.isEngineWork) {
         requestAnimationFrame(move);
+      } else if (isRace && this.isEngineWork) {
+        this.signalFinish();
       }
     };
 
     requestAnimationFrame(move);
+    this.startTime = Date.now();
 
     this.setControlsStateToRace();
 
@@ -126,6 +131,33 @@ export default class CarTrack extends ElemController {
     if (res === 500) {
       this.isEngineWork = false;
     }
+
+    return this.carId;
+  }
+
+  signalFinish() {
+    this.totalTime = (Date.now() - this.startTime) / 1000;
+    const event = new CustomEvent(CustomEvents.finish, {
+      bubbles: true,
+      detail: {
+        carId: this.carId,
+        totalTime: this.totalTime,
+      },
+    });
+
+    this.elem?.dispatchEvent(event);
+  }
+
+  async startEngine() {
+    this.disableAllContols();
+
+    const params = await this.serverAPI.startCarEngine(this.carId);
+
+    if (!params) return;
+    this.speed = params.distance / (params.velocity * 1000);
+
+    this.currDistance = 0;
+    this.isEngineWork = true;
   }
 
   async stopCar() {
