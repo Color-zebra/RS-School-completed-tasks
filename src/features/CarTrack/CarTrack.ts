@@ -65,7 +65,7 @@ export default class CarTrack extends ElemController {
     this.icon = new CarIcon(car);
     this.nameElem = null;
 
-    this.finishOffset = 90;
+    this.finishOffset = 110;
     this.trackLength = window.innerWidth - this.finishOffset;
     this.isEngineWork = true;
     this.currDistance = 0;
@@ -106,7 +106,12 @@ export default class CarTrack extends ElemController {
 
   hydrate() {
     window.addEventListener('resize', () => {
+      const oldLength = this.trackLength;
       this.trackLength = window.innerWidth - this.finishOffset;
+      if (this.speed !== 0) {
+        const coefficient = this.trackLength / oldLength;
+        this.speed *= coefficient;
+      }
     });
     this.setControlsStateToStart();
   }
@@ -128,6 +133,7 @@ export default class CarTrack extends ElemController {
     this.setControlsStateToRace();
 
     const res = await this.serverAPI.driveCar(this.carId);
+    console.log(res);
     if (res === 500) {
       this.isEngineWork = false;
     }
@@ -145,6 +151,8 @@ export default class CarTrack extends ElemController {
       },
     });
 
+    console.log('finished car with id ', this.carId, ' and time ', this.totalTime);
+
     this.elem?.dispatchEvent(event);
   }
 
@@ -154,7 +162,7 @@ export default class CarTrack extends ElemController {
     const params = await this.serverAPI.startCarEngine(this.carId);
 
     if (!params) return;
-    this.speed = params.distance / (params.velocity * 1000);
+    this.speed = this.trackLength / (params.distance / params.velocity / 1000) / 60;
 
     this.currDistance = 0;
     this.isEngineWork = true;
