@@ -21,6 +21,8 @@ export default class Race extends ElemController {
 
   private carTracksContainer: HTMLElement;
 
+  totalCarsElem: HTMLElement;
+
   private currPage: number;
 
   private totalPages: number;
@@ -58,6 +60,7 @@ export default class Race extends ElemController {
     );
 
     this.carTracksContainer = this.createElem('div', null, null);
+    this.totalCarsElem = this.createElem('span', null, null);
     this.carTracks = [];
     this.cars = [];
     this.currPage = 0;
@@ -74,7 +77,9 @@ export default class Race extends ElemController {
   }
 
   init() {
-    this.elem = this.createElem('div', [this.pagination.getElem()], this.classes.trackClass);
+    const totalCarsContainer = this.createElem('div', [this.createElem('span', ['Total cars:'], null)], null);
+    totalCarsContainer.append(this.totalCarsElem);
+    this.elem = this.createElem('div', [this.pagination.getElem(), totalCarsContainer], this.classes.trackClass);
     this.currPage = 1;
     this.renderCars();
     this.hydrate();
@@ -117,6 +122,7 @@ export default class Race extends ElemController {
     if (!totalCars) return;
     this.totalCars = +totalCars;
     this.totalPages = Math.ceil(this.totalCars / this.carsPerPage);
+    this.totalCarsElem.innerText = String(this.totalCars);
   }
 
   updateSingleCar(car: Car) {
