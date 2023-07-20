@@ -41,12 +41,17 @@ export default class Garage extends ElemController {
     };
     this.addClasses = addClasses || [];
 
-    this.race = new Race(null);
     this.carUpdater = new CarUpdater();
     this.carCreator = new CarCreator();
     this.startRaceButton = new Button('start race', null, () => this.startRace());
     this.stopRaceButton = new Button('stop race', null, () => this.stopRace());
     this.carGeneratorButton = new Button('generate 100 cars', null, () => this.massCarGeneration());
+    this.race = new Race(
+      null,
+      () => this.disableAllControls(),
+      () => this.setControlsStateToStart(),
+      () => this.setControlsStateToRace()
+    );
 
     this.massGenerationCount = 100;
 
@@ -95,7 +100,7 @@ export default class Garage extends ElemController {
   }
 
   private stopRace() {
-    console.log('Race stopped');
+    this.race.stopRace();
   }
 
   async massCarGeneration() {
@@ -114,17 +119,20 @@ export default class Garage extends ElemController {
     this.stopRaceButton.enable();
     this.startRaceButton.disable();
     this.carGeneratorButton.disable();
+    this.carCreator.submitButton.enable();
   }
 
   setControlsStateToStart() {
     this.stopRaceButton.disable();
     this.startRaceButton.enable();
     this.carGeneratorButton.enable();
+    this.carCreator.submitButton.enable();
   }
 
-  disableAllContols() {
+  disableAllControls() {
     this.stopRaceButton.disable();
     this.startRaceButton.disable();
     this.carGeneratorButton.disable();
+    this.carCreator.submitButton.disable();
   }
 }

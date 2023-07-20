@@ -130,10 +130,9 @@ export default class CarTrack extends ElemController {
     requestAnimationFrame(move);
     this.startTime = Date.now();
 
-    this.setControlsStateToRace();
+    if (!isRace) this.setControlsStateToRace();
 
     const res = await this.serverAPI.driveCar(this.carId);
-    console.log(res);
     if (res === 500) {
       this.isEngineWork = false;
     }
@@ -157,7 +156,7 @@ export default class CarTrack extends ElemController {
   }
 
   async startEngine() {
-    this.disableAllContols();
+    this.disableAllControls();
 
     const params = await this.serverAPI.startCarEngine(this.carId);
 
@@ -168,13 +167,13 @@ export default class CarTrack extends ElemController {
     this.isEngineWork = true;
   }
 
-  async stopCar() {
-    this.disableAllContols();
+  async stopCar(race?: boolean) {
+    this.disableAllControls();
     await this.serverAPI.stopCarEngine(this.carId);
     this.isEngineWork = false;
     this.icon.getElem().style.transform = 'none';
     this.currDistance = 0;
-    this.setControlsStateToStart();
+    if (!race) this.setControlsStateToStart();
   }
 
   changeCar(newColor: string, newName: string) {
@@ -228,7 +227,7 @@ export default class CarTrack extends ElemController {
     this.deleteButton.enable();
   }
 
-  disableAllContols() {
+  disableAllControls() {
     this.stopButton.disable();
     this.startButton.disable();
     this.changeButton.disable();

@@ -36,4 +36,20 @@ export default class Pagination extends ElemController {
   updatePageNumber(pageNumber: number | string) {
     this.pageNumberWindow.innerText = String(pageNumber);
   }
+
+  disablePrev() {
+    this.prevButton.getElem().setAttribute('disabled', 'disabled');
+  }
+
+  disableNext() {
+    this.nextButton.getElem().setAttribute('disabled', 'disabled');
+  }
+
+  enablePrev() {
+    this.prevButton.getElem().removeAttribute('disabled');
+  }
+
+  enableNext() {
+    this.nextButton.getElem().removeAttribute('disabled');
+  }
 }

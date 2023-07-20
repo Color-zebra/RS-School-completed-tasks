@@ -31,7 +31,18 @@ export default class Race extends ElemController {
 
   isWinnerSet: boolean;
 
-  constructor(addClasses: [string] | null) {
+  disableAllControlsCB: () => void;
+
+  setControlsStateToStartCB: () => void;
+
+  setControlsStateToRaceCB: () => void;
+
+  constructor(
+    addClasses: [string] | null,
+    disableAllControlsCB: () => void,
+    setControlsStateToStartCB: () => void,
+    setControlsStateToRaceCB: () => void
+  ) {
     super();
 
     this.classes = {
@@ -53,8 +64,11 @@ export default class Race extends ElemController {
     this.totalPages = 0;
     this.totalCars = 0;
     this.carsPerPage = 7;
-
     this.isWinnerSet = false;
+
+    this.disableAllControlsCB = disableAllControlsCB;
+    this.setControlsStateToStartCB = setControlsStateToStartCB;
+    this.setControlsStateToRaceCB = setControlsStateToRaceCB;
 
     this.init();
   }
@@ -64,6 +78,7 @@ export default class Race extends ElemController {
     this.currPage = 1;
     this.renderCars();
     this.hydrate();
+    this.setControlsStateToStartCB();
   }
 
   hydrate() {
@@ -78,6 +93,9 @@ export default class Race extends ElemController {
       if (this.isWinnerSet) return;
       this.setWinner(id, time);
       this.isWinnerSet = true;
+      this.setControlsStateToRaceCB();
+      this.enablePagination();
+      this.carTracks.forEach((carTrack) => carTrack.setControlsStateToRace());
     });
   }
 
@@ -91,6 +109,7 @@ export default class Race extends ElemController {
     if (data) {
       this.updateCurrPageCars(data.cars);
       this.updateTotalCars(data?.count);
+      this.enablePagination();
     }
   }
 
@@ -152,14 +171,21 @@ export default class Race extends ElemController {
   }
 
   async startRace() {
-    const startPromises = this.carTracks.map((carTrack) => carTrack.startEngine());
-    await Promise.all(startPromises);
+    this.disableAllControlsCB();
+    this.disablePagination();
+    const stopPromises = this.carTracks.map((carTrack) => carTrack.stopCar(true));
+    await Promise.all(stopPromises);
+    const preparePromises = this.carTracks.map((carTrack) => carTrack.startEngine());
+    await Promise.all(preparePromises);
     this.carTracks.map((carTrack) => carTrack.startCar(true));
     this.isWinnerSet = false;
   }
 
-  stopRace() {
-    console.log('Race stopped');
+  async stopRace() {
+    const stopPromises = this.carTracks.map((carTrack) => carTrack.stopCar());
+    await Promise.all(stopPromises);
+    this.setControlsStateToStartCB();
+    this.enablePagination();
   }
 
   async setWinner(carId: number, time: number) {
@@ -180,6 +206,24 @@ export default class Race extends ElemController {
       };
 
       await this.serverAPI.updateWinner(updatedWinner);
+    }
+  }
+
+  disablePagination() {
+    this.pagination.disableNext();
+    this.pagination.disablePrev();
+  }
+
+  enablePagination() {
+    if (this.currPage > 1) {
+      this.pagination.enablePrev();
+    } else {
+      this.pagination.disablePrev();
+    }
+    if (this.currPage < this.totalPages) {
+      this.pagination.enableNext();
+    } else {
+      this.pagination.disableNext();
     }
   }
 }
