@@ -83,10 +83,12 @@ export default class Router extends ElemController {
     if (this.mode === ModeNames.fun) {
       this.mode = ModeNames.strict;
       this.garagePage.changeMode(this.mode);
+      this.winnersPage.changeMode(this.mode);
       document.body.dataset.mode = 'strict';
     } else {
       this.mode = ModeNames.fun;
       this.garagePage.changeMode(this.mode);
+      this.winnersPage.changeMode(this.mode);
       document.body.dataset.mode = 'fun';
     }
   }

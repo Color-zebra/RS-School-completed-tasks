@@ -1,7 +1,7 @@
 export const brands = [
   'Lexus',
-  'Genesis',
-  'Kia',
+  'Tesla',
+  'Mersedes',
   'Chevrolet',
   'Mitsubishi',
   'Toyota',
@@ -32,8 +32,8 @@ export const models = [
 
 export const brandTransformer = {
   Lexus: 'Sabrina',
-  Genesis: 'Luna',
-  Kia: 'Samantha',
+  Tesla: 'Luna',
+  Mersedes: 'Samantha',
   Chevrolet: 'Ursula',
   Mitsubishi: 'Morgana',
   Toyota: 'Raven',

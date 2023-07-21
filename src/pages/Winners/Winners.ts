@@ -1,3 +1,4 @@
+import { brandTransformer, modelTransformer } from '../../shared/data/carName';
 import { ModeNames, SortOrders, SortTypes } from '../../shared/types/enums';
 import { Winner } from '../../shared/types/interfaces';
 import ElemController from '../../shared/utils/ElemController';
@@ -148,9 +149,13 @@ export default class Winners extends ElemController {
   }
 
   private createWinnerRow(id: number, imageColor: string, name: string, wins: number, time: number) {
+    let usedName = name;
+    if (this.mode === ModeNames.fun) {
+      usedName = this.transformName(usedName);
+    }
     const idCell = this.createElem('td', [String(id)], null);
     const imageCell = this.createElem('td', [this.createImage(imageColor)], null);
-    const nameCell = this.createElem('td', [name], null);
+    const nameCell = this.createElem('td', [usedName], null);
     const winsCell = this.createElem('td', [String(wins)], null);
     const timeCell = this.createElem('td', [String(time)], null);
 
@@ -163,7 +168,8 @@ export default class Winners extends ElemController {
     const svgNS = 'http://www.w3.org/2000/svg';
     const svgElem = document.createElementNS(svgNS, 'svg') as SVGElement;
     const useElem = document.createElementNS(svgNS, 'use') as SVGUseElement;
-    useElem.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', './assets/sprite.svg#car-icon');
+    const src = this.mode === ModeNames.strict ? './assets/sprite.svg#car-icon' : './assets/sprite.svg#witch-icon';
+    useElem.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', src);
     svgElem.setAttribute('color', color);
     svgElem.setAttribute('width', '40px');
     svgElem.setAttribute('height', '40px');
@@ -173,5 +179,25 @@ export default class Winners extends ElemController {
     this.currPageIcons.push(useElem);
 
     return container;
+  }
+
+  transformName(winnerName: string) {
+    let [first, second] = [...winnerName.split(' ')];
+    if (first && first in brandTransformer) {
+      first = brandTransformer[first as keyof typeof brandTransformer];
+    }
+    if (second && second in modelTransformer) {
+      second = modelTransformer[second as keyof typeof modelTransformer];
+    }
+
+    first = first === undefined ? '' : first;
+    second = second === undefined ? '' : second;
+
+    return `${first} ${second}`;
+  }
+
+  changeMode(mode: ModeNames) {
+    this.mode = mode;
+    this.renderWinners();
   }
 }
