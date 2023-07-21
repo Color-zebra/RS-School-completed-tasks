@@ -16,3 +16,8 @@ export enum CustomEvents {
   create = 'car-create',
   finish = 'car-finished',
 }
+
+export enum ModeNames {
+  strict = 'strict-mode',
+  fun = 'fun-mode',
+}

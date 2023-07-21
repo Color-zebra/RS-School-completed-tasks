@@ -1,6 +1,6 @@
 import CarTrack from '../../features/CarTrack/CarTrack';
 import Pagination from '../../features/Pagination/Pagination';
-import { CustomEvents } from '../../shared/types/enums';
+import { CustomEvents, ModeNames } from '../../shared/types/enums';
 import { Car, Winner } from '../../shared/types/interfaces';
 import ElemController from '../../shared/utils/ElemController';
 import ServerAPI from '../../shared/utils/ServerAPI';
@@ -32,6 +32,8 @@ export default class Race extends ElemController {
   private carsPerPage: number;
 
   isWinnerSet: boolean;
+
+  mode: ModeNames;
 
   disableAllControlsCB: () => void;
 
@@ -69,6 +71,8 @@ export default class Race extends ElemController {
     this.carsPerPage = 7;
     this.isWinnerSet = false;
 
+    this.mode = ModeNames.strict;
+
     this.disableAllControlsCB = disableAllControlsCB;
     this.setControlsStateToStartCB = setControlsStateToStartCB;
     this.setControlsStateToRaceCB = setControlsStateToRaceCB;
@@ -105,6 +109,7 @@ export default class Race extends ElemController {
   }
 
   async renderCars() {
+    console.log(this.mode);
     if (!this.elem) return;
 
     this.clear();
@@ -115,6 +120,13 @@ export default class Race extends ElemController {
       this.updateCurrPageCars(data.cars);
       this.updateTotalCars(data?.count);
       this.enablePagination();
+    }
+
+    if (this.mode === ModeNames.fun) {
+      this.carTracks.forEach((carTrack) => {
+        carTrack.transformName();
+        carTrack.changeIcon(this.mode);
+      });
     }
   }
 
@@ -231,5 +243,14 @@ export default class Race extends ElemController {
     } else {
       this.pagination.disableNext();
     }
+  }
+
+  changeMode(mode: ModeNames) {
+    if (mode === ModeNames.fun) {
+      this.mode = ModeNames.fun;
+    } else {
+      this.mode = ModeNames.strict;
+    }
+    this.carTracks.forEach((carTrack) => carTrack.changeMode(mode));
   }
 }

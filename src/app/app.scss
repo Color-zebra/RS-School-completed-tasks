@@ -17,3 +17,13 @@ body {
 main {
   flex: 1 0 auto;
 }
+
+body[data-mode="fun"] {
+  --track-bg: url('../shared/assets/img/witch-bg.jpg');
+  --track-finish: url('../shared/assets/img/witch-finish.png');
+}
+
+body[data-mode="strict"] {
+  --track-bg: url('../shared/assets/img/car-bg.png');
+  --track-finish: url('../shared/assets/img/car-finish.jpg');
+}

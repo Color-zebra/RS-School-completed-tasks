@@ -7,7 +7,7 @@ import './garage.scss';
 import ServerAPI from '../../shared/utils/ServerAPI';
 import { Car, CarInfo } from '../../shared/types/interfaces';
 import CarInfoGenerator from '../../shared/utils/CarInfoGenerator';
-import { CustomEvents } from '../../shared/types/enums';
+import { CustomEvents, ModeNames } from '../../shared/types/enums';
 
 export default class Garage extends ElemController {
   classes: Record<string, string>;
@@ -134,5 +134,13 @@ export default class Garage extends ElemController {
     this.startRaceButton.disable();
     this.carGeneratorButton.disable();
     this.carCreator.submitButton.disable();
+  }
+
+  changeMode(mode: ModeNames) {
+    if (mode === ModeNames.fun) {
+      this.race.changeMode(ModeNames.fun);
+    } else {
+      this.race.changeMode(ModeNames.strict);
+    }
   }
 }

@@ -1,5 +1,6 @@
 import Garage from '../../pages/Garage/Garage';
 import Winners from '../../pages/Winners/Winners';
+import { ModeNames } from '../../shared/types/enums';
 import ElemController from '../../shared/utils/ElemController';
 import Footer from '../../widgets/Footer/Footer';
 import Header from '../../widgets/Header/Header';
@@ -15,6 +16,8 @@ export default class Router extends ElemController {
 
   protected garagePage: Garage;
 
+  mode: ModeNames;
+
   constructor() {
     super();
 
@@ -22,7 +25,9 @@ export default class Router extends ElemController {
       baseClass: 'wrapper',
     };
 
-    this.header = new Header(null);
+    this.mode = ModeNames.strict;
+
+    this.header = new Header(null, () => this.changeMode());
     this.footer = new Footer(null);
     this.garagePage = new Garage(null);
     this.winnersPage = new Winners();
@@ -31,6 +36,7 @@ export default class Router extends ElemController {
   }
 
   protected init() {
+    document.body.dataset.mode = 'strict';
     const page = this.createElem(
       'main',
       [this.garagePage.getElem(), this.winnersPage.getElem()],
@@ -71,5 +77,17 @@ export default class Router extends ElemController {
   displayWinners() {
     this.garagePage.getElem().style.display = 'none';
     this.winnersPage.getElem().style.display = 'flex';
+  }
+
+  changeMode() {
+    if (this.mode === ModeNames.fun) {
+      this.mode = ModeNames.strict;
+      this.garagePage.changeMode(this.mode);
+      document.body.dataset.mode = 'strict';
+    } else {
+      this.mode = ModeNames.fun;
+      this.garagePage.changeMode(this.mode);
+      document.body.dataset.mode = 'fun';
+    }
   }
 }

@@ -1,6 +1,7 @@
+import { brandTransformer, modelTransformer } from '../../shared/data/carName';
 import Button from '../../shared/elements/Button/Button';
 import CarIcon from '../../shared/elements/CarIcon/CarIcon';
-import { CustomEvents } from '../../shared/types/enums';
+import { CustomEvents, ModeNames } from '../../shared/types/enums';
 import { Car } from '../../shared/types/interfaces';
 import ElemController from '../../shared/utils/ElemController';
 import ServerAPI from '../../shared/utils/ServerAPI';
@@ -150,8 +151,6 @@ export default class CarTrack extends ElemController {
       },
     });
 
-    console.log('finished car with id ', this.carId, ' and time ', this.totalTime);
-
     this.elem?.dispatchEvent(event);
   }
 
@@ -232,5 +231,37 @@ export default class CarTrack extends ElemController {
     this.startButton.disable();
     this.changeButton.disable();
     this.deleteButton.disable();
+  }
+
+  changeMode(mode: ModeNames) {
+    if (mode === ModeNames.fun) {
+      this.transformName();
+    } else {
+      this.removeNameTransform();
+    }
+    this.changeIcon(mode);
+  }
+
+  changeIcon(mode: ModeNames) {
+    this.icon.changeMode(mode);
+  }
+
+  transformName() {
+    let [first, second] = [...this.carName.split(' ')];
+    if (first && first in brandTransformer) {
+      first = brandTransformer[first as keyof typeof brandTransformer];
+    }
+    if (second && second in modelTransformer) {
+      second = modelTransformer[second as keyof typeof modelTransformer];
+    }
+
+    first = first === undefined ? '' : first;
+    second = second === undefined ? '' : second;
+
+    if (this.nameElem) this.nameElem.innerText = `${first} ${second}`;
+  }
+
+  removeNameTransform() {
+    if (this.nameElem) this.nameElem.innerText = this.carName;
   }
 }

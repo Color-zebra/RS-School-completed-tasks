@@ -11,7 +11,9 @@ export default class Header extends ElemController {
 
   protected toWinnersBtn: Button;
 
-  constructor(addClasses: [string] | null) {
+  protected switchModeBtn: Button;
+
+  constructor(addClasses: [string] | null, switchModeCB: () => void) {
     super();
 
     this.classes = {
@@ -25,6 +27,9 @@ export default class Header extends ElemController {
     this.toWinnersBtn = new Button('Winners', ['header__winners-btn'], () => {
       window.location.hash = 'winners';
     });
+    this.switchModeBtn = new Button('Switch mode', ['header__switch-btn'], () => {
+      switchModeCB();
+    });
 
     this.init();
   }
@@ -32,7 +37,7 @@ export default class Header extends ElemController {
   protected init() {
     this.elem = this.createElem(
       'div',
-      [this.toGarageBtn.getElem(), this.toWinnersBtn.getElem()],
+      [this.toGarageBtn.getElem(), this.switchModeBtn.getElem(), this.toWinnersBtn.getElem()],
       [this.classes.baseClass]
     );
   }

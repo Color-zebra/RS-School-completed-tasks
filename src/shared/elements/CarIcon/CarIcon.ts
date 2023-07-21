@@ -1,3 +1,4 @@
+import { ModeNames } from '../../types/enums';
 import { Car } from '../../types/interfaces';
 import ElemController from '../../utils/ElemController';
 import './caricon.scss';
@@ -48,8 +49,6 @@ export default class CarIcon extends ElemController {
     this.svgElem.appendChild(this.useElem);
     const container = this.createElem('div', [this.svgElem], this.classes.baseClass);
 
-    container.addEventListener('click', () => this.switchMode());
-
     this.elem = container;
   }
 
@@ -63,11 +62,12 @@ export default class CarIcon extends ElemController {
     this.useElem.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', './assets/sprite.svg#car-icon');
   }
 
-  switchMode() {
-    if (this.funModeEnabled) {
-      this.disableFunMode();
-    } else {
+  changeMode(mode: ModeNames) {
+    console.log(mode);
+    if (mode === ModeNames.fun) {
       this.enableFunMod();
+    } else {
+      this.disableFunMode();
     }
   }
 
