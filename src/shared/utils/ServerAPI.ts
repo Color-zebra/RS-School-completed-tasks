@@ -1,6 +1,5 @@
 import { SortOrders, SortTypes } from '../types/enums';
 import { Car, CarInfo, SpeedParams, Winner } from '../types/interfaces';
-import { SortOrder, SortType } from '../types/types';
 
 export default class ServerAPI {
   private static instance: ServerAPI;
@@ -203,11 +202,12 @@ export default class ServerAPI {
     }
   }
 
-  public async getWinners(sort: SortType, order: SortOrder, page?: number) {
+  public async getWinners(sort: SortTypes, order: SortOrders, page?: number) {
+    console.log(sort, order);
     const choosenPageLink = page ? `&_page=${page}` : '';
     const choosenLimitLink = `?_limit=${this.winnersPerPage}`;
-    const sortTypeLink = `&_sort=${SortTypes[sort]}`;
-    const sortOrderLink = `&_order=${SortOrders[order]}`;
+    const sortTypeLink = `&_sort=${sort}`;
+    const sortOrderLink = `&_order=${order}`;
     const link = `${this.baseAddress}${this.winnersAddress}${choosenLimitLink}${choosenPageLink}${sortTypeLink}${sortOrderLink}`;
     let responce;
     try {

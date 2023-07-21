@@ -109,7 +109,6 @@ export default class Race extends ElemController {
   }
 
   async renderCars() {
-    console.log(this.mode);
     if (!this.elem) return;
 
     this.clear();
@@ -171,6 +170,7 @@ export default class Race extends ElemController {
 
   private async deleteCar(id: number) {
     await this.serverAPI.deleteCar(id);
+    await this.serverAPI.deleteWinner(id);
     this.renderCars();
   }
 
