@@ -1,3 +1,4 @@
+import Pagination from '../../features/Pagination/Pagination';
 import { brandTransformer, modelTransformer } from '../../shared/data/carName';
 import { ModeNames, SortOrders, SortTypes } from '../../shared/types/enums';
 import { Winner } from '../../shared/types/interfaces';
@@ -12,29 +13,37 @@ export default class Winners extends ElemController {
 
   private serverAPI: ServerAPI;
 
+  private pagination: Pagination;
+
   private sortByIdOrder: SortOrders;
 
   private sortByWinsOrder: SortOrders;
 
   private sortByTimeOrder: SortOrders;
 
-  private currentPage: number;
+  private currPage: number;
+
+  private totalPages: number;
+
+  private winnersPerPage: number;
 
   private tableContent: HTMLElement;
 
-  totalWinners: number;
+  private totalWinners: number;
 
-  currPageWinners: Winner[];
+  public currPageWinners: Winner[];
 
-  currPageIcons: SVGUseElement[];
+  private currPageIcons: SVGUseElement[];
 
-  mode: ModeNames;
+  public mode: ModeNames;
 
-  sortOrders: Record<string, SortOrders>;
+  private sortOrders: Record<string, SortOrders>;
 
-  sortType: SortTypes;
+  private sortType: SortTypes;
 
-  sortControls: Record<string, HTMLElement>;
+  private sortControls: Record<string, HTMLElement>;
+
+  private totalWinnersElem: HTMLElement;
 
   constructor() {
     super();
@@ -52,6 +61,15 @@ export default class Winners extends ElemController {
       wins: 'Total wins',
       time: 'Best time',
     };
+
+    this.pagination = new Pagination(
+      () => this.prevPage(),
+      () => this.nextPage()
+    );
+    this.totalWinnersElem = this.createElem('span', null, null);
+    this.winnersPerPage = 10;
+    this.currPage = 1;
+    this.totalPages = 1;
 
     this.serverAPI = ServerAPI.getInstance();
 
@@ -74,7 +92,6 @@ export default class Winners extends ElemController {
       time: SortOrders.RIGHT,
     };
 
-    this.currentPage = 1;
     this.totalWinners = 0;
     this.currPageWinners = [];
     this.currPageIcons = [];
@@ -93,17 +110,17 @@ export default class Winners extends ElemController {
 
   async renderWinners() {
     this.clear();
-    const res = await this.serverAPI.getWinners(this.sortType, this.sortOrders[`${this.sortType}`], this.currentPage);
-    console.log(res);
+    const res = await this.serverAPI.getWinners(this.sortType, this.sortOrders[`${this.sortType}`], this.currPage);
 
     if (res?.count) {
       this.totalWinners = +res.count;
+      this.updateTotalWinners(res.count);
+      this.enablePagination();
     }
 
     if (res?.winners) {
       res.winners.forEach(async (winner) => {
         const carInfo = await this.serverAPI.getCar(winner.id);
-        console.log(carInfo);
         if (!carInfo) return;
         const { color, name } = carInfo;
         const tableRow = this.createWinnerRow(winner.id, color, name, winner.wins, winner.time);
@@ -140,18 +157,17 @@ export default class Winners extends ElemController {
   private createTable() {
     const imageColumnHeader = this.createElem('th', [this.columnNames.image], null);
     const nameColumnHeader = this.createElem('th', [this.columnNames.name], null);
+    const paginationSection = this.createElem('div', [this.pagination.getElem(), this.totalWinnersElem], null);
 
     const headersRow = this.createElem(
       'tr',
       [this.sortControls.id, imageColumnHeader, nameColumnHeader, this.sortControls.wins, this.sortControls.time],
       null
     );
-
     const tableHeader = this.createElem('thead', [headersRow], null);
-
     const table = this.createElem('table', [tableHeader, this.tableContent], null);
 
-    this.elem = this.createElem('div', [table], this.classes.baseClass);
+    this.elem = this.createElem('div', [table, paginationSection], this.classes.baseClass);
   }
 
   private clear() {
@@ -210,6 +226,45 @@ export default class Winners extends ElemController {
 
   changeMode(mode: ModeNames) {
     this.mode = mode;
+    this.renderWinners();
+  }
+
+  disablePagination() {
+    this.pagination.disableNext();
+    this.pagination.disablePrev();
+  }
+
+  enablePagination() {
+    if (this.currPage > 1) {
+      this.pagination.enablePrev();
+    } else {
+      this.pagination.disablePrev();
+    }
+    if (this.currPage < this.totalPages) {
+      this.pagination.enableNext();
+    } else {
+      this.pagination.disableNext();
+    }
+  }
+
+  updateTotalWinners(totalWinners: number | string | null) {
+    if (!totalWinners) return;
+    this.totalWinners = +totalWinners;
+    this.totalPages = Math.ceil(this.totalWinners / this.winnersPerPage);
+    this.totalWinnersElem.innerText = String(this.totalWinners);
+  }
+
+  nextPage() {
+    if (this.currPage >= this.totalPages) return;
+    this.currPage += 1;
+    this.pagination.updatePageNumber(this.currPage);
+    this.renderWinners();
+  }
+
+  prevPage() {
+    if (this.currPage <= 1) return;
+    this.currPage -= 1;
+    this.pagination.updatePageNumber(this.currPage);
     this.renderWinners();
   }
 }
