@@ -91,20 +91,12 @@ export default class Race extends ElemController {
   }
 
   hydrate() {
-    this.elem?.addEventListener(CustomEvents.delete, (e) => {
-      const id: number = (e as CustomEvent).detail.carId;
-      this.deleteCar(id);
+    this.elem?.addEventListener(CustomEvents.delete, async (e) => {
+      this.handleDeleting(e as CustomEvent);
     });
 
-    this.elem?.addEventListener(CustomEvents.finish, (e) => {
-      const id: number = (e as CustomEvent).detail.carId;
-      const time: number = (e as CustomEvent).detail.totalTime;
-      if (this.isWinnerSet) return;
-      this.setWinner(id, time);
-      this.isWinnerSet = true;
-      this.setControlsStateToRaceCB();
-      this.enablePagination();
-      this.carTracks.forEach((carTrack) => carTrack.setControlsStateToRace());
+    this.elem?.addEventListener(CustomEvents.finish, async (e) => {
+      this.handleFinish(e as CustomEvent);
     });
   }
 
@@ -134,6 +126,39 @@ export default class Race extends ElemController {
     this.totalCars = +totalCars;
     this.totalPages = Math.ceil(this.totalCars / this.carsPerPage);
     this.totalCarsElem.innerText = String(this.totalCars);
+  }
+
+  async handleFinish(e: CustomEvent) {
+    const id: number = e.detail.carId;
+    const time: number = e.detail.totalTime;
+    if (this.isWinnerSet) return;
+    this.isWinnerSet = true;
+    await this.setWinner(id, time);
+    this.setControlsStateToRaceCB();
+    this.enablePagination();
+    this.carTracks.forEach((carTrack) => carTrack.setControlsStateToRace());
+    const event = new CustomEvent(CustomEvents.newWinner, {
+      bubbles: true,
+      detail: {
+        id,
+      },
+    });
+
+    this.elem?.dispatchEvent(event);
+  }
+
+  async handleDeleting(e: CustomEvent) {
+    const id: number = e.detail.carId;
+    await this.deleteCar(id);
+
+    const event = new CustomEvent(CustomEvents.deleteWinner, {
+      bubbles: true,
+      detail: {
+        id,
+      },
+    });
+
+    this.elem?.dispatchEvent(event);
   }
 
   updateSingleCar(car: Car) {

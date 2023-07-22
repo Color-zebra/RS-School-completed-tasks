@@ -1,6 +1,6 @@
 import Garage from '../../pages/Garage/Garage';
 import Winners from '../../pages/Winners/Winners';
-import { ModeNames } from '../../shared/types/enums';
+import { CustomEvents, ModeNames } from '../../shared/types/enums';
 import ElemController from '../../shared/utils/ElemController';
 import Footer from '../../widgets/Footer/Footer';
 import Header from '../../widgets/Header/Header';
@@ -50,6 +50,24 @@ export default class Router extends ElemController {
     this.changeView();
     window.addEventListener('hashchange', () => {
       this.changeView();
+    });
+    this.elem?.addEventListener(CustomEvents.newWinner, () => {
+      this.winnersPage.renderWinners();
+    });
+    this.elem?.addEventListener(CustomEvents.deleteWinner, (e) => {
+      const { id } = (e as CustomEvent).detail;
+      console.log(id);
+      console.log(this.winnersPage.currPageWinners);
+      if (this.winnersPage.currPageWinners.some((winner) => winner.id === id)) {
+        console.log('deleting');
+        this.winnersPage.renderWinners();
+      }
+    });
+    this.elem?.addEventListener(CustomEvents.updateEnd, (e) => {
+      const { id } = (e as CustomEvent).detail.car;
+      if (this.winnersPage.currPageWinners.some((winner) => winner.id === id)) {
+        this.winnersPage.renderWinners();
+      }
     });
   }
 

@@ -15,6 +15,8 @@ export enum CustomEvents {
   updateEnd = 'car-updating-finish',
   create = 'car-create',
   finish = 'car-finished',
+  newWinner = 'new-winner-set',
+  deleteWinner = 'winner-delete',
 }
 
 export enum ModeNames {

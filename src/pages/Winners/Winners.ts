@@ -12,12 +12,6 @@ export default class Winners extends ElemController {
 
   private serverAPI: ServerAPI;
 
-  private sortByIdContol: HTMLElement;
-
-  private sortByWinsContol: HTMLElement;
-
-  private sortByTimeContol: HTMLElement;
-
   private sortByIdOrder: SortOrders;
 
   private sortByWinsOrder: SortOrders;
@@ -40,6 +34,8 @@ export default class Winners extends ElemController {
 
   sortType: SortTypes;
 
+  sortControls: Record<string, HTMLElement>;
+
   constructor() {
     super();
 
@@ -59,9 +55,12 @@ export default class Winners extends ElemController {
 
     this.serverAPI = ServerAPI.getInstance();
 
-    this.sortByIdContol = this.createElem('th', [this.columnNames.id], this.classes.rightOrder);
-    this.sortByWinsContol = this.createElem('th', [this.columnNames.wins], this.classes.rightOrder);
-    this.sortByTimeContol = this.createElem('th', [this.columnNames.time], this.classes.rightOrder);
+    this.sortControls = {
+      id: this.createElem('th', [this.columnNames.id], this.classes.rightOrder),
+      wins: this.createElem('th', [this.columnNames.wins], null),
+      time: this.createElem('th', [this.columnNames.time], null),
+    };
+
     this.tableContent = this.createElem('tbody', null, null);
 
     this.sortByIdOrder = SortOrders.RIGHT;
@@ -92,7 +91,7 @@ export default class Winners extends ElemController {
     this.hydrate();
   }
 
-  protected async renderWinners() {
+  async renderWinners() {
     this.clear();
     const res = await this.serverAPI.getWinners(this.sortType, this.sortOrders[`${this.sortType}`], this.currentPage);
     console.log(res);
@@ -109,21 +108,33 @@ export default class Winners extends ElemController {
         const { color, name } = carInfo;
         const tableRow = this.createWinnerRow(winner.id, color, name, winner.wins, winner.time);
         this.tableContent.append(tableRow);
+        this.currPageWinners.push(winner);
       });
     }
   }
 
   private hydrate() {
-    this.sortByIdContol.addEventListener('click', () => this.sortBy(SortTypes.byId));
-    this.sortByWinsContol.addEventListener('click', () => this.sortBy(SortTypes.byWins));
-    this.sortByTimeContol.addEventListener('click', () => this.sortBy(SortTypes.byTime));
+    this.sortControls.id.addEventListener('click', () => this.sortBy(SortTypes.byId));
+    this.sortControls.wins.addEventListener('click', () => this.sortBy(SortTypes.byWins));
+    this.sortControls.time.addEventListener('click', () => this.sortBy(SortTypes.byTime));
   }
 
   sortBy(sortType: SortTypes) {
-    this.renderWinners();
-    this.sortOrders[this.sortType] =
-      this.sortOrders[this.sortType] === SortOrders.REVERS ? SortOrders.RIGHT : SortOrders.REVERS;
+    Object.values(this.sortControls).forEach((control) => {
+      control.classList.remove(this.classes.reverseOrder);
+      control.classList.remove(this.classes.rightOrder);
+    });
+
     this.sortType = sortType;
+    if (this.sortOrders[this.sortType] === SortOrders.REVERS) {
+      this.sortOrders[this.sortType] = SortOrders.RIGHT;
+      this.sortControls[this.sortType].classList.add(this.classes.rightOrder);
+    } else {
+      this.sortOrders[this.sortType] = SortOrders.REVERS;
+      this.sortControls[this.sortType].classList.add(this.classes.reverseOrder);
+    }
+
+    this.renderWinners();
   }
 
   private createTable() {
@@ -132,7 +143,7 @@ export default class Winners extends ElemController {
 
     const headersRow = this.createElem(
       'tr',
-      [this.sortByIdContol, imageColumnHeader, nameColumnHeader, this.sortByWinsContol, this.sortByTimeContol],
+      [this.sortControls.id, imageColumnHeader, nameColumnHeader, this.sortControls.wins, this.sortControls.time],
       null
     );
 
@@ -146,6 +157,7 @@ export default class Winners extends ElemController {
   private clear() {
     this.tableContent.innerHTML = '';
     this.currPageIcons.length = 0;
+    this.currPageWinners.length = 0;
   }
 
   private createWinnerRow(id: number, imageColor: string, name: string, wins: number, time: number) {
