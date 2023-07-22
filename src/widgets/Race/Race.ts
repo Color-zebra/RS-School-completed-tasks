@@ -3,7 +3,9 @@ import Pagination from '../../features/Pagination/Pagination';
 import { CustomEvents, ModeNames } from '../../shared/types/enums';
 import { Car, Winner } from '../../shared/types/interfaces';
 import ElemController from '../../shared/utils/ElemController';
+import transformName from '../../shared/utils/NameTransform';
 import ServerAPI from '../../shared/utils/ServerAPI';
+import WinnerPopup from '../WinnerPopup/WinnerPopup';
 import './race.scss';
 
 export default class Race extends ElemController {
@@ -18,6 +20,8 @@ export default class Race extends ElemController {
   private serverAPI: ServerAPI;
 
   private pagination: Pagination;
+
+  popup: WinnerPopup;
 
   private carTracksContainer: HTMLElement;
 
@@ -60,6 +64,7 @@ export default class Race extends ElemController {
       () => this.prevPage(),
       () => this.nextPage()
     );
+    this.popup = new WinnerPopup();
 
     this.carTracksContainer = this.createElem('div', null, null);
     this.totalCarsElem = this.createElem('span', null, null);
@@ -129,13 +134,16 @@ export default class Race extends ElemController {
   }
 
   async handleFinish(e: CustomEvent) {
+    if (this.isWinnerSet) return;
     const id: number = e.detail.carId;
     const time: number = e.detail.totalTime;
-    if (this.isWinnerSet) return;
+    let name: string = e.detail.carName;
+    if (this.mode === ModeNames.fun) name = transformName(name);
     this.isWinnerSet = true;
     await this.setWinner(id, time);
     this.setControlsStateToRaceCB();
     this.enablePagination();
+    this.popup.showPopup(name, time);
     this.carTracks.forEach((carTrack) => carTrack.setControlsStateToRace());
     const event = new CustomEvent(CustomEvents.newWinner, {
       bubbles: true,

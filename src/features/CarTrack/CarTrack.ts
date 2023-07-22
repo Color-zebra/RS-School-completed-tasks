@@ -146,6 +146,7 @@ export default class CarTrack extends ElemController {
     const event = new CustomEvent(CustomEvents.finish, {
       bubbles: true,
       detail: {
+        carName: this.carName,
         carId: this.carId,
         totalTime: this.totalTime,
       },

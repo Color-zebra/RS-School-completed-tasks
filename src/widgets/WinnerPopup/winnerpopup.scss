@@ -1,0 +1,113 @@
+.winner-popup {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  left: -200vw;
+  background: #000000c9;
+  z-index: 2;
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 2rem;
+  text-transform: lowercase;
+  font-style: italic;
+  color: white;
+
+  &__content {
+    position: relative;
+    left: -100vw;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__name {
+    text-transform: uppercase;
+    color: orange;
+  }
+
+  &__time {
+    text-transform: uppercase;
+    color: orange;
+  }
+
+  &_shown {
+    top: 0;
+    left: 0;
+  }
+
+  &_shown > &__content {
+    animation: show 2s ease-in-out;
+  }
+}
+
+
+@keyframes show {
+  0%{
+    left: -5%
+  }
+  5%{
+    left: -4.5%
+  }
+  10%{
+    left: -4%
+  }
+  15%{
+    left: -3.5%
+  }
+  20%{
+    left: -3%
+  }
+  25%{
+    left: -2.5%
+  }
+  30%{
+    left: -2%
+  }
+  35%{
+    left: -1.5%
+  }
+  40%{
+    left: -1%
+  }
+  45%{
+    left: -0.5%
+  }
+  50%{
+    left: 0%
+  }
+  55%{
+    left: 0.5%
+  }
+  60%{
+    left: 1%
+  }
+  65%{
+    left: 1.5%
+  }
+  70%{
+    left: 2%
+  }
+  75%{
+    left: 2.5%
+  }
+  80%{
+    left: 3%
+  }
+  85%{
+    left: 3.5%
+  }
+  90%{
+    left: 4%
+  }
+  95%{
+    left: 4.5%
+  }
+  100%{
+    left: 100vw
+  }
+}
