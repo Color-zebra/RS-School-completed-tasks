@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/night.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>FSD Architecture</section>
+				<section>An architecture is a set of rules and conventions for organizing code. The main goal is to make the project understandable and structured, especially in the context of regular changes and additions.</section>
+				<section>
+					<section>
+						<ul>
+							<li>Exclusively for the frontend.</li>
+							<li>May be overkill for small projects.</li>
+							<li>May not be suitable for VERY large applications.</li>
+							<li>Suitable for any framework or language.</li>
+						</ul>
+					</section>
+					<section>
+						<img src="./assets/fsd.jpg" alt="fsd scheme">
+					</section>
+				</section>
+				<section>
+					<section>
+						A layer is the first level of an organizational hierarchy. Their goal is to separate the code based on the degree of responsibility and dependencies on other modules. 
+					</section>
+					<section>
+						<img src="./assets/layers.svg" alt="fsd layers">
+					</section>
+					<section>
+						<img src="./assets/gh-example.jpg" alt="fsd layers">
+					</section>
+				</section>
+				<section>
+					<section>
+						Slices are the second level of the organizational hierarchy. Their main purpose is to group code by its value to the application. 
+					</section>
+					<section>
+						<img src="./assets/slices.jpg" alt="fsd slices">
+					</section>
+					<section>
+						A public API is a public interface that provides a single point of access to all the capabilities of a module and determines how this module will interact with the outside world.
+						<ul>
+							<li>Protects the internal structure of modules from uncontrolled change.</li>
+							<li>Helps to encapsulate modules.</li>
+							<li>Allows you to easily define module behaviors based on API methods.</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>
+						Segments are the third and final level of the organizational hierarchy. Their task is to group the code according to its technical nature.
+					</section>
+					<section>
+						<img src="./assets/segments.jpg" alt="">
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>Should be</h3>
+						<ul>
+							<li>Layering.</li>
+							<li>Public API for slices.</li>
+							<li>Top-down interaction.</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Optional</h3>
+						<ul>
+							<li>Implementation of all layers.</li>
+							<li>Implementation of slice segmentation.</li>
+						</ul>
+					</section>
+				</section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script>
+			Reveal.initialize({
+				hash: true,
+			});
+		</script>
+	</body>
+</html>
