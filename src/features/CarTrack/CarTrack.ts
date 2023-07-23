@@ -46,6 +46,8 @@ export default class CarTrack extends ElemController {
 
   totalTime: number;
 
+  isOnStart: boolean;
+
   constructor(addClasses: [string] | null, car: Car) {
     super();
 
@@ -70,6 +72,7 @@ export default class CarTrack extends ElemController {
     this.finishOffset = 110;
     this.trackLength = window.innerWidth - this.finishOffset;
     this.isEngineWork = true;
+    this.isOnStart = true;
     this.currDistance = 0;
     this.speed = 0;
     this.startTime = 0;
@@ -119,6 +122,7 @@ export default class CarTrack extends ElemController {
   }
 
   async startCar(isRace?: boolean) {
+    this.isOnStart = false;
     const move = () => {
       this.icon.getElem().style.transform = `translateX(${this.currDistance}px)`;
       this.currDistance += this.speed;
@@ -175,6 +179,7 @@ export default class CarTrack extends ElemController {
     this.icon.getElem().style.transform = 'none';
     this.currDistance = 0;
     if (!race) this.setControlsStateToStart();
+    this.isOnStart = true;
   }
 
   changeCar(newColor: string, newName: string) {

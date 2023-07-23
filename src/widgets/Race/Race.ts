@@ -231,7 +231,9 @@ export default class Race extends ElemController {
   async startRace() {
     this.disableAllControlsCB();
     this.disablePagination();
-    const stopPromises = this.carTracks.map((carTrack) => carTrack.stopCar(true));
+
+    const carNotOnTheStart = this.carTracks.filter((carTrack) => carTrack.isOnStart === false);
+    const stopPromises = carNotOnTheStart.map((carTrack) => carTrack.stopCar(true));
     await Promise.all(stopPromises);
     const preparePromises = this.carTracks.map((carTrack) => carTrack.startEngine());
     await Promise.all(preparePromises);

@@ -203,7 +203,6 @@ export default class ServerAPI {
   }
 
   public async getWinners(sort: SortTypes, order: SortOrders, page?: number) {
-    console.log(sort, order);
     const choosenPageLink = page ? `&_page=${page}` : '';
     const choosenLimitLink = `?_limit=${this.winnersPerPage}`;
     const sortTypeLink = `&_sort=${sort}`;

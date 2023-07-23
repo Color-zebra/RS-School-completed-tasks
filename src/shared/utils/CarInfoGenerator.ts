@@ -44,8 +44,6 @@ export default class CarInfoGenerator {
       color: this.getRandomColor(),
     };
 
-    console.log(res);
-
     return res;
   }
 }

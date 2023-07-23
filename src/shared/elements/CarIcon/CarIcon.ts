@@ -63,7 +63,6 @@ export default class CarIcon extends ElemController {
   }
 
   changeMode(mode: ModeNames) {
-    console.log(mode);
     if (mode === ModeNames.fun) {
       this.enableFunMod();
     } else {

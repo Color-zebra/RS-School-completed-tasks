@@ -69,7 +69,6 @@ export default class ModeChangePopup extends ElemController {
         once: true,
       }
     );
-    console.log('tremor');
   }
 
   hidePopup(e: Event) {
@@ -82,12 +81,10 @@ export default class ModeChangePopup extends ElemController {
         this.elem?.classList.remove(this.classes.hide);
         this.elem?.remove();
         e.stopImmediatePropagation();
-        console.log('remove');
       },
       {
         once: true,
       }
     );
-    console.log('up');
   }
 }

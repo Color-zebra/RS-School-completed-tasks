@@ -1,23 +1,83 @@
+.winners {
+  flex-direction: column;
+
+  &__control {
+    background-color: var(--btn-bg);
+    color: var(--btn-text);
+  }
+
+  &__control:hover {
+    cursor: pointer;
+  }
+
+  &__pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--fcolor);
+    margin: 0 2rem 0 0;
+  }
+
+  &__total {
+    font-size: 2rem;
+  }
+}
+
 table {
   display: table;
+  color: var(--fcolor);
+  font-family: monospace;
+  font-size: 1rem;
+  font-weight: 500;
 }
+
+thead {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0 0 1rem 0;
+}
+
+th:nth-child(1) {
+  width: 8vw;
+  padding: 0 0 0 1rem;
+}
+
+th:nth-child(2) {
+  width: 7vw;
+}
+
+th:nth-child(3) {
+  width: 30vw;
+}
+
+th:nth-child(4) {
+  width: 8vw;
+  padding: 0 0 0 1rem;
+}
+
+th:nth-child(5) {
+  width: 10vw;
+  padding: 0 0 0 1rem;
+}
+
 td {
   text-align: center;
   vertical-align: auto;
+  border-bottom: 3px solid var(--fcolor);
 }
 
 .right-order {
   background-image: url('../../shared/assets/img/arrow-down.png');
   background-position: left;
-  background-size: contain;
+  background-size: 20px;
   background-repeat: no-repeat;
-  padding: 0 0 0 17px;
+  padding: 0 0 0 1rem;
 }
 
 .reverse-order {
   background-image: url('../../shared/assets/img/arrow-up.png');
   background-position: left;
-  background-size: contain;
+  background-size: 20px;
   background-repeat: no-repeat;
-  padding: 0 0 0 17px;
+  padding: 0 0 0 1rem;
 }

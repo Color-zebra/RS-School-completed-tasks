@@ -11,7 +11,6 @@ export default class SoundsController {
 
   play() {
     this.currAudio.play();
-    console.log(this.currAudio.currentTime);
   }
 
   stop() {

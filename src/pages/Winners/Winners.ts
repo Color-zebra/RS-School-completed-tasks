@@ -53,6 +53,9 @@ export default class Winners extends ElemController {
       pagination: 'winners__pagination',
       rightOrder: 'right-order',
       reverseOrder: 'reverse-order',
+      control: 'winners__control',
+      padgination: 'winners__pagination',
+      total: 'winners__total',
     };
 
     this.columnNames = {
@@ -60,7 +63,7 @@ export default class Winners extends ElemController {
       image: 'Image',
       name: 'Name',
       wins: 'Total wins',
-      time: 'Best time',
+      time: 'Best time (sec)',
     };
 
     this.pagination = new Pagination(
@@ -68,7 +71,7 @@ export default class Winners extends ElemController {
       () => this.prevPage(),
       () => this.nextPage()
     );
-    this.totalWinnersElem = this.createElem('span', null, null);
+    this.totalWinnersElem = this.createElem('span', null, this.classes.total);
     this.winnersPerPage = 10;
     this.currPage = 1;
     this.totalPages = 1;
@@ -76,9 +79,9 @@ export default class Winners extends ElemController {
     this.serverAPI = ServerAPI.getInstance();
 
     this.sortControls = {
-      id: this.createElem('th', [this.columnNames.id], this.classes.rightOrder),
-      wins: this.createElem('th', [this.columnNames.wins], null),
-      time: this.createElem('th', [this.columnNames.time], null),
+      id: this.createElem('th', [this.columnNames.id], [this.classes.control, this.classes.rightOrder]),
+      wins: this.createElem('th', [this.columnNames.wins], this.classes.control),
+      time: this.createElem('th', [this.columnNames.time], this.classes.control),
     };
 
     this.tableContent = this.createElem('tbody', null, null);
@@ -159,7 +162,12 @@ export default class Winners extends ElemController {
   private createTable() {
     const imageColumnHeader = this.createElem('th', [this.columnNames.image], null);
     const nameColumnHeader = this.createElem('th', [this.columnNames.name], null);
-    const paginationSection = this.createElem('div', [this.pagination.getElem(), this.totalWinnersElem], null);
+    const totalWinnersContainer = this.createElem('div', ['Total winners: ', this.totalWinnersElem], null);
+    const paginationSection = this.createElem(
+      'div',
+      [this.pagination.getElem(), totalWinnersContainer],
+      this.classes.pagination
+    );
 
     const headersRow = this.createElem(
       'tr',
@@ -169,7 +177,7 @@ export default class Winners extends ElemController {
     const tableHeader = this.createElem('thead', [headersRow], null);
     const table = this.createElem('table', [tableHeader, this.tableContent], null);
 
-    this.elem = this.createElem('div', [table, paginationSection], this.classes.baseClass);
+    this.elem = this.createElem('div', [paginationSection, table], this.classes.baseClass);
   }
 
   private clear() {
