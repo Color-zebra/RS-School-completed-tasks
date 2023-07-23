@@ -53,6 +53,7 @@ export default class CarTrack extends ElemController {
       baseClass: 'car-track',
       controlsClass: 'car-track__controls',
       trackClass: 'car-track__track',
+      trackName: 'car-track__name',
     };
     this.addClasses = addClasses || [];
 
@@ -84,16 +85,16 @@ export default class CarTrack extends ElemController {
   }
 
   init() {
-    this.nameElem = this.createElem('span', [this.carName], null);
+    this.nameElem = this.createElem('span', [this.carName], this.classes.trackName);
 
     const controls = this.createElem(
       'div',
       [
-        this.nameElem,
         this.startButton.getElem(),
         this.stopButton.getElem(),
         this.changeButton.getElem(),
         this.deleteButton.getElem(),
+        this.nameElem,
       ],
       this.classes.controlsClass
     );

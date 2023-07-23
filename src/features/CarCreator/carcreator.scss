@@ -1,0 +1,31 @@
+.car-creator {
+  display: flex;
+  justify-content: center;
+  height: 2rem;
+  gap: 0.2rem;
+
+  & > * {
+    height: 2rem;
+    padding: 0;
+    margin: 0;
+    border: none;
+    outline: none;
+    border-radius: 0;
+  }
+
+  & > .btn {
+    padding: 0 0.4rem;
+  }
+}
+
+@media (width < 997.7px) {
+  .car-creator {
+    flex: 0 0 45%;
+  }
+}
+
+@media (width < 670px) {
+  .car-creator {
+    flex: 0 0 100%;
+  }
+}

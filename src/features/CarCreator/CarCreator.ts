@@ -17,10 +17,11 @@ export default class CarCreator extends ElemController {
 
     this.classes = {
       baseClass: 'car-creator',
+      btnClass: 'car-creator__btn',
     };
 
     this.colorRange = new ColorRange(null);
-    this.submitButton = new Button('create car', null, () => this.createCar());
+    this.submitButton = new Button('create car', [this.classes.btnClass], () => this.createCar());
     this.nameInput = null;
 
     this.init();

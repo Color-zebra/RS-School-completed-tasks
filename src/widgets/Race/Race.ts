@@ -55,18 +55,21 @@ export default class Race extends ElemController {
 
     this.classes = {
       baseClass: 'race',
-      trackClass: 'race__track',
+      pagination: 'race__pagination',
+      totalCars: 'race__total-cars',
+      trackClass: 'race__tracks',
     };
     this.addClasses = addClasses || [];
 
     this.serverAPI = ServerAPI.getInstance();
     this.pagination = new Pagination(
+      [this.classes.pagination],
       () => this.prevPage(),
       () => this.nextPage()
     );
     this.popup = new WinnerPopup();
 
-    this.carTracksContainer = this.createElem('div', null, null);
+    this.carTracksContainer = this.createElem('div', null, [this.classes.trackClass]);
     this.totalCarsElem = this.createElem('span', null, null);
     this.carTracks = [];
     this.cars = [];
@@ -86,9 +89,13 @@ export default class Race extends ElemController {
   }
 
   init() {
-    const totalCarsContainer = this.createElem('div', [this.createElem('span', ['Total cars:'], null)], null);
+    const totalCarsContainer = this.createElem(
+      'div',
+      [this.createElem('span', ['Total cars:'], null)],
+      [this.classes.totalCars]
+    );
     totalCarsContainer.append(this.totalCarsElem);
-    this.elem = this.createElem('div', [this.pagination.getElem(), totalCarsContainer], this.classes.trackClass);
+    this.elem = this.createElem('div', [this.pagination.getElem(), totalCarsContainer], this.classes.baseClass);
     this.currPage = 1;
     this.renderCars();
     this.hydrate();

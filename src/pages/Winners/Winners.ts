@@ -50,6 +50,7 @@ export default class Winners extends ElemController {
 
     this.classes = {
       baseClass: 'winners',
+      pagination: 'winners__pagination',
       rightOrder: 'right-order',
       reverseOrder: 'reverse-order',
     };
@@ -63,6 +64,7 @@ export default class Winners extends ElemController {
     };
 
     this.pagination = new Pagination(
+      [this.classes.pagination],
       () => this.prevPage(),
       () => this.nextPage()
     );

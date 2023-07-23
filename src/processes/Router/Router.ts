@@ -4,6 +4,7 @@ import { CustomEvents, ModeNames } from '../../shared/types/enums';
 import ElemController from '../../shared/utils/ElemController';
 import Footer from '../../widgets/Footer/Footer';
 import Header from '../../widgets/Header/Header';
+import ModeChangePopup from '../../widgets/ModeChangePopup/ModeChangePopup';
 
 export default class Router extends ElemController {
   protected classes: Record<string, string>;
@@ -16,21 +17,27 @@ export default class Router extends ElemController {
 
   protected garagePage: Garage;
 
-  mode: ModeNames;
+  private mode: ModeNames;
+
+  private modePopup: ModeChangePopup;
 
   constructor() {
     super();
 
     this.classes = {
       baseClass: 'wrapper',
+      pageClass: 'main',
     };
 
     this.mode = ModeNames.strict;
 
-    this.header = new Header(null, () => this.changeMode());
+    this.header = new Header(null, () =>
+      this.modePopup.showPopup(this.mode === ModeNames.fun ? ModeNames.strict : ModeNames.fun)
+    );
     this.footer = new Footer(null);
     this.garagePage = new Garage(null);
     this.winnersPage = new Winners();
+    this.modePopup = new ModeChangePopup(() => this.changeMode());
 
     this.init();
   }
@@ -40,7 +47,7 @@ export default class Router extends ElemController {
     const page = this.createElem(
       'main',
       [this.garagePage.getElem(), this.winnersPage.getElem()],
-      this.classes.baseClass
+      this.classes.pageClass
     );
     this.elem = this.createElem('div', [this.header.getElem(), page, this.footer.getElem()], this.classes.baseClass);
     this.hydrate();
@@ -56,10 +63,7 @@ export default class Router extends ElemController {
     });
     this.elem?.addEventListener(CustomEvents.deleteWinner, (e) => {
       const { id } = (e as CustomEvent).detail;
-      console.log(id);
-      console.log(this.winnersPage.currPageWinners);
       if (this.winnersPage.currPageWinners.some((winner) => winner.id === id)) {
-        console.log('deleting');
         this.winnersPage.renderWinners();
       }
     });

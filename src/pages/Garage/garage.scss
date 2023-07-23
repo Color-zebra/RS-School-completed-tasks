@@ -1,7 +1,23 @@
 .garage {
   display: flex;
   flex-direction: column;
+
   &__controls {
     display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+}
+
+@media (width < 997.7px) {
+  .garage {
+  
+    &__controls {
+
+      & > .btn {
+        width: 8rem;
+      }
+    }
   }
 }

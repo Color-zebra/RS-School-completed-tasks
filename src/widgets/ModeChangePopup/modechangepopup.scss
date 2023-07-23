@@ -1,0 +1,129 @@
+.mode-change-popup {
+  position: fixed;
+  z-index: 10;
+  width: 100%;
+  height: 100vh;
+  top: -110vh;
+  background-image: url('../../shared/assets/img/gates.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  transform: scale(1.05);
+
+  &_shown {
+    animation: show 1s ease-in-out forwards;
+  }
+
+  &_hide {
+    animation: hide 1s ease-in-out forwards;
+  }
+
+  &_tremor {
+    animation: tremor 1s ease-in-out;
+  }
+}
+
+@keyframes show {
+  0% {
+    top: -110vh;
+  }
+  100% {
+    top: 0;
+  }
+}
+
+@keyframes hide {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: -110vh;
+  }
+}
+
+@keyframes tremor {
+  0% {
+    top: 0;
+    transform: scale(1.05) translate(0, 0);
+  }
+  5% {
+    top: 0;
+    transform: scale(1.05) translate(-1rem, -1rem);
+  }
+  10% {
+    top: 0;
+    transform: scale(1.05) translate(0, 0);
+  }
+  15% {
+    top: 0;
+    transform: scale(1.05) translate(1rem, -1rem);
+  }
+  20% {
+    top: 0;
+    transform: scale(1.05) translate(0, 0);
+  }
+  25% {
+    top: 0;
+    transform: scale(1.05) translate(-1rem, -1rem);
+  }
+  30% {
+    top: 0;
+    transform: scale(1.05) translate(0, 0);
+  }
+  35% {
+    top: 0;
+    transform: scale(1.05) translate(1rem, -1rem);
+  }
+  40% {
+    top: 0;
+    transform: scale(1.05) translate(0, 0);
+  }
+  45% {
+    top: 0;
+    transform: scale(1.05) translate(-0.5rem, -0.5rem);
+  }
+  50% {
+    top: 0;
+    transform: scale(1.05) translate(0, 0);
+  }
+  55% {
+    top: 0;
+    transform: scale(1.05) translate(0.5rem, -0.5rem);
+  }
+  60% {
+    top: 0;
+    transform: scale(1.05) translate(0, 0);
+  }
+  65% {
+    top: 0;
+    transform: scale(1.05) translate(-0.25rem, -0.25rem);
+  }
+  70% {
+    top: 0;
+    transform: scale(1.05) translate(0, 0);
+  }
+  75% {
+    top: 0;
+    transform: scale(1.05) translate(0.25rem, -0.25rem);
+  }
+  80% {
+    top: 0;
+    transform: scale(1.05) translate(0, 0);
+  }
+  85% {
+    top: 0;
+    transform: scale(1.05) translate(-0.1rem, -0.1rem);
+  }
+  90% {
+    top: 0;
+    transform: scale(1.05) translate(0, 0);
+  }
+  95% {
+    top: 0;
+    transform: scale(1.05) translate(0.1rem, -0.1rem);
+  }
+  100% {
+    top: 0;
+    transform: scale(1.05) translate(0, 0);
+  }
+}

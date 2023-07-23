@@ -12,7 +12,7 @@ export default class Button extends ElemController {
 
   callBack: (() => void) | undefined;
 
-  constructor(text: string | null, addClasses: [string] | null, callBack?: () => void) {
+  constructor(text: string | null, addClasses: Array<string> | null, callBack?: () => void) {
     super();
     this.elem = null;
     this.text = text || '';

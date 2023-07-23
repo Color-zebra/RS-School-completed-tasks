@@ -44,7 +44,6 @@ export default class WinnerPopup extends ElemController {
   }
 
   showPopup(name: string, time: string | number) {
-    console.log('show');
     this.winnerNameElem.innerText = name;
     this.winnerTimeElem.innerText = String(time);
     if (!this.elem) return;

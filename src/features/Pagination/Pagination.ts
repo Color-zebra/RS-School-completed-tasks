@@ -11,12 +11,15 @@ export default class Pagination extends ElemController {
 
   private pageNumberWindow: HTMLElement;
 
-  constructor(prevBtnCB: () => void, nextBtnCB: () => void) {
+  protected addClasses: Array<string> | Array<never>;
+
+  constructor(addClasses: [string] | null, prevBtnCB: () => void, nextBtnCB: () => void) {
     super();
 
     this.classes = {
       baseClass: 'pagination',
     };
+    this.addClasses = addClasses || [];
 
     this.prevButton = new Button('<', null, prevBtnCB);
     this.nextButton = new Button('>', null, nextBtnCB);
@@ -29,7 +32,7 @@ export default class Pagination extends ElemController {
     this.elem = this.createElem(
       'div',
       [this.prevButton.getElem(), this.pageNumberWindow, this.nextButton.getElem()],
-      this.classes.baseClass
+      [this.classes.baseClass, ...this.addClasses]
     );
   }
 

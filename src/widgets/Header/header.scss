@@ -1,0 +1,12 @@
+.header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 5rem;
+
+  background-color: #ffffff52;
+
+  & > .btn:not(.btn_spec) {
+    width: 25vw;
+  }
+}

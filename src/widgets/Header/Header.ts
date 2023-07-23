@@ -27,7 +27,7 @@ export default class Header extends ElemController {
     this.toWinnersBtn = new Button('Winners', ['header__winners-btn'], () => {
       window.location.hash = 'winners';
     });
-    this.switchModeBtn = new Button('Switch mode', ['header__switch-btn'], () => {
+    this.switchModeBtn = new Button(null, ['header__switch-btn', 'btn_spec'], () => {
       switchModeCB();
     });
 

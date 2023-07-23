@@ -1,0 +1,20 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & > span {
+    font-weight: 700;
+    padding: 0 1rem;
+    font-size: 2rem;
+    width: 2rem;
+    text-align: center;
+  }
+
+  & > .btn {
+    font-weight: 700;
+    padding: 0 1rem;
+    font-size: 1rem;
+    height: auto;
+  }
+}

@@ -1,0 +1,82 @@
+.btn {
+  display: block;
+  line-height: 2;
+  height: 2rem;
+  border-radius: 0.5rem;
+  outline: none;
+  border: none;
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  text-transform: uppercase;
+  text-shadow: 0 0 3px black;
+  font-weight: 600;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &_spec {
+    position: relative;
+
+    overflow: hidden;
+
+    background-image: url('../../assets/img/eyes.jpg');
+    background-position: bottom 0 right 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: black;
+
+    height: 4rem;
+
+    color: orange;
+    text-align: justify;
+    width: 10rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+  &_spec::before {
+    content: '';
+    position: relative;
+    width: 10rem;
+    height: 5rem;
+
+    z-index: 2;
+
+    position: absolute;
+
+    background-color: black;
+    border-radius: 50%;
+
+    transform: translateY(-1.4rem);
+    transition: all .7s ease;
+  }
+
+  &_spec::after {
+    content: 'SWITCH MODE';
+    position: relative;
+    top: 3px;
+    left: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    font-weight: 700;
+
+    z-index: 3;
+
+    width: 10rem;
+    height: 4rem;
+  }
+
+  &_spec:hover::before {
+    transform: translateY(-3rem);
+  }
+}
+
+.btn:disabled {
+  background-color: var(--btn-bg-dis);
+  color: var(--btn-text-dis);
+}

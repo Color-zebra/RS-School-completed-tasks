@@ -4,27 +4,53 @@ html, body {
   margin: 0;
 }
 
-body {
-  background-color: grey;
-  position: relative;
-}
-
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
-}
-
-main {
-  flex: 1 0 auto;
-}
-
 body[data-mode="fun"] {
+  --main-bg-img: url('../shared/assets/img/fun-bg.jpeg');
+  --fcolor: orange;
+  --btn-bg: ForestGreen;
+  --btn-bg-dis: rgba(34, 139, 34, 0.4);
+  --btn-text: coral;
+  --btn-text-dis: rgba(255, 127, 80, 0.4);
   --track-bg: url('../shared/assets/img/witch-bg.jpg');
   --track-finish: url('../shared/assets/img/witch-finish.png');
 }
 
 body[data-mode="strict"] {
+  --main-bg-img: none;
+  --fcolor: black;
+  --btn-bg: DarkSlateGray;
+  --btn-text: azure;
+  --btn-bg-dis: rgba(47, 79, 79, 0.4);
+  --btn-text-dis: rgba(240, 255, 255, 0.4);
   --track-bg: url('../shared/assets/img/car-bg.png');
   --track-finish: url('../shared/assets/img/car-finish.jpg');
+}
+
+body {
+  position: relative;
+}
+
+.wrapper {
+  background-color: grey;
+  background-image: var(--main-bg-img);
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.main {
+  margin: 1rem 0;
+
+  flex: 1 0 auto;
+}
+
+a, a:visited {
+  color: inherit;
+}
+
+html {
+  overflow-x: hidden;
+  margin-right: calc(-1 * (100vw - 100%));
 }

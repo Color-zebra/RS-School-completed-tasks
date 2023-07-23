@@ -1,0 +1,26 @@
+.race {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 1rem 0;
+
+  flex-wrap: wrap;
+
+  width: 100%;
+
+  &__pagination {
+    margin: 0 1rem;
+
+  }
+  &__total-cars {
+    color: var(--fcolor);
+  }
+  &__total-cars > span:last-child {
+    font-size: 2rem;
+  }
+  &__tracks {
+    flex: 0 0 100%;
+    margin: 1rem 0;
+  }
+}
