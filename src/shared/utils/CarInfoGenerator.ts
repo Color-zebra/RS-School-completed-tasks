@@ -23,7 +23,8 @@ export default class CarInfoGenerator {
   private getRandomColor() {
     let color = '#';
     for (let i = 0; i < 3; i += 1) {
-      color += Math.floor(Math.random() * 255).toString(16);
+      const currColor = Math.floor(Math.random() * 255).toString(16);
+      color += `0${currColor}`.slice(-2);
     }
     return color;
   }
