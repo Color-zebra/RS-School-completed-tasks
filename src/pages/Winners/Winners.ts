@@ -128,6 +128,10 @@ export default class Winners extends ElemController {
       this.enablePagination();
     }
 
+    if (res?.winners.length === 0 && this.currPage > 1) {
+      this.prevPage();
+    }
+
     if (res?.winners) {
       res.winners.forEach(async (winner) => {
         const carInfo = await this.serverAPI.getCar(winner.id);
