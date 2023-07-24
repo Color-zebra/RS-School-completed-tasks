@@ -1,3 +1,4 @@
+import Button from '../../shared/elements/Button/Button';
 import { ModeNames } from '../../shared/types/enums';
 import ElemController from '../../shared/utils/ElemController';
 import SoundsController from '../../shared/utils/SoundsController';
@@ -10,7 +11,9 @@ export default class ModeChangePopup extends ElemController {
 
   private player: SoundsController;
 
-  constructor(modeChangeCB: () => void) {
+  private modeChangeBtn: Button;
+
+  constructor(modeChangeCB: () => void, btn: Button) {
     super();
 
     this.classes = {
@@ -19,6 +22,8 @@ export default class ModeChangePopup extends ElemController {
       hide: 'mode-change-popup_hide',
       tremor: 'mode-change-popup_tremor',
     };
+
+    this.modeChangeBtn = btn;
 
     this.player = new SoundsController();
 
@@ -33,6 +38,8 @@ export default class ModeChangePopup extends ElemController {
 
   showPopup(mode: ModeNames) {
     if (!this.elem) return;
+
+    this.modeChangeBtn.disable();
 
     if (mode === ModeNames.fun) {
       this.player.play();
@@ -80,6 +87,7 @@ export default class ModeChangePopup extends ElemController {
       () => {
         this.elem?.classList.remove(this.classes.hide);
         this.elem?.remove();
+        this.modeChangeBtn.enable();
         e.stopImmediatePropagation();
       },
       {

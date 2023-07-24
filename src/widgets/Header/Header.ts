@@ -11,7 +11,7 @@ export default class Header extends ElemController {
 
   protected toWinnersBtn: Button;
 
-  protected switchModeBtn: Button;
+  public switchModeBtn: Button;
 
   constructor(addClasses: [string] | null, switchModeCB: () => void) {
     super();

@@ -37,7 +37,7 @@ export default class Router extends ElemController {
     this.footer = new Footer(null);
     this.garagePage = new Garage(null);
     this.winnersPage = new Winners();
-    this.modePopup = new ModeChangePopup(() => this.changeMode());
+    this.modePopup = new ModeChangePopup(() => this.changeMode(), this.header.switchModeBtn);
 
     this.init();
   }
