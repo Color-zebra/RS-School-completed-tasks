@@ -21,6 +21,17 @@
   &__total {
     font-size: 2rem;
   }
+
+  &__name {
+    position: absolute;
+    text-orientation: upright;
+    writing-mode: vertical-lr;
+    text-transform: uppercase;
+    padding: 0;
+    margin: 0 0 0 0.5rem;
+    color: var(--btn-text);
+    text-shadow: 0 0 0.5rem var(--btn-bg), 0 0 0.5rem var(--btn-bg), 0 0 0.5rem var(--btn-bg), 0 0 0.5rem var(--btn-bg), 0 0 0.5rem var(--btn-bg), ;
+  }
 }
 
 table {
@@ -29,6 +40,7 @@ table {
   font-family: monospace;
   font-size: 1rem;
   font-weight: 500;
+  margin: 1rem 3rem;
 }
 
 thead {

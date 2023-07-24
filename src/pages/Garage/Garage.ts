@@ -32,14 +32,19 @@ export default class Garage extends ElemController {
 
   massGenerationCount: number;
 
+  viewName: string;
+
   constructor(addClasses: string[] | null) {
     super();
 
     this.classes = {
       baseClass: 'garage',
       controlsClass: 'garage__controls',
+      viewNameClass: 'garage__name',
     };
     this.addClasses = addClasses || [];
+
+    this.viewName = 'Garage';
 
     this.carUpdater = new CarUpdater();
     this.carCreator = new CarCreator();
@@ -73,7 +78,9 @@ export default class Garage extends ElemController {
       ],
       this.classes.controlsClass
     );
-    this.elem = this.createElem('div', [controlsBlock, this.race.getElem()], this.classes.baseClass);
+
+    const viewName = this.createElem('h4', [this.viewName], this.classes.viewNameClass);
+    this.elem = this.createElem('div', [viewName, controlsBlock, this.race.getElem()], this.classes.baseClass);
 
     this.hydrate();
   }

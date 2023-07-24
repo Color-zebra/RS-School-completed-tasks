@@ -45,6 +45,8 @@ export default class Winners extends ElemController {
 
   private totalWinnersElem: HTMLElement;
 
+  viewName: string;
+
   constructor() {
     super();
 
@@ -56,6 +58,7 @@ export default class Winners extends ElemController {
       control: 'winners__control',
       padgination: 'winners__pagination',
       total: 'winners__total',
+      viewNameClass: 'winners__name',
     };
 
     this.columnNames = {
@@ -65,6 +68,8 @@ export default class Winners extends ElemController {
       wins: 'Total wins',
       time: 'Best time (sec)',
     };
+
+    this.viewName = 'Winners';
 
     this.pagination = new Pagination(
       [this.classes.pagination],
@@ -177,7 +182,9 @@ export default class Winners extends ElemController {
     const tableHeader = this.createElem('thead', [headersRow], null);
     const table = this.createElem('table', [tableHeader, this.tableContent], null);
 
-    this.elem = this.createElem('div', [paginationSection, table], this.classes.baseClass);
+    const viewName = this.createElem('h4', [this.viewName], this.classes.viewNameClass);
+
+    this.elem = this.createElem('div', [viewName, paginationSection, table], this.classes.baseClass);
   }
 
   private clear() {
