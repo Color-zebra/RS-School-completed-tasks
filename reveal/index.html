@@ -8,35 +8,28 @@
 
 		<link rel="stylesheet" href="dist/reset.css">
 		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/night.css">
-
-		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="dist/theme/white.css">
 		<link rel="stylesheet" href="plugin/highlight/monokai.css">
 	</head>
 	<body>
 		<div class="reveal">
 			<div class="slides">
 				<section>FSD Architecture</section>
-				<section>An architecture is a set of rules and conventions for organizing code. The main goal is to make the project understandable and structured, especially in the context of regular changes and additions.</section>
 				<section>
-					<section>
-						<ul>
-							<li>Exclusively for the frontend.</li>
-							<li>May be overkill for small projects.</li>
-							<li>May not be suitable for VERY large applications.</li>
-							<li>Suitable for any framework or language.</li>
-						</ul>
-					</section>
-					<section>
-						<img src="./assets/fsd.jpg" alt="fsd scheme">
-					</section>
+					<img class="r-stretch" src="./assets/architecture.png" alt="bad architecture image">
+				</section>
+				<section>
+					Not a silver bullet!
+				</section>
+				<section>
+					<img src="./assets/fsd.jpg" alt="fsd scheme">
 				</section>
 				<section>
 					<section>
-						A layer is the first level of an organizational hierarchy. Their goal is to separate the code based on the degree of responsibility and dependencies on other modules. 
+						First level FSD is a <b>layer</b>
 					</section>
 					<section>
-						<img src="./assets/layers.svg" alt="fsd layers">
+						<img src="./assets/layers.jpg" alt="fsd layers">
 					</section>
 					<section>
 						<img src="./assets/gh-example.jpg" alt="fsd layers">
@@ -44,23 +37,23 @@
 				</section>
 				<section>
 					<section>
-						Slices are the second level of the organizational hierarchy. Their main purpose is to group code by its value to the application. 
+						Second level FSD is a <b>slice</b>
 					</section>
 					<section>
 						<img src="./assets/slices.jpg" alt="fsd slices">
 					</section>
+				</section>
+				<section>
 					<section>
-						A public API is a public interface that provides a single point of access to all the capabilities of a module and determines how this module will interact with the outside world.
-						<ul>
-							<li>Protects the internal structure of modules from uncontrolled change.</li>
-							<li>Helps to encapsulate modules.</li>
-							<li>Allows you to easily define module behaviors based on API methods.</li>
-						</ul>
+						Public API is an interface that provides an access to a module.
+					</section>
+					<section>
+						Main purpose - protect and encapsulate.
 					</section>
 				</section>
 				<section>
 					<section>
-						Segments are the third and final level of the organizational hierarchy. Their task is to group the code according to its technical nature.
+						<b>Segments</b> are the third and final level of the hierarchy.
 					</section>
 					<section>
 						<img src="./assets/segments.jpg" alt="">
@@ -71,7 +64,7 @@
 						<h3>Should be</h3>
 						<ul>
 							<li>Layering.</li>
-							<li>Public API for slices.</li>
+							<li>Public API.</li>
 							<li>Top-down interaction.</li>
 						</ul>
 					</section>
@@ -87,9 +80,15 @@
 		</div>
 
 		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
 		<script>
 			Reveal.initialize({
 				hash: true,
+				slideNumber: 'c/t',
+				showSlideNumber: 'all',
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
 			});
 		</script>
 	</body>
